@@ -5,8 +5,12 @@
  */
 package uk.ac.dundee.computing.infrabike.servlets;
 
+import java.sql.Connection;
 import java.util.List;
 import javax.persistence.EntityManager;
+import static sun.security.jgss.GSSUtil.login;
+import uk.ac.dundee.computing.infrabike.dao.DatabaseDAO;
+import uk.ac.dundee.computing.infrabike.models.UserModel;
 
 /**
  *
@@ -60,4 +64,22 @@ public abstract class AbstractFacade<T> {
         return ((Long) q.getSingleResult()).intValue();
     }
     
+    public boolean exists(String username,String password){
+        boolean exists=false;
+        System.out.println("DATA"+username+ password);
+        try{
+           
+        DatabaseDAO db = new DatabaseDAO();
+        UserModel c = new UserModel();
+         Connection conn = db.Get_Connection();
+           System.out.println("USERDATA"+username+password);
+           exists= c.valid(conn, username, password);
+            System.out.println("DATA"+exists);}
+        catch(Exception e)
+        {
+        }            
+        return exists;
+    }
 }
+    
+
