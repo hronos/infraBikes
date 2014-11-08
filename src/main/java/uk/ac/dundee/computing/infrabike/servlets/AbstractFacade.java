@@ -80,6 +80,15 @@ public abstract class AbstractFacade<T> {
         else return new Viewable("/works",null);
     
     }
+    
+    
+    public int add() {
+        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+        javax.persistence.criteria.Root<T> rt = cq.from(entityClass);
+        cq.select(getEntityManager().getCriteriaBuilder().count(rt));
+        javax.persistence.Query q = getEntityManager().createQuery(cq);
+        return ((Long) q.getSingleResult()).intValue();
+    }
     }
 
     

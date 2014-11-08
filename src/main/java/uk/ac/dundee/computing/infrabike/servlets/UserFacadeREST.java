@@ -18,7 +18,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import static sun.security.jgss.GSSUtil.login;
+import org.glassfish.jersey.server.mvc.Viewable;
 import uk.ac.dundee.computing.infrabike.dto.User;
 
 /**
@@ -43,6 +43,16 @@ public class UserFacadeREST extends AbstractFacade<User> {
         super.create(entity);
     }
 
+    
+    @POST
+    @Override
+    //@Consumes({"application/xml", "application/json"})
+    public Viewable exists(@FormParam("login") String username, @FormParam("password")String password) {
+        
+        return super.exists(username, password);
+    }
+    
+    
     @PUT
     @Path("{id}")
     @Consumes({"application/xml", "application/json"})
@@ -70,13 +80,7 @@ public class UserFacadeREST extends AbstractFacade<User> {
         return super.findAll();
     }
     
-    @POST
-    @Override
-    //@Consumes({"application/xml", "application/json"})
-    public boolean exists(@FormParam("login") String username, @FormParam("password")String password) {
-        
-        return super.exists(username, password);
-    }
+  
 
     @GET
     @Path("{from}/{to}")
