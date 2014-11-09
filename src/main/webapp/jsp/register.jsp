@@ -14,13 +14,12 @@
     <body>
         
         
-         <form method="POST"  action="/infraBike/webapi/User"
+         <form method="POST"  action="/infraBike/webapi/UserV"
                 <ul>
                     <li>User Name <input type="text" name="username" value=""></li>
                     <li>Password <input type="password" name="password" value=""></li>
                     <li>Email <input type="email" name="email"></li>
-                    
-                             
+                           
                 </ul>
                 <br/>
                 <input type="submit" value="Register"> 

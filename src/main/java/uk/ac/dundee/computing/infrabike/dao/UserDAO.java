@@ -21,7 +21,7 @@ public class UserDAO {
     public boolean userExists(String username,String password,Connection connection){
       try{
           
-        PreparedStatement ps = connection.prepareStatement("SELECT * FROM user WHERE username=? "  );
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM user_v WHERE username=? "  );
         ps.setString(1, username);
         
         ResultSet rs = ps.executeQuery();
@@ -40,6 +40,27 @@ public class UserDAO {
         }
       }catch(SQLException e)
       {
+          System.out.println("FAIL");
+          e.printStackTrace();  
+      }
+      
+        return true;
+    }
+    
+    public boolean registerUser(String username,String password,String email,Connection connection){
+      try{
+          
+        PreparedStatement ps = connection.prepareStatement("INSERT INTO user_v (username,password,email,id_role) VALUES(?,?,?,?) "  );
+        ps.setString(1, username);
+        ps.setString(2, password);
+        ps.setString(3, email);
+        ps.setInt(4, 1);
+         System.out.println("YEY");
+         ps.executeUpdate();
+      
+         System.out.println("SUCCESS");
+      }catch(SQLException e)
+      { System.out.println("FAIL");
           e.printStackTrace();  
       }
       

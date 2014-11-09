@@ -19,15 +19,24 @@ public class UserModel {
     public boolean valid(Connection connection, String username,String password) throws Exception {
         boolean valid = true;
         try {
-            
             UserDAO c = new UserDAO();
             valid=c.userExists(username,password,connection);
-          
         } 
         catch (Exception e) {
             throw e;
         }
-        
         return valid;
     }
+    public boolean register(Connection connection, String username,String password,String email) throws Exception {
+        boolean success = true;
+        try {
+            UserDAO c = new UserDAO();
+            success=c.registerUser(username,password,email,connection);
+        } 
+        catch (Exception e) {
+            throw e;
+        }
+        return success;
+    }
+    
 }

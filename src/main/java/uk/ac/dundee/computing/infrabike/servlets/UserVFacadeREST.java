@@ -5,27 +5,31 @@
  */
 package uk.ac.dundee.computing.infrabike.servlets;
 
+import java.sql.Connection;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import org.glassfish.jersey.server.mvc.Viewable;
+import uk.ac.dundee.computing.infrabike.dao.DatabaseDAO;
 import uk.ac.dundee.computing.infrabike.dto.UserV;
+import uk.ac.dundee.computing.infrabike.models.UserModel;
 
 /**
  *
  * @author dlennart
  */
 @Stateless
-@Path("uk.ac.dundee.computing.infrabike.dto.userv")
+@Path("UserV")
 public class UserVFacadeREST extends AbstractFacade<UserV> {
     //@PersistenceContext(unitName = "uk.ac.dundee.computing_infraBike_war_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -52,7 +56,8 @@ public class UserVFacadeREST extends AbstractFacade<UserV> {
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
         em = getEntityManager();
-        em.remove(em.merge(super.find(id)));
+        UserV em2= em.merge(super.find(id));
+        em.remove(em2);
         //super.remove(super.find(id));
     }
 
@@ -90,4 +95,29 @@ public class UserVFacadeREST extends AbstractFacade<UserV> {
         return em;
     }
     
+    
+    /*@POST
+    @Override
+    //@Consumes({"application/xml", "application/json"})
+    public Viewable exists(@FormParam("login") String username, @FormParam("password")String password) {
+        return super.exists(username, password);
+    }*/
+    
+    @POST
+    public Viewable register(@FormParam("username") String username, @FormParam("password")String password,@FormParam("email")String email)
+    {
+        boolean success=false;
+        try{  
+        DatabaseDAO db = new DatabaseDAO();
+        UserModel c = new UserModel();
+         Connection conn = db.Get_Connection();
+           success= c.register(conn, username, password,email);
+            }
+        catch(Exception e)
+        {
+        }        
+        if(success){ return new Viewable("/works",null);}
+        else return new Viewable("/works",null);
+      
+    }
 }
