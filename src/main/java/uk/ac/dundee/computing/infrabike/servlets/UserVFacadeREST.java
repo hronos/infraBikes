@@ -18,60 +18,62 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import uk.ac.dundee.computing.infrabike.dto.UserRole;
+import uk.ac.dundee.computing.infrabike.dto.UserV;
 
 /**
  *
  * @author dlennart
  */
 @Stateless
-@Path("uk.ac.dundee.computing.infrabike.dto.userrole")
-public class UserRoleFacadeREST extends AbstractFacade<UserRole> {
+@Path("uk.ac.dundee.computing.infrabike.dto.userv")
+public class UserVFacadeREST extends AbstractFacade<UserV> {
     //@PersistenceContext(unitName = "uk.ac.dundee.computing_infraBike_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
-    public UserRoleFacadeREST() {
-        super(UserRole.class);
+    public UserVFacadeREST() {
+        super(UserV.class);
     }
 
     @POST
     @Override
     @Consumes({"application/xml", "application/json"})
-    public void create(UserRole entity) {
+    public void create(UserV entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({"application/xml", "application/json"})
-    public void edit(@PathParam("id") Integer id, UserRole entity) {
+    public void edit(@PathParam("id") Integer id, UserV entity) {
         super.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
-        super.remove(super.find(id));
+        em = getEntityManager();
+        em.remove(em.merge(super.find(id)));
+        //super.remove(super.find(id));
     }
 
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public UserRole find(@PathParam("id") Integer id) {
+    public UserV find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({"application/xml", "application/json"})
-    public List<UserRole> findAll() {
+    public List<UserV> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({"application/xml", "application/json"})
-    public List<UserRole> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<UserV> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 
