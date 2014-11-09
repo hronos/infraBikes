@@ -19,9 +19,16 @@
             <div id="menu_bar">
                 <ul>
                     <li><a href="">Profile</a></li>
-                    <li><a href="">Search</a></li>
+                    <li><a href="">Motorcycles</a></li>
                     <li><a href="">Orders</a></li>
                     <li><a href="">Reports</a></li>
+                     <li><a href="">Warehouse</a>
+                         <ul>
+                                 <li><a href="">Stock</a></li>
+                                 <li><a href="">Info</a></li>
+                                 
+                         </ul>
+                     </li>
                     <li><a href="">About us</a></li>
                 </ul>   
             </div>
