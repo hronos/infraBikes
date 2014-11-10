@@ -58,10 +58,10 @@ var app = {
                     // headers has to be set on the REST server side.
                     // Otherwise the JS client has to be copied into the
                     // some (f.e. the same) Web project on the same domain
-                    alert('Unable to fulfil the request');
-                }}
+                    alert('Unable to fulfil the request' + errorThrown);
+                }};
             
-            if (method == 'create') {
+            if (method === 'create') {
                 options.url = 'http://localhost:8080/infraBike/webapi/uk.ac.dundee.computing.infrabike.dto.userv/';
             }
             var result = Backbone.sync(method, model, _.extend(options, errorHandler));
@@ -87,7 +87,7 @@ var app = {
                     // Otherwise the JS client has to be copied into the
                     // some (f.e. the same) Web project on the same domain
                     alert('Unable to fulfil the request');
-                }}
+                }};
             
             var result = Backbone.sync(method, model, _.extend(options, errorHandler));
             return result;
@@ -200,7 +200,7 @@ var app = {
                 });
             } else {
                 this.model.save();
-                this.model.el.parent().parent().trigger("update");
+                //this.model.el.parent().parent().trigger("update");
             }
             return false;
         },

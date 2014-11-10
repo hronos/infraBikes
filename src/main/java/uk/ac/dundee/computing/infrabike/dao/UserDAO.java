@@ -9,6 +9,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import uk.ac.dundee.computing.infrabike.dto.UserV;
 
 /**
  *
@@ -16,7 +20,31 @@ import java.sql.SQLException;
  */
 public class UserDAO {
      
-    
+    public ArrayList GetUsers(Connection connection, HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+        ArrayList userData = new ArrayList();
+        try{
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM user_v ORDER BY id_user DESC");
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                UserV  u = new UserV();
+                u.setIdUser(rs.getInt("id_user"));
+                u.setIdRole(rs.getInt("id_role"));
+                u.setEmail(rs.getString("email"));
+                u.setPassword(rs.getString("password"));
+                u.setUsername(rs.getString("username"));
+               
+                userData.add(u);
+            
+            }
+            
+            return userData;
+        }
+        catch(Exception e){
+            throw e;
+        }
+    }
     
     public boolean userExists(String username,String password,Connection connection){
       try{
