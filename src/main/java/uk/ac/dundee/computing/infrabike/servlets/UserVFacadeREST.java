@@ -96,12 +96,7 @@ public class UserVFacadeREST extends AbstractFacade<UserV> {
     }
     
     
-    /*@POST
-    @Override
-    //@Consumes({"application/xml", "application/json"})
-    public Viewable exists(@FormParam("login") String username, @FormParam("password")String password) {
-        return super.exists(username, password);
-    }*/
+    
     
     @POST
     public Viewable register(@FormParam("username") String username, @FormParam("password")String password,@FormParam("email")String email)

@@ -18,6 +18,7 @@ import uk.ac.dundee.computing.infrabike.dao.UserDAO;
 public class UserModel {
     public boolean valid(Connection connection, String username,String password) throws Exception {
         boolean valid = true;
+
         try {
             UserDAO c = new UserDAO();
             valid=c.userExists(username,password,connection);

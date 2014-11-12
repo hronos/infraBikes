@@ -20,30 +20,29 @@ public class UserDAO {
     
     public boolean userExists(String username,String password,Connection connection){
       try{
-          
+         
         PreparedStatement ps = connection.prepareStatement("SELECT * FROM user_v WHERE username=? "  );
+        
         ps.setString(1, username);
-        
-        ResultSet rs = ps.executeQuery();
       
+        ResultSet rs = ps.executeQuery();
+       
         if (!rs.next() ) {
-        
             return false;
         }
         else
-        {
-            while(rs.next()){
+        {  
                 String dbpass=rs.getString("password");
-                if(dbpass.equals(password))return true;
-                else return false;
-            }
+                if(dbpass.equals(password)){System.out.println("TRUE");return true;}
+                else {System.out.println("FALSE");return false;}
+            
         }
       }catch(SQLException e)
       {
           System.out.println("FAIL");
           e.printStackTrace();  
       }
-      
+       System.out.println("TUT7");
         return true;
     }
     
@@ -55,12 +54,9 @@ public class UserDAO {
         ps.setString(2, password);
         ps.setString(3, email);
         ps.setInt(4, 1);
-         System.out.println("YEY");
          ps.executeUpdate();
-      
-         System.out.println("SUCCESS");
       }catch(SQLException e)
-      { System.out.println("FAIL");
+      { 
           e.printStackTrace();  
       }
       
