@@ -2,6 +2,7 @@ package uk.ac.dundee.computing.infrabike.servlets;
 
 import java.sql.Connection;
 import java.util.List;
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import org.glassfish.jersey.server.mvc.Viewable;
 import uk.ac.dundee.computing.infrabike.dao.DatabaseDAO;
@@ -30,6 +31,7 @@ public abstract class AbstractFacade<T> {
 
     public void remove(T entity) {
         getEntityManager().remove(getEntityManager().merge(entity));
+        
     }
 
     public T find(Object id) {
