@@ -70,7 +70,7 @@ public class UserDAO {
           System.out.println("FAIL");
           e.printStackTrace();  
       }
-       System.out.println("TUT7");
+     
         return true;
     }
     
@@ -88,6 +88,155 @@ public class UserDAO {
           e.printStackTrace();  
       }
       
+        return true;
+    }
+    
+    public boolean changRole(int role,int Id,Connection connection)
+    {
+        try{     
+        PreparedStatement ps = connection.prepareStatement("UPDATE user_v SET id_role=? where id_user=?");
+        ps.setInt(1, role);
+        ps.setInt(2, Id);
+         ps.executeUpdate();
+      }catch(SQLException e)
+      { 
+          e.printStackTrace();  
+      }
+        return true;
+    }
+    
+    //not checked
+    //can dealer change the email?
+   
+    public boolean editDealer(int Id,String name,String  location,String phone,String email,Connection connection)
+    {   try{     
+        PreparedStatement ps = connection.prepareStatement("UPDATE dealer_v SET name=?,location=?,phone=?,email=? WHERE id_dealer=?");
+        ps.setString(1, name);
+        ps.setString(2, location);
+        ps.setString(3, phone);
+        ps.setString(4, email);
+        ps.setInt(5, Id);
+         ps.executeUpdate();
+      }catch(SQLException e)
+      { 
+          e.printStackTrace();  
+      }
+        return true;
+    }
+    
+    public boolean editCustomer(int Id,String first_name,String last_name,String location,String phone_number,Connection connection)
+    {
+        try{     
+        PreparedStatement ps = connection.prepareStatement("UPDATE customer_v SET first_name=?,last_name=?,location=?,phone_number=? where id_customer=?");
+        ps.setString(1, first_name);
+        ps.setString(2, last_name);
+        ps.setString(3, location);
+        ps.setString(4, phone_number);
+        ps.setInt(5, Id);
+         ps.executeUpdate();
+      }catch(SQLException e)
+      { 
+          e.printStackTrace();  
+      }
+        return true;
+    }
+     public boolean editUser(int Id,String username,String password,String email,Connection connection)
+    {   try{     
+        PreparedStatement ps = connection.prepareStatement("UPDATE user_v SET username=?,password=?,email=? where id_user=?");
+        ps.setString(1, username);
+        ps.setString(2, password);
+        ps.setString(3, email);
+        ps.setInt(4, Id);
+         ps.executeUpdate();
+      }catch(SQLException e)
+      { 
+          e.printStackTrace();  
+      }
+        return true;
+    }
+    //for dealer profile
+    public boolean viewDealer(int role,int Id,Connection connection)
+    {
+        try{     
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM dealer_lo");
+         ResultSet rs=ps.executeQuery();
+      }catch(SQLException e)
+      { 
+          e.printStackTrace();  
+      }
+        return true;
+    }
+     public boolean viewCustomer(int role,int Id,Connection connection)
+    {
+        try{     
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM customer_v");
+        ResultSet rs= ps.executeQuery();
+      }catch(SQLException e)
+      { 
+          e.printStackTrace();  
+      }
+        return true;
+    }
+    
+     
+     public boolean deleteCustomer(int Id,Connection connection)
+    {
+        try{     
+        PreparedStatement ps = connection.prepareStatement("DELETE FROM customer_v WHERE id_customer=?");
+   
+         ps.setInt(1, Id);
+              ps.executeUpdate();
+      }catch(SQLException e)
+      { 
+          e.printStackTrace();  
+      }
+        return true;
+    }
+     
+     public boolean deleteDealer(int Id,Connection connection)
+    {
+        try{     
+        PreparedStatement ps = connection.prepareStatement("DELETE FROM dealer_v WHERE id_dealer=?");
+        
+         ps.setInt(1, Id);
+          ps.executeUpdate();
+      }catch(SQLException e)
+      { 
+          e.printStackTrace();  
+      }
+        return true;
+    }
+     
+      public boolean addDealer(int userId,String name,String location,String phone,String email, Connection connection)
+    {
+        try{     
+        PreparedStatement ps = connection.prepareStatement("INSERT INTO dealer_v (name,location,phone,email,id_user) VALUES (?,?,?,?,?)");
+          ps.setString(1, name);
+          ps.setString(2, location);
+          ps.setString(3, phone);
+          ps.setString(4, email);
+          ps.setInt(5, userId);
+          ps.executeUpdate();
+      }catch(SQLException e)
+      { 
+          e.printStackTrace();  
+      }
+        return true;
+    }
+       public boolean addCustomer(int userId,String first_name,String last_name,String location,String phone_number,Connection connection)
+    {
+        try{     
+        PreparedStatement ps = connection.prepareStatement("INSERT INTO customer_v (first_name,last_name,location,phone_number,id_user) VALUES (?,?,?,?,?)");
+          ps.setString(1, first_name);
+          ps.setString(2, last_name);
+          ps.setString(3, location);
+          ps.setString(4, phone_number);
+          ps.setInt(5, userId);
+          ps.executeUpdate();
+      }catch(SQLException e)
+      { 
+          e.printStackTrace();  
+      }
         return true;
     }
     

@@ -42,7 +42,7 @@ public class Users {
         ArrayList userData = null;
         
         Connection conn = db.Get_Connection();
-        userData = u.GetUsers(conn, null, null);
+      //  userData = u.GetUsers(conn, null, null);
         
         Gson gson = new Gson();
         

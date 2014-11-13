@@ -9,8 +9,6 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -24,22 +22,23 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Anna
  */
 @Entity
-@Table(name = "dealer", catalog = "14ac3d30", schema = "")
+@Table(name = "dealer_v")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Dealer.findAll", query = "SELECT d FROM Dealer d"),
-    @NamedQuery(name = "Dealer.findByIdDealer", query = "SELECT d FROM Dealer d WHERE d.idDealer = :idDealer"),
-    @NamedQuery(name = "Dealer.findByName", query = "SELECT d FROM Dealer d WHERE d.name = :name"),
-    @NamedQuery(name = "Dealer.findByLocation", query = "SELECT d FROM Dealer d WHERE d.location = :location"),
-    @NamedQuery(name = "Dealer.findByPhone", query = "SELECT d FROM Dealer d WHERE d.phone = :phone"),
-    @NamedQuery(name = "Dealer.findByEmail", query = "SELECT d FROM Dealer d WHERE d.email = :email")})
-public class Dealer implements Serializable {
+    @NamedQuery(name = "DealerV.findAll", query = "SELECT d FROM DealerV d"),
+    @NamedQuery(name = "DealerV.findByIdDealer", query = "SELECT d FROM DealerV d WHERE d.idDealer = :idDealer"),
+    @NamedQuery(name = "DealerV.findByName", query = "SELECT d FROM DealerV d WHERE d.name = :name"),
+    @NamedQuery(name = "DealerV.findByLocation", query = "SELECT d FROM DealerV d WHERE d.location = :location"),
+    @NamedQuery(name = "DealerV.findByPhone", query = "SELECT d FROM DealerV d WHERE d.phone = :phone"),
+    @NamedQuery(name = "DealerV.findByEmail", query = "SELECT d FROM DealerV d WHERE d.email = :email"),
+    @NamedQuery(name = "DealerV.findByIdUser", query = "SELECT d FROM DealerV d WHERE d.idUser = :idUser")})
+public class DealerV implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+     @Id  
     @Basic(optional = false)
+    @NotNull
     @Column(name = "id_dealer")
-    private Integer idDealer;
+    private int idDealer;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -62,27 +61,19 @@ public class Dealer implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "email")
     private String email;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "id_user")
+    private int idUser;
 
-    public Dealer() {
+    public DealerV() {
     }
 
-    public Dealer(Integer idDealer) {
-        this.idDealer = idDealer;
-    }
-
-    public Dealer(Integer idDealer, String name, String location, String phone, String email) {
-        this.idDealer = idDealer;
-        this.name = name;
-        this.location = location;
-        this.phone = phone;
-        this.email = email;
-    }
-
-    public Integer getIdDealer() {
+    public int getIdDealer() {
         return idDealer;
     }
 
-    public void setIdDealer(Integer idDealer) {
+    public void setIdDealer(int idDealer) {
         this.idDealer = idDealer;
     }
 
@@ -118,29 +109,12 @@ public class Dealer implements Serializable {
         this.email = email;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idDealer != null ? idDealer.hashCode() : 0);
-        return hash;
+    public int getIdUser() {
+        return idUser;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Dealer)) {
-            return false;
-        }
-        Dealer other = (Dealer) object;
-        if ((this.idDealer == null && other.idDealer != null) || (this.idDealer != null && !this.idDealer.equals(other.idDealer))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "uk.ac.dundee.computing.infrabike.dao.Dealer[ idDealer=" + idDealer + " ]";
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
     
 }
