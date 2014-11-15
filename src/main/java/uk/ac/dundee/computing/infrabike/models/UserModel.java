@@ -6,10 +6,11 @@
 package uk.ac.dundee.computing.infrabike.models;
 
 import java.sql.Connection;
-import java.util.ArrayList;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import uk.ac.dundee.computing.infrabike.dao.UserDAO;
+import uk.ac.dundee.computing.infrabike.dto.CustomerV;
+import uk.ac.dundee.computing.infrabike.dto.DealerV;
+import uk.ac.dundee.computing.infrabike.dto.Profile;
+import uk.ac.dundee.computing.infrabike.dto.UserV;
 
 /**
  *
@@ -39,5 +40,77 @@ public class UserModel {
         }
         return success;
     }
+
     
-}
+   
+    
+      public Profile findUser(int Id,Connection connection)
+    {
+        Profile profile=new Profile();
+        UserV user;
+        CustomerV customer=null;
+        DealerV dealer=null;
+         try {
+            UserDAO c = new UserDAO();
+            user=c.getUser(Id,connection);
+            if(user.getIdRole()==6)
+            {
+                customer=c.viewCustomer(Id, connection);
+            }
+            else if(user.getIdRole()==7)
+            {
+                dealer=c.viewDealer(Id, connection);
+            }
+             
+         profile.setCustomer(customer);
+         profile.setDealer(dealer);
+         profile.setUser(user);
+         }catch (Exception e) {
+            throw e;
+        }
+        return profile;
+    }
+      
+      public boolean editCustomer(int Id,String first_name,String last_name,String location,String phone_number,String emailUser,String password,Connection connection)
+      {
+           boolean success = true;
+        try {
+            UserDAO c = new UserDAO();
+            success=c.editCustomer(Id,first_name,last_name,location,phone_number,emailUser,password,connection);
+        } 
+        catch (Exception e) {
+            throw e;
+        }
+        return success;
+      }
+      
+      public boolean editDealer(int Id,String name,String location,String phone,String emailUser,String password,String email,Connection connection)
+      {
+           boolean success = true;
+        try {
+            UserDAO c = new UserDAO();
+            success=c.editDealer(Id,name,location,phone,emailUser,password,email,connection);
+        } 
+        catch (Exception e) {
+            throw e;
+        }
+        return success;
+      }
+      
+      public boolean editUser(int Id,String emailUser,String password,Connection connection)
+      {
+           boolean success = true;
+        try {
+            UserDAO c = new UserDAO();
+            success=c.editUser(Id,emailUser,password,connection);
+        } 
+        catch (Exception e) {
+            throw e;
+        }
+        return success;
+      }
+      
+      }
+      
+      
+

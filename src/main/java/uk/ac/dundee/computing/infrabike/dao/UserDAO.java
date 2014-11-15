@@ -4,14 +4,18 @@
  * and open the template in the editor.
  */
 package uk.ac.dundee.computing.infrabike.dao;
+import com.sun.rowset.internal.Row;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import uk.ac.dundee.computing.infrabike.dto.CustomerV;
+import uk.ac.dundee.computing.infrabike.dto.DealerV;
 import uk.ac.dundee.computing.infrabike.dto.UserV;
 
 /**
@@ -46,6 +50,29 @@ public class UserDAO {
         }
     }
     
+    public UserV getUser(int Id,Connection connection)
+    { 
+    UserV  u=new UserV();
+    try{
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM user_v WHERE id_user=?");
+            ps.setInt(1, Id);
+            ResultSet rs = ps.executeQuery();       
+            while(rs.next()){
+               u = new UserV();
+                u.setIdUser(rs.getInt("id_user"));
+                u.setIdRole(rs.getInt("id_role"));
+                u.setEmail(rs.getString("email"));
+                u.setPassword(rs.getString("password"));
+                u.setUsername(rs.getString("username"));
+
+    }            
+    }
+      catch(SQLException e){
+          e.printStackTrace();  
+    }
+    return u;
+    }
+            
     public boolean userExists(String username,String password,Connection connection){
       try{
          
@@ -108,15 +135,17 @@ public class UserDAO {
     //not checked
     //can dealer change the email?
    
-    public boolean editDealer(int Id,String name,String  location,String phone,String email,Connection connection)
+    public boolean editDealer(int Id,String name,String  location,String phone,String emailUser,String password,String email,Connection connection)
     {   try{     
         PreparedStatement ps = connection.prepareStatement("UPDATE dealer_v SET name=?,location=?,phone=?,email=? WHERE id_dealer=?");
+        
         ps.setString(1, name);
         ps.setString(2, location);
         ps.setString(3, phone);
-        ps.setString(4, email);
+        ps.setString(4, emailUser);
         ps.setInt(5, Id);
          ps.executeUpdate();
+         editUser(Id,password,email,connection);
       }catch(SQLException e)
       { 
           e.printStackTrace();  
@@ -124,23 +153,25 @@ public class UserDAO {
         return true;
     }
     
-    public boolean editCustomer(int Id,String first_name,String last_name,String location,String phone_number,Connection connection)
+    public boolean editCustomer(int Id,String first_name,String last_name,String location,String phone_number,String emailUser,String password,Connection connection)
     {
         try{     
         PreparedStatement ps = connection.prepareStatement("UPDATE customer_v SET first_name=?,last_name=?,location=?,phone_number=? where id_customer=?");
+        
         ps.setString(1, first_name);
         ps.setString(2, last_name);
         ps.setString(3, location);
         ps.setString(4, phone_number);
         ps.setInt(5, Id);
          ps.executeUpdate();
+         editUser(Id,password,emailUser,connection);
       }catch(SQLException e)
       { 
           e.printStackTrace();  
       }
         return true;
     }
-     public boolean editUser(int Id,String username,String password,String email,Connection connection)
+    /* public boolean editUser(int Id,String username,String password,String email,Connection connection)
     {   try{     
         PreparedStatement ps = connection.prepareStatement("UPDATE user_v SET username=?,password=?,email=? where id_user=?");
         ps.setString(1, username);
@@ -154,28 +185,73 @@ public class UserDAO {
       }
         return true;
     }
+     */
+    
+     public boolean editUser(int Id,String password,String email,Connection connection)
+     {
+         try{
+        PreparedStatement ps= connection.prepareStatement("UPDATE user_v SET password=?,email=? WHERE id_user=?");
+        ps.setString(1,password);
+        ps.setString(2, email);
+        ps.setInt(3, Id);
+        ps.executeUpdate();
+         }catch(SQLException e)
+         { 
+          e.printStackTrace();
+          return false;
+         
+         }
+         return true;
+         }
     //for dealer profile
-    public boolean viewDealer(int role,int Id,Connection connection)
+   
+    
+     public DealerV viewDealer(int Id,Connection connection)
     {
+        DealerV dealer;
         try{     
-        PreparedStatement ps = connection.prepareStatement("SELECT * FROM dealer_lo");
-         ResultSet rs=ps.executeQuery();
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM dealer_v WHERE id_user=?");
+        ps.setInt(1, Id); 
+        ResultSet rs=ps.executeQuery();
+        while(rs.next()){
+                 dealer= new DealerV();
+                dealer.setIdDealer(rs.getInt("id_dealer"));; 
+                dealer.setIdUser(rs.getInt("id_user"));
+                dealer.setLocation(rs.getString("location"));
+                dealer.setName(rs.getString("name"));
+                dealer.setPhone(rs.getString("phone"));
+                dealer.setEmail(rs.getString("email"));  
+            }
       }catch(SQLException e)
       { 
           e.printStackTrace();  
       }
-        return true;
+        return null;
     }
-     public boolean viewCustomer(int role,int Id,Connection connection)
+    
+   
+     
+     public CustomerV viewCustomer(int Id,Connection connection)
     {
+        CustomerV customer=new CustomerV();
         try{     
-        PreparedStatement ps = connection.prepareStatement("SELECT * FROM customer_v");
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM customer_v WHERE id_user=?");
+        ps.setInt(1, Id);
         ResultSet rs= ps.executeQuery();
+        while(rs.next()){
+                 customer= new CustomerV();
+                customer.setIdCustomer(rs.getInt("id_dealer"));; 
+                customer.setIdUser(rs.getInt("id_user"));
+                customer.setLocation(rs.getString("location"));
+                customer.setFirstName(rs.getString("first_name"));
+                customer.setLastName(rs.getString("last_name"));
+                customer.setPhoneNumber(rs.getString("phone_number"));  
+            }
       }catch(SQLException e)
       { 
           e.printStackTrace();  
       }
-        return true;
+        return customer;
     }
     
      
@@ -241,3 +317,29 @@ public class UserDAO {
     }
     
 }
+/*  public boolean viewCustomerLo(int Id,Connection connection)
+    {
+        try{     
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM customer_v WHERE id_user=?");
+        ResultSet rs= ps.executeQuery();
+      }catch(SQLException e)
+      { 
+          e.printStackTrace();  
+      }
+        return true;
+    }
+
+     public boolean viewDealerLo(int Id,Connection connection)
+    {
+        try{     
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM dealer_lo WHERE id_dealer=?");
+         ResultSet rs=ps.executeQuery();
+      }catch(SQLException e)
+      { 
+          e.printStackTrace();  
+      }
+        return true;
+    }
+
+
+*/

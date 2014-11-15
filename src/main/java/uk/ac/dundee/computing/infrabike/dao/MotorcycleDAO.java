@@ -59,9 +59,9 @@ public class MotorcycleDAO {
             String colour,int price, int prod_weight,Connection connection){
     try{
          
-         PreparedStatement ps = connection.prepareStatement("UPDATE motorcycle_lo SET model_name=?, top_speed=?, weight=?,seat_height=?,frame=?,tank=?,"
-                 + "engine_size_cc=?,front_brakes=?,rear_brakes=?,front_tyre_size=?,rear_tyre_size=?,power_kw=?,serial=?,colour=?, price=?,prod_weight=?"
-                 + " WHERE id_model=?"  );
+         PreparedStatement ps = connection.prepareStatement("UPDATE motorcycle_v SET serial=?,id_part=? WHERE id_model=? ");
+         
+        
          ps.setString(1, model_name);
          ps.setInt(2, top_speed);
          ps.setInt(3, weight);
@@ -127,9 +127,12 @@ public class MotorcycleDAO {
     
     public void deleteMotorcycle(int Id,Connection connection){
         try{
-        PreparedStatement ps = connection.prepareStatement("DELETE FROM part_v WHERE id_model=?  ");
+        PreparedStatement ps = connection.prepareStatement("DELETE FROM motorcycle_v WHERE id_model=?  ");
+        PreparedStatement ps2 = connection.prepareStatement("DELETE FROM motorcycle_spec_v WHERE id_model=?  ");
          ps.setInt(1, Id);
+         ps2.setInt(1, Id);
          ps.executeUpdate();
+         ps2.executeUpdate();
         }catch(Exception e)
         {
         }
