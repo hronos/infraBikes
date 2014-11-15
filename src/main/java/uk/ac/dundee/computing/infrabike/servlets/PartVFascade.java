@@ -21,9 +21,6 @@ import javax.ws.rs.Produces;
 import org.glassfish.jersey.server.mvc.Viewable;
 import uk.ac.dundee.computing.infrabike.dao.DatabaseDAO;
 import uk.ac.dundee.computing.infrabike.dto.PartV;
-import static uk.ac.dundee.computing.infrabike.dto.UserV_.password;
-import static uk.ac.dundee.computing.infrabike.dto.UserV_.username;
-import static uk.ac.dundee.computing.infrabike.dto.User_.email;
 import uk.ac.dundee.computing.infrabike.models.WarehouseModel;
 
 /**
