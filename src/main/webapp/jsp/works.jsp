@@ -13,6 +13,6 @@
 <!DOCTYPE html>
 <html>
     <body>
-        Value: [<c:out value="${obj}"/>]
+        Value: [<c:out value="${username}"/>]
     </body>
 </html>
