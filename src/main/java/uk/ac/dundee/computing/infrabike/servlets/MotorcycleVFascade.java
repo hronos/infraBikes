@@ -5,18 +5,17 @@
  */
 package uk.ac.dundee.computing.infrabike.servlets;
 
+import java.sql.Connection;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import uk.ac.dundee.computing.infrabike.dao.DatabaseDAO;
-import uk.ac.dundee.computing.infrabike.dto.MotorcycleAll;
 import uk.ac.dundee.computing.infrabike.dto.MotorcycleLo;
-import uk.ac.dundee.computing.infrabike.dto.MotorcycleSpecV;
-import uk.ac.dundee.computing.infrabike.dto.MotorcycleV;
 import uk.ac.dundee.computing.infrabike.models.MotorcycleModel;
 
 
@@ -25,40 +24,65 @@ import uk.ac.dundee.computing.infrabike.models.MotorcycleModel;
  * @author dlennart
  */
 @Stateless
-@Path("MotorcycleV")
-public class MotorcycleVFascade extends AbstractFacade<MotorcycleV> {
+@Path("Motorcycle")
+public class MotorcycleVFascade  {
     //@PersistenceContext(unitName = "uk.ac.dundee.computing_infraBike_war_1.0-SNAPSHOTPU")
-    private EntityManager em;
+  
 
     public MotorcycleVFascade() {
-        super(MotorcycleV.class);
+       
     }
     
-    @Override
-    protected EntityManager getEntityManager() {
-        em = Persistence.createEntityManagerFactory("uk.ac.dundee.computing_infraBike_war_1.0-SNAPSHOTPU").createEntityManager();
-        return em;
-    }
+   
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public MotorcycleAll find(@PathParam("id") Integer id) {
+    public MotorcycleLo find(@PathParam("id") Integer id) {
         DatabaseDAO db = new DatabaseDAO();
         MotorcycleModel c = new MotorcycleModel();
-        MotorcycleSpecV spec=c.findSpec(id);
+       
         MotorcycleLo motorcycle =c.findMotorcycle(id) ;
-        MotorcycleAll m= new MotorcycleAll();
-        m.setSpec(spec);
-        m.setMotorcycle(motorcycle);
-        return m;
+        
+        return motorcycle;
     }
-   /* @POST
-    @Override
-    @Consumes({"application/xml", "application/json"})
-    public void create(UserV entity) {
-        super.create(entity);
+    
+    
+    @POST
+   
+    public void createMotorcycleSpec(@FormParam ("model_name")String name,@FormParam("top_speed")String top_speed,@FormParam("weight")String weight,@FormParam("seat_height")String seat_height,@FormParam("frame")String frame,
+   @FormParam("tank")String tank,@FormParam("engine_size")String engineSize,@FormParam("front_brakes")String frontB,@FormParam("rear_brakes")String rearB,@FormParam("front_tyre")String frontT,
+    @FormParam("rear_tyre")String rearT,@FormParam("power")String power,@FormParam ("serial")String serial,@FormParam("colour")String colour,@FormParam("price")String price,@FormParam("Id")String Id) {
+    System.out.println("TEST");
+     int speed=Integer.parseInt(top_speed);
+     int w=Integer.parseInt(weight);
+     int sh=Integer.parseInt(seat_height);
+     int t=Integer.parseInt(tank);
+     int es=Integer.parseInt(engineSize);
+     int fb=Integer.parseInt(frontB);
+     int rb=Integer.parseInt(rearB);
+     int ft=Integer.parseInt(frontT);
+     int rt=Integer.parseInt(rearT);
+     int pw=Integer.parseInt(power);
+     int s=Integer.parseInt(serial);
+     int pr=Integer.parseInt(price);
+     int id=Integer.parseInt(Id);
+              System.out.println("TEST2");
+        try{
+        DatabaseDAO db = new DatabaseDAO();
+         Connection conn = db.Get_Connection();
+        MotorcycleModel c = new MotorcycleModel();
+         System.out.println("TEST3"+name);
+        c.addSpec(name,speed,w,sh,frame,t,es,fb,rb,ft,rt,pw,s,colour, pr,id,conn) ; 
+        }catch(Exception e)
+        {
+             System.out.println("TEST4");
+        }
+        
     }
 
+    
+    
+    /* 
     @PUT
     @Path("{id}")
     @Consumes({"application/xml", "application/json"})
