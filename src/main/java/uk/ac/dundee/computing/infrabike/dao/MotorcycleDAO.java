@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.glassfish.jersey.server.mvc.Viewable;
+import uk.ac.dundee.computing.infrabike.dto.MotorcycleLo;
 import uk.ac.dundee.computing.infrabike.dto.PartLo;
 
 /**
@@ -56,16 +57,38 @@ public class MotorcycleDAO {
     }
     
     
-      public void viewMotorcycle(int Id,Connection connection){
+      public MotorcycleLo viewMotorcycle(int Id,Connection connection){
+          MotorcycleLo motLo = new MotorcycleLo();
     try{
          
          PreparedStatement ps = connection.prepareStatement("SELECT * FROM motorcycle_lo WHERE id_model=?"  );
          ps.setInt(1, Id);
          ResultSet rs=ps.executeQuery();
+         while(rs.next()){
+             motLo.setColor(rs.getString("color"));
+             motLo.setEngineSizeCc(rs.getInt("engline_size_cc"));
+             motLo.setFrame(rs.getString("frame"));
+             motLo.setFrontBrakes(rs.getInt("front_brakes"));
+             motLo.setFrontTyreSize(rs.getInt("front_tyre_size"));
+             motLo.setIdModel(rs.getInt("id_model"));
+             motLo.setModelName(rs.getString("model_name"));
+             motLo.setPowerKw(rs.getInt("power_kw"));
+             motLo.setPrice(rs.getFloat("price"));
+             motLo.setProdWeight(rs.getFloat("prod_weight"));
+             motLo.setRearBrakes(rs.getInt("rear_brakes"));
+             motLo.setRearTyreSize(rs.getInt("rear_tyre_size"));
+             motLo.setSeatHeight(rs.getInt("seat_height"));
+             motLo.setSerial(rs.getInt("serial"));
+             motLo.setTank(rs.getInt("tank"));
+             motLo.setTopSpeed(rs.getInt("top_speed"));
+             motLo.setWeight(rs.getInt("weight"));
+             
+         }
     }catch(Exception e)
     {
+        e.printStackTrace(); 
     }
-      
+      return motLo;
     }
     
      
