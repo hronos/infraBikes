@@ -101,14 +101,16 @@ public class SupplierFascade {
     }
              
     @POST
-    public Viewable updateSupplier()
+    @Path("{name}")
+    public Viewable updateSupplier(@PathParam("name")String name,@FormParam("location")String location,@FormParam("phone")String phone,@formParam("email")String email)
     {
-     boolean success=false;
+        int ph=Integer.parseInt(phone);
+        boolean success=false;
          try{  
         DatabaseDAO db = new DatabaseDAO();
         SupplierModel c = new SupplierModel();
         Connection conn = db.Get_Connection();
-        success= c.updateSupplier());
+        success= c.updateSupplier(name,location,ph,email,conn);
             }
         catch(Exception e)
         {
