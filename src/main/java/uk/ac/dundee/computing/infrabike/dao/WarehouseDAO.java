@@ -10,14 +10,45 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import uk.ac.dundee.computing.infrabike.dto.PartLo;
 import uk.ac.dundee.computing.infrabike.dto.WarehouseLo;
+import uk.ac.dundee.computing.infrabike.dto.WarehouseV;
 
 /**
  *
  * @author Anna
  */
 public class WarehouseDAO {
+    
+     public ArrayList getWarehouses(Connection connection, HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+          ArrayList warehouseData = new ArrayList();
+        try{
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM warehouse_v ORDER BY id_warehouse DESC");
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                WarehouseV w = new WarehouseV();
+                
+                w.setIdWarehouse(rs.getInt("id_warehouse"));
+               w.setLocation(rs.getString("location"));
+               w.setStorageSize(rs.getInt("storage_size"));
+               w.setPhone(rs.getString("phone"));
+               
+               warehouseData.add(w);
+            
+            }
+            
+            return warehouseData;
+        }
+        catch(Exception e){
+            throw e;
+        }
+     }
+        
+    
     
     
     public boolean updateWarehouse(int Id,String phone,int storageS,Connection connection){
