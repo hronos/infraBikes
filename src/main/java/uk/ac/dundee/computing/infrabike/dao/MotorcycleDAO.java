@@ -190,7 +190,7 @@ public class MotorcycleDAO {
     */
     
     public void addSpec(String model_name,int top_speed,int weight,int seat_height,String frame,int tank,
-            int engine_size_cc,int front_brakes,int rear_brakes,int front_tyre_size,int rear_tyre_size,int power_kw,int serial, String colour,int price, int prod_weight,int Id,Connection connection){
+            int engine_size_cc,int front_brakes,int rear_brakes,int front_tyre_size,int rear_tyre_size,int power_kw,int serial, String colour,float price, int prod_weight,int Id,Connection connection){
    
          try{
          
@@ -220,7 +220,7 @@ public class MotorcycleDAO {
          ps4.setInt(1,serial);
          ps4.setInt(2,Id);
          ps4.setString(3,colour);
-         ps4.setInt(4, price);
+         ps4.setFloat(4, price);
          ps4.setInt(5, weight);
          ps.executeUpdate();
          ps2.executeUpdate();
@@ -233,7 +233,7 @@ public class MotorcycleDAO {
     }
     
    public void updateSpec(int Id,String model_name,int top_speed,int weight,int seat_height,String frame,int tank,
-            int engine_size_cc,int front_brakes,int rear_brakes,int front_tyre_size,int rear_tyre_size,int power_kw,int serial,String colour,int price,Connection connection)
+            int engine_size_cc,int front_brakes,int rear_brakes,int front_tyre_size,int rear_tyre_size,int power_kw,int serial,String colour,float price,Connection connection)
     {
          try{
         //PreparedStatement ps=connection.prepareStatement("START TRANSACTION");
@@ -257,7 +257,7 @@ public class MotorcycleDAO {
             ps2.setInt(13, Id);
             ps3.setInt(1,serial);
             ps3.setString(2, colour);
-            ps3.setInt(3,  price);
+            ps3.setFloat(3,  price);
             ps3.setInt(4, weight);
             ps3.setInt(5, Id);
           //  ps.executeUpdate();

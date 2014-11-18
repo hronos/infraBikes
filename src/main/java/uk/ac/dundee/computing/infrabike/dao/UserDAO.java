@@ -16,6 +16,7 @@ import uk.ac.dundee.computing.infrabike.dto.CustomerLo;
 import uk.ac.dundee.computing.infrabike.dto.CustomerV;
 import uk.ac.dundee.computing.infrabike.dto.DealerLo;
 import uk.ac.dundee.computing.infrabike.dto.Roles;
+import uk.ac.dundee.computing.infrabike.dto.UserLo;
 import uk.ac.dundee.computing.infrabike.dto.UserV;
 
 /**
@@ -72,7 +73,26 @@ public class UserDAO {
     }
     return u;
     }
-            
+           
+     public UserLo viewUser(String username, String role_name, String email, Connection connection){
+        UserLo user = new UserLo();
+        try{     
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM user_lo WHERE username=?");
+        ps.setString(1, username); 
+        ResultSet rs=ps.executeQuery();
+        while(rs.next()){
+            user.setUsername(rs.getString("username") );
+            user.setRole(rs.getString("role_name"));
+            user.setEmail(rs.getString("email"));
+            }
+      }catch(SQLException e)
+      { 
+          e.printStackTrace();  
+      }
+        return null;
+    
+    }
+     
     public boolean userExists(String username,String password,Connection connection){
       try{
          
