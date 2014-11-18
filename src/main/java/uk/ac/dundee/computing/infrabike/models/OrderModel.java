@@ -73,12 +73,12 @@ public class OrderModel {
    
     }
     
-    public boolean updateOrder(int id,int idI,int int_d,int delivery_price,String region,int id_c,int serial,Connection connection)
+    public boolean updateOrder(int id,int id_d,int delivery_price,String region,int id_c,Connection connection)
     {
     boolean success=false;    
     try {
             OrderDAO o = new OrderDAO();
-            success= o.updateOrder(id, idI, id_c, delivery_price, region, id_c, serial, connection);
+            success= o.updateOrder(id, id_d, delivery_price, region, id_c, connection);
             
         } catch (Exception e) {
             throw e;
@@ -86,4 +86,41 @@ public class OrderModel {
          return success;
     }
     
+     public boolean updateItem(int id,int idI,int serial,Connection connection)
+    {
+    boolean success=false;    
+    try {
+            OrderDAO o = new OrderDAO();
+            success= o.updateItem(id, idI,serial, connection);
+            
+        } catch (Exception e) {
+            throw e;
+        }
+         return success;
+    }
+    public boolean addOrderItem(int id,int serial,Connection connection)
+    {
+        boolean success=false;
+        try{
+            OrderDAO o= new OrderDAO();
+            success=o.addItem(id,serial,connection);
+        }catch(Exception e)
+        {
+        }
+        return success;
+    }
+    
+     public boolean deleteItem(int id,Connection connection)
+    {
+        boolean success=false;
+        try{
+            OrderDAO o= new OrderDAO();
+            success=o.deleteItem(id,connection);
+        }catch(Exception e)
+        {
+        }
+        return success;
+    }
+    
+     
 }

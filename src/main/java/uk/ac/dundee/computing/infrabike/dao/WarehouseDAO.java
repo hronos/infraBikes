@@ -77,7 +77,7 @@ public class WarehouseDAO {
     
     }
     public boolean updatePart(int Id,String name,String part,int price,int quantity,Connection connection){
-     try{PreparedStatement ps = connection.prepareStatement("UPDATE part_v SET name=?, part_type=?,price=?,quantity-? WHERE id_part=?"  );
+     try{PreparedStatement ps = connection.prepareStatement("UPDATE part_v SET name=?, part_type=?,price=?,quantity=? WHERE id_part=?"  );
          ps.setString(1, name);
           ps.setString(2,part);
          ps.setInt(3, price);

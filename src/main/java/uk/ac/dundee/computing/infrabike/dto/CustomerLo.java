@@ -34,6 +34,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "CustomerLo.findByEmail", query = "SELECT c FROM CustomerLo c WHERE c.email = :email"),
     @NamedQuery(name = "CustomerLo.findByRoleName", query = "SELECT c FROM CustomerLo c WHERE c.roleName = :roleName")})
 public class CustomerLo implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "id_customer")
+    private int idCustomer;
     
     //no id here in this view-need to do;(
     
@@ -134,6 +138,14 @@ public class CustomerLo implements Serializable {
 
     public void setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+
+    public int getIdCustomer() {
+        return idCustomer;
+    }
+
+    public void setIdCustomer(int idCustomer) {
+        this.idCustomer = idCustomer;
     }
     
 }

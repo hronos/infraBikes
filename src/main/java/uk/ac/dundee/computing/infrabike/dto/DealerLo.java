@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "DealerLo.findAll", query = "SELECT d FROM DealerLo d"),
+    @NamedQuery(name = "DealerLo.findByIdDealer", query = "SELECT d FROM DealerLo d WHERE d.idDealer = :idDealer"),
     @NamedQuery(name = "DealerLo.findByUsername", query = "SELECT d FROM DealerLo d WHERE d.username = :username"),
     @NamedQuery(name = "DealerLo.findByName", query = "SELECT d FROM DealerLo d WHERE d.name = :name"),
     @NamedQuery(name = "DealerLo.findByLocation", query = "SELECT d FROM DealerLo d WHERE d.location = :location"),
@@ -33,6 +34,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "DealerLo.findByDealerEmail", query = "SELECT d FROM DealerLo d WHERE d.dealerEmail = :dealerEmail")})
 public class DealerLo implements Serializable {
     private static final long serialVersionUID = 1L;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "id_dealer")
+    private int idDealer;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -66,6 +71,14 @@ public class DealerLo implements Serializable {
     private String dealerEmail;
 
     public DealerLo() {
+    }
+
+    public int getIdDealer() {
+        return idDealer;
+    }
+
+    public void setIdDealer(int idDealer) {
+        this.idDealer = idDealer;
     }
 
     public String getUsername() {

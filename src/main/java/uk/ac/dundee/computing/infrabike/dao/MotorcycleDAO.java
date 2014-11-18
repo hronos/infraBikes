@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import uk.ac.dundee.computing.infrabike.dto.PartLo;
 
 /**
  *
@@ -26,16 +27,31 @@ public class MotorcycleDAO {
     }
       
     }
-    public void viewParts(int Id,Connection connection){
-    try{
-         
-         PreparedStatement ps = connection.prepareStatement("SELECT * FROM part_v WHERE id_part=?"  );
+    public PartLo viewParts(int Id,Connection connection){
+      PartLo part=new PartLo();
+        try{
+        
+         PreparedStatement ps = connection.prepareStatement("SELECT * FROM part_lo WHERE id_part=?"  );
          ps.setInt(1, Id);
          ResultSet rs=ps.executeQuery();
+         while(rs.next())
+         {
+         part.setIdPart(rs.getInt("id_part"));
+         part.setName(rs.getString("name"));
+         part.setPartType(rs.getString("part_type"));
+         part.setPrice(rs.getFloat("price"));
+         part.setQuantity(rs.getInt("quantity"));
+         part.setSupplierEmail(rs.getString("supplier_email"));
+         part.setSupplierName(rs.getString("supplier_name"));
+         part.setSupplierPhone(rs.getInt("supplier_phone"));
+         part.setWarehouseLocation(rs.getString("warehouse_location"));
+         part.setWarehousePhone(rs.getString("warehouse_phone"));
+         }
+         
     }catch(Exception e)
     {
     }
-      
+     return part; 
     }
     
     

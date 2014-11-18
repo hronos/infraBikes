@@ -35,6 +35,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "PartLo.findBySupplierPhone", query = "SELECT p FROM PartLo p WHERE p.supplierPhone = :supplierPhone"),
     @NamedQuery(name = "PartLo.findBySupplierEmail", query = "SELECT p FROM PartLo p WHERE p.supplierEmail = :supplierEmail")})
 public class PartLo implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "id_part")
+    private int idPart;
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @NotNull
@@ -152,6 +156,14 @@ public class PartLo implements Serializable {
 
     public void setSupplierEmail(String supplierEmail) {
         this.supplierEmail = supplierEmail;
+    }
+
+    public int getIdPart() {
+        return idPart;
+    }
+
+    public void setIdPart(int idPart) {
+        this.idPart = idPart;
     }
     
 }

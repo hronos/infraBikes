@@ -60,7 +60,7 @@ public class OrderDAO {
         try{
         PreparedStatement ps=connection.prepareStatement("START TRANSACTION");
          PreparedStatement ps2=connection.prepareStatement("DELETE FROM order_v WHERE id_order=?");
-         PreparedStatement ps3=connection.prepareStatement("DELETE FROM order_v WHERE id_order=?");        
+         PreparedStatement ps3=connection.prepareStatement("DELETE FROM order_item_v WHERE id_order=?");        
          PreparedStatement ps4=connection.prepareStatement ("COMMIT");
          ps2.setInt(1,id);
          ps3.setInt(1,id);
@@ -146,25 +146,19 @@ public class OrderDAO {
         return orderList;
     }
     
-    public boolean updateOrder(int id,int idI,int id_d,int del_price,String region,int id_c,int serial, Connection connection)
+    public boolean updateOrder(int id,int id_d,int del_price,String region,int id_c, Connection connection)
     {
         try{
-        PreparedStatement ps=connection.prepareStatement("START TRANSACTION");
+        
         PreparedStatement ps2=connection.prepareStatement("UPDATE order_v SET id_dealer=?,delivery_price=?,region=?,id_customer=? WHERE id_order =?");
         PreparedStatement ps3=connection.prepareStatement("UPDATE order_item_v SET id_order=?, serial=? WHERE id_order_item=?");
-        PreparedStatement ps4=connection.prepareStatement("COMMIT");
+        
         ps2.setInt(1, id_d);
         ps2.setInt(2, del_price);
         ps2.setString(3, region);
         ps2.setInt(4,id_c);
         ps2.setInt(5,id);
-        ps3.setInt(1,id);
-        ps3.setInt(2,serial);
-        ps3.setInt(3,idI);
-        ps.executeUpdate();
         ps2.executeUpdate();
-        ps3.executeUpdate();
-        ps4.executeUpdate();
         }catch(SQLException e)
         {
             e.printStackTrace();
@@ -173,5 +167,49 @@ public class OrderDAO {
         return true;
     
     }
+    public boolean updateItem(int id,int idI,int serial,Connection connection)
+    {
+        try{
+           PreparedStatement ps3=connection.prepareStatement("UPDATE order_item_v SET id_order=?, serial=? WHERE id_order_item=?");
+            ps3.setInt(1,id);
+            ps3.setInt(2,serial);
+            ps3.setInt(3,idI);
+            ps3.executeUpdate();
+        }
+        catch(SQLException e)
+        {
+           return false; 
+        }
+    return true;
+    }
     
+    public boolean addItem(int id,int serial,Connection connection)
+    {
+        try{
+           PreparedStatement ps=connection.prepareStatement("INSERT INTO order_item_v (id_order,serial) VALUES(@?,?)"); 
+            ps.setInt(1,id);
+            ps.setInt(2,serial);
+            
+            ps.executeUpdate();
+        }
+        catch(SQLException e)
+        {
+           return false; 
+        }
+    return true;
+    }
+    public boolean deleteItem(int idI,Connection connection)
+    {
+        try{
+            PreparedStatement ps=connection.prepareStatement("DELETE FROM order_item_v WHERE id_order_item=?");        
+            ps.setInt(1,idI);
+           
+            ps.executeUpdate();
+        }
+        catch(SQLException e)
+        {
+           return false; 
+        }
+    return true;
+    }
 }

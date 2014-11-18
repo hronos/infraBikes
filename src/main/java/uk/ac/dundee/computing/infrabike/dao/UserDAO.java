@@ -12,8 +12,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import uk.ac.dundee.computing.infrabike.dto.CustomerLo;
 import uk.ac.dundee.computing.infrabike.dto.CustomerV;
-import uk.ac.dundee.computing.infrabike.dto.DealerV;
+import uk.ac.dundee.computing.infrabike.dto.DealerLo;
 import uk.ac.dundee.computing.infrabike.dto.Roles;
 import uk.ac.dundee.computing.infrabike.dto.UserV;
 
@@ -223,21 +224,22 @@ public class UserDAO {
     //for dealer profile
    
     
-     public DealerV viewDealer(int Id,Connection connection)
+     public DealerLo viewDealer(int Id,Connection connection)
     {
-        DealerV dealer;
+        DealerLo dealer= new DealerLo();
         try{     
-        PreparedStatement ps = connection.prepareStatement("SELECT * FROM dealer_v WHERE id_user=?");
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM dealer_lo WHERE id_user=?");
         ps.setInt(1, Id); 
         ResultSet rs=ps.executeQuery();
         while(rs.next()){
-                 dealer= new DealerV();
-                dealer.setIdDealer(rs.getInt("id_dealer"));; 
-                dealer.setIdUser(rs.getInt("id_user"));
+                 
+                dealer.setDealerEmail(rs.getString("dealer_email"));
+                dealer.setUsername(rs.getString("username"));
+                dealer.setIdDealer(rs.getInt("id_dealer"));
                 dealer.setLocation(rs.getString("location"));
                 dealer.setName(rs.getString("name"));
                 dealer.setPhone(rs.getString("phone"));
-                dealer.setEmail(rs.getString("email"));  
+                dealer.setPersonalEmail(rs.getString("personal_email"));  
             }
       }catch(SQLException e)
       { 
@@ -248,17 +250,18 @@ public class UserDAO {
     
    
      
-     public CustomerV viewCustomer(int Id,Connection connection)
+     public CustomerLo viewCustomer(int Id,Connection connection)
     {
-        CustomerV customer=new CustomerV();
+        CustomerLo customer= new CustomerLo();
         try{     
-        PreparedStatement ps = connection.prepareStatement("SELECT * FROM customer_v WHERE id_user=?");
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM customer_lo WHERE id_user=?");
         ps.setInt(1, Id);
         ResultSet rs= ps.executeQuery();
         while(rs.next()){
-                 customer= new CustomerV();
-                customer.setIdCustomer(rs.getInt("id_dealer"));; 
-                customer.setIdUser(rs.getInt("id_user"));
+                
+                customer.setIdCustomer(rs.getInt(rs.getInt("id_dealer")));; 
+               customer.setUsername(rs.getString("username"));
+               customer.setRoleName(rs.getString("role_name"));
                 customer.setLocation(rs.getString("location"));
                 customer.setFirstName(rs.getString("first_name"));
                 customer.setLastName(rs.getString("last_name"));
