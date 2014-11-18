@@ -11,14 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import uk.ac.dundee.computing.infrabike.dao.CustomerDAO;
-import uk.ac.dundee.computing.infrabike.dto.CustomerDTO;
+//import uk.ac.dundee.computing.infrabike.dto.CustomerDTO;
 /**
  *
  * @author dlennart
  */
 public class CustomerModel {
     public ArrayList GetCustomers(Connection connection, HttpServletRequest request,
-HttpServletResponse response) throws Exception {
+    HttpServletResponse response) throws Exception {
         ArrayList customers = null;
         try {
             CustomerDAO c = new CustomerDAO();

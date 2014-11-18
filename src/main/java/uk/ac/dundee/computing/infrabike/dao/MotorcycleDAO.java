@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.glassfish.jersey.server.mvc.Viewable;
 import uk.ac.dundee.computing.infrabike.dto.PartLo;
 
 /**
@@ -30,7 +31,7 @@ public class MotorcycleDAO {
     public PartLo viewParts(int Id,Connection connection){
       PartLo part=new PartLo();
         try{
-        
+      
          PreparedStatement ps = connection.prepareStatement("SELECT * FROM part_lo WHERE id_part=?"  );
          ps.setInt(1, Id);
          ResultSet rs=ps.executeQuery();

@@ -336,8 +336,8 @@ public class UserDAO {
         return true;
     }
     
-}
-/*  public boolean viewCustomerLo(int Id,Connection connection)
+
+ public boolean viewCustomerLo(int Id,Connection connection)
     {
         try{     
         PreparedStatement ps = connection.prepareStatement("SELECT * FROM customer_v WHERE id_user=?");
@@ -362,4 +362,4 @@ public class UserDAO {
     }
 
 
-*/
+}

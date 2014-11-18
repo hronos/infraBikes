@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -48,7 +49,6 @@ public class UserFacadeREST extends AbstractFacade<User> {
     @Override
     //@Consumes({"application/xml", "application/json"})
     public Viewable exists(@FormParam("login") String username, @FormParam("password")String password) {
-        
         return super.exists(username, password);
     }
     

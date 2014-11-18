@@ -11,8 +11,8 @@ package uk.ac.dundee.computing.infrabike.dto;
  */
 public class Profile {
   private UserV user;
-  private DealerV dealer=null;
-  private CustomerV customer=null;
+  private DealerLo dealer=null;
+  private CustomerLo customer=null;
   
     public UserV getUser() {
         return user;
@@ -22,19 +22,19 @@ public class Profile {
         this.user = user;
     }
 
-    public DealerV getDealer() {
+    public DealerLo getDealer() {
         return dealer;
     }
 
-    public void setDealer(DealerV dealer) {
+    public void setDealer(DealerLo dealer) {
         this.dealer = dealer;
     }
 
-    public CustomerV getCustomer() {
+    public CustomerLo getCustomer() {
         return customer;
     }
 
-    public void setCustomer(CustomerV customer) {
+    public void setCustomer(CustomerLo customer) {
         this.customer = customer;
     }
 

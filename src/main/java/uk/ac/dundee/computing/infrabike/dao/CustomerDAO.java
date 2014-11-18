@@ -11,8 +11,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import uk.ac.dundee.computing.infrabike.dto.CustomerV;
 
-import uk.ac.dundee.computing.infrabike.dto.CustomerDTO;
+//import uk.ac.dundee.computing.infrabike.dto.Customer;
 /**
  *
  * @author dlennart
@@ -26,12 +27,12 @@ public class CustomerDAO {
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
-                CustomerDTO c = new CustomerDTO();
-                c.setId_customer(rs.getString("id_customer"));
-                c.setFirst_name(rs.getString("first_name"));
-                c.setLast_name(rs.getString("last_name"));
+                CustomerV c = new CustomerV();
+                c.setIdCustomer(rs.getInt("id_customer"));
+                c.setFirstName(rs.getString("first_name"));
+                c.setLastName(rs.getString("last_name"));
                 c.setLocation(rs.getString("location"));
-                c.setPhone_number(rs.getString("phone_number"));
+                c.setPhoneNumber(rs.getString("phone_number"));
                 customerData.add(c);
             
             }
