@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.glassfish.jersey.server.mvc.Viewable;
+import uk.ac.dundee.computing.infrabike.dto.MotPartLo;
 import uk.ac.dundee.computing.infrabike.dto.MotorcycleLo;
 import uk.ac.dundee.computing.infrabike.dto.PartLo;
 
@@ -56,6 +57,26 @@ public class MotorcycleDAO {
      return part; 
     }
     
+    // view parts that exist in certain bike
+    public MotPartLo viewMotPart(String name, Connection connection){
+        MotPartLo motPart=new MotPartLo();
+        try{
+      
+         PreparedStatement ps = connection.prepareStatement("SELECT * FROM mot_part_lo WHERE model_name=?"  );
+         ps.setString(1, name);
+         ResultSet rs=ps.executeQuery();
+         while(rs.next())
+         {
+         motPart.setModelName(rs.getString("model_name"));
+         motPart.setPartName(rs.getString("part_name"));
+         motPart.setPartType(rs.getString("part_type"));        
+         }
+         
+        }catch(Exception e){
+        
+        }
+     return motPart; 
+    }
     
       public MotorcycleLo viewMotorcycle(int Id,Connection connection){
           MotorcycleLo motLo = new MotorcycleLo();
