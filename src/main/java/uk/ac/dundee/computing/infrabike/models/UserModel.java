@@ -10,6 +10,7 @@ import uk.ac.dundee.computing.infrabike.dao.UserDAO;
 import uk.ac.dundee.computing.infrabike.dto.CustomerV;
 import uk.ac.dundee.computing.infrabike.dto.DealerV;
 import uk.ac.dundee.computing.infrabike.dto.Profile;
+import uk.ac.dundee.computing.infrabike.dto.Roles;
 import uk.ac.dundee.computing.infrabike.dto.UserV;
 
 /**
@@ -40,8 +41,19 @@ public class UserModel {
         }
         return success;
     }
-
     
+    public Roles showRole(String username,Connection connection){
+            boolean success = true;
+            Roles role=new Roles();
+        try {
+            UserDAO c = new UserDAO();
+            role=c.showRole(username,connection);
+        } 
+        catch (Exception e) {
+            throw e;
+        }
+        return role;
+    }
    
     
       public Profile findUser(int Id,Connection connection)

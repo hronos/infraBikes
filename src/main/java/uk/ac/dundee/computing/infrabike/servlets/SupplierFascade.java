@@ -6,6 +6,7 @@
 package uk.ac.dundee.computing.infrabike.servlets;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import javax.ejb.Stateless;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -16,27 +17,29 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import org.glassfish.jersey.server.mvc.Viewable;
 import uk.ac.dundee.computing.infrabike.dao.DatabaseDAO;
-import uk.ac.dundee.computing.infrabike.dto.WarehouseLo;
-import uk.ac.dundee.computing.infrabike.models.WarehouseModel;
+import uk.ac.dundee.computing.infrabike.dto.SupplierLo;
+import uk.ac.dundee.computing.infrabike.models.SupplierModel;
 
 /**
  *
  * @author Anna
  */
 @Stateless
-@Path("Warehouse")
-public class WarehouseVFascade {
+@Path("Supplier")
+public class SupplierFascade {
     
     
     @PUT
-    public Viewable addWarehouse(@FormParam("location")String location,@FormParam("storage_size")int storage_size,@FormParam("phone")String phone)
+    public Viewable addSupplier(@FormParam("name")String name,@FormParam("location")String location,@FormParam("phone")String phone,@FormParam("email")String email)
     {
         boolean success=false;
+        int ph=Integer.parseInt(phone);
          try{  
+             
         DatabaseDAO db = new DatabaseDAO();
-        WarehouseModel c = new WarehouseModel();
+        SupplierModel c = new SupplierModel();
         Connection conn = db.Get_Connection();
-        success= c.addWarehouse(conn, location, storage_size, phone);
+        success= c.addSupplier(name,location,ph,email,conn);
             }
         catch(Exception e)
         {
@@ -47,15 +50,32 @@ public class WarehouseVFascade {
       
     
     @GET
-    @Path("{location}")
-    public Viewable showWarehouse(@PathParam("location")String location)
+    @Path("{name}")
+    public Viewable showSupplier(@PathParam("name")String name)
     {
       
          try{  
         DatabaseDAO db = new DatabaseDAO();
-        WarehouseModel c = new WarehouseModel();
+        SupplierModel c = new SupplierModel();
         Connection conn = db.Get_Connection();
-        WarehouseLo wh= c.showWarehouse(location, conn);
+        SupplierLo wh= c.showSupplier(name,conn);
+            }
+        catch(Exception e)
+        {
+             
+        }        
+    }
+    
+    @GET
+    
+    public Viewable showSuppliers()
+    {
+      
+         try{  
+        DatabaseDAO db = new DatabaseDAO();
+        SupplierModel c = new SupplierModel();
+        Connection conn = db.Get_Connection();
+        ArrayList wh= c.showSuppliers(conn);
             }
         catch(Exception e)
         {
@@ -64,15 +84,15 @@ public class WarehouseVFascade {
     }
             
     @DELETE
-    @Path("{id}")
-    public Viewable deleteWarehouse(@PathParam("id")int id)
+    @Path("{name}")
+    public Viewable deleteSupplier(@PathParam("name")String name)
     {
      boolean success=false;
          try{  
         DatabaseDAO db = new DatabaseDAO();
-        WarehouseModel c = new WarehouseModel();
+        SupplierModel c = new SupplierModel();
         Connection conn = db.Get_Connection();
-        success= c.deleteWarehouse(conn, id);
+        success= c.deleteSupplier(name,conn);
             }
         catch(Exception e)
         {
@@ -81,15 +101,14 @@ public class WarehouseVFascade {
     }
              
     @POST
-    @
-    public Viewable updateWarehouse(@FormParam("id")int id,@FormParam("storage_size")int storage_size,@FormParam("phone")String phone)
+    public Viewable updateSupplier()
     {
      boolean success=false;
          try{  
         DatabaseDAO db = new DatabaseDAO();
-        WarehouseModel c = new WarehouseModel();
+        SupplierModel c = new SupplierModel();
         Connection conn = db.Get_Connection();
-        success= c.updateWarehouse(conn, id, storage_size, phone);
+        success= c.updateSupplier());
             }
         catch(Exception e)
         {

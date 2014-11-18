@@ -4,18 +4,17 @@
  * and open the template in the editor.
  */
 package uk.ac.dundee.computing.infrabike.dao;
-import com.sun.rowset.internal.Row;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import uk.ac.dundee.computing.infrabike.dto.CustomerV;
 import uk.ac.dundee.computing.infrabike.dto.DealerV;
+import uk.ac.dundee.computing.infrabike.dto.Roles;
 import uk.ac.dundee.computing.infrabike.dto.UserV;
 
 /**
@@ -130,6 +129,24 @@ public class UserDAO {
           e.printStackTrace();  
       }
         return true;
+    }
+    public Roles showRole(String username,Connection connection)
+    {
+        Roles role=new Roles();
+        try{     
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM roles WHERE username=?");
+        ps.setString(1, username);
+         ResultSet rs=ps.executeQuery();
+         while(rs.next())
+         {
+         role.setRoleName(username);
+         role.setRoleName("role_name");
+         }
+      }catch(SQLException e)
+      { 
+          e.printStackTrace();  
+      }
+        return role;
     }
     
     //not checked
