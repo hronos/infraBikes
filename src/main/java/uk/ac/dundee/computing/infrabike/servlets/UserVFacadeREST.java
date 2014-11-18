@@ -12,17 +12,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import org.glassfish.jersey.server.mvc.Viewable;
 import uk.ac.dundee.computing.infrabike.dao.DatabaseDAO;
 import uk.ac.dundee.computing.infrabike.dto.UserV;
 import uk.ac.dundee.computing.infrabike.models.UserModel;
+
 
 /**
  *
@@ -38,12 +37,7 @@ public class UserVFacadeREST extends AbstractFacade<UserV> {
         super(UserV.class);
     }
 
-    @POST
-    @Override
-    @Consumes({"application/xml", "application/json"})
-    public void create(UserV entity) {
-        super.create(entity);
-    }
+    
 
     @PUT
     @Path("{id}")
@@ -99,20 +93,23 @@ public class UserVFacadeREST extends AbstractFacade<UserV> {
     
     
     @POST
-    public Viewable register(@FormParam("username") String username, @FormParam("password")String password,@FormParam("email")String email)
+    @Path("{username}/{password}/{email}")
+    public void register
+        (@PathParam("username") String username, @PathParam("password") String password, @PathParam("email") String email)
     {
         boolean success=false;
         try{  
         DatabaseDAO db = new DatabaseDAO();
         UserModel c = new UserModel();
          Connection conn = db.Get_Connection();
-           success= c.register(conn, username, password,email);
+         
+         
+           success= c.register(conn,username, password , email);
             }
         catch(Exception e)
         {
         }        
-        if(success){ return new Viewable("/works",null);}
-        else return new Viewable("/works",null);
+        
       
     }
 }

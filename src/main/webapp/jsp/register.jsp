@@ -10,7 +10,42 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="../css/forms.css" rel="stylesheet" type="text/css"/>
-        <script src="../dynatable/vendor/jquery-1.7.2.min.js" type="text/javascript"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $("#register").click(function(e) {
+                    e.preventDefault();
+                    var name = $("#name").val();
+                    var email = $("#email").val();
+                    var password = $("#password").val();
+                    var cpassword = $("#cpassword").val();
+                    if (name === '' || email === '' || password === '' || cpassword === '') {
+                        alert("Please fill all fields...!!!!!!");
+                    } else if ((password.length) < 5) {
+                        alert("Password should atleast 5 character in length...!!!!!!");
+                    } else if (!(password).match(cpassword)) {
+                        alert("Your passwords don't match. Try again?");
+                    } else {
+                        $.ajax({
+                            type: "POST",
+                            url: "/infraBike/webapi/UserV/"+name+"/"+password+"/"+email,
+                            success: function(e){
+                                alert("Registration was successful, redirecting to login");
+                                console.log("success");
+                                $(location).attr('href', "/infraBike/");
+                            },
+                            error: function(e){
+                                //alert(JSON.stringify(e));
+                                alert("Registration error")
+                                console.log("error occured");
+                                $(location).attr('href', "/infraBike/");
+                            },
+                        });
+                    }
+                });
+            });
+
+        </script>
     </head>
     <body>
         
@@ -25,40 +60,10 @@
                 <br/>
                 <input type="submit" value="Register"> 
         </form>
-        <script>
-            $(document).ready(function() {
-                $("#register").click(function() {
-                    
-                    var name = $("#name").val();
-                    var email = $("#email").val();
-                    var password = $("#password").val();
-                    var cpassword = $("#cpassword").val();
-                    if (name === '' || email === '' || password === '' || cpassword === '') {
-                        alert("Please fill all fields...!!!!!!");
-                    } else if ((password.length) < 5) {
-                        alert("Password should atleast 5 character in length...!!!!!!");
-                    } else if (!(password).match(cpassword)) {
-                        alert("Your passwords don't match. Try again?");
-                    } else {
-                        $.ajax({
-                            type: "POST",
-                            url: "/infraBike/webapi/UserV",
-                            success: function(msg){
-                                alert("Registration sucessful");
-                            },
-                            error: function(){
-                                alert("Problem");
-                            },
-                        });
-                    }
-                });
-            });
-            
         
-        </script>
 <div class="cont">
     <section id="content">
-        <form class="form" method="post" action="#">
+        <form class="form">
         <h1>Registration</h1>
         
         <input type="text" name="dname" placeholder="Username" id="name">
