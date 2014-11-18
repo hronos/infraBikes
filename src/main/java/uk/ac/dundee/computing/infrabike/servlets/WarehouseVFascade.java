@@ -81,7 +81,7 @@ public class WarehouseVFascade {
     }
              
     @POST
-    @
+    
     public Viewable updateWarehouse(@FormParam("id")int id,@FormParam("storage_size")int storage_size,@FormParam("phone")String phone)
     {
      boolean success=false;
