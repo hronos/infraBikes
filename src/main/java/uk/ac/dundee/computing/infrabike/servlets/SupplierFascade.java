@@ -45,7 +45,7 @@ public class SupplierFascade {
         {
              
         }        
-        
+         return new Viewable("/test", null);
     }
       
     
@@ -64,6 +64,7 @@ public class SupplierFascade {
         {
              
         }        
+          return new Viewable("/test", null);
     }
     
     @GET
@@ -81,6 +82,7 @@ public class SupplierFascade {
         {
              
         }        
+          return new Viewable("/test", null);
     }
             
     @DELETE
@@ -98,6 +100,7 @@ public class SupplierFascade {
         {
              
         }        
+          return new Viewable("/test", null);
     }
              
     @POST
@@ -115,7 +118,8 @@ public class SupplierFascade {
         catch(Exception e)
         {
              
-        }        
+        }      
+          return new Viewable("/test", null);
     }
     
   

@@ -66,7 +66,7 @@ public class PartsFascade {
         {
              
         }      
-        
+         return new Viewable("/test", null);
     }
     
     @GET
@@ -85,7 +85,7 @@ public class PartsFascade {
         {
              
         }      
-         //return list;
+          return new Viewable("/test", null);
     }
     
     @GET
@@ -102,7 +102,7 @@ public class PartsFascade {
         {
              
         }      
-         //return list; 
+          return new Viewable("/test", null);
     }
     
     
@@ -121,6 +121,7 @@ public class PartsFascade {
         {
              
         }      
+          return new Viewable("/test", null);
     }
 
     

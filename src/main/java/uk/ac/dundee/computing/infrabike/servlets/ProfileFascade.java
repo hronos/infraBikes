@@ -58,7 +58,7 @@ public class ProfileFascade {
     
     @POST
     @Path("Customer/{id}")
-     public boolean editCustomer(@PathParam("id") Integer id,@FormParam("first_name") String first_name,@FormParam("last_name")String last_name,@FormParam("location")String location,@FormParam("phone_number")String phone_number,@FormParam("emailUser")String emailUser,@FormParam("password") String password) {
+     public Viewable editCustomer(@PathParam("id") Integer id,@FormParam("first_name") String first_name,@FormParam("last_name")String last_name,@FormParam("location")String location,@FormParam("phone_number")String phone_number,@FormParam("emailUser")String emailUser,@FormParam("password") String password) {
      boolean success;
          try{  
        DatabaseDAO db = new DatabaseDAO();
@@ -70,12 +70,12 @@ public class ProfileFascade {
      {
      }
          
-         return true;
+         return new Viewable("/test", null);
      }
      
      @POST
     @Path("Dealer/{id}")
-     public boolean editDealer(@PathParam("id") Integer id,@FormParam("name") String name,@FormParam("location")String location,@FormParam("phone")String phone,@FormParam("emailUser")String emailUser,@FormParam("password") String password,@FormParam("email")String email) {
+     public Viewable editDealer(@PathParam("id") Integer id,@FormParam("name") String name,@FormParam("location")String location,@FormParam("phone")String phone,@FormParam("emailUser")String emailUser,@FormParam("password") String password,@FormParam("email")String email) {
      boolean success=false;
          try{  
        DatabaseDAO db = new DatabaseDAO();
@@ -87,12 +87,12 @@ public class ProfileFascade {
      {
      }
          
-         return success;
+          return new Viewable("/test", null);
      }
      
     @POST
     @Path("User/{id}")
-     public boolean editUser(@PathParam("id") Integer id,@FormParam("password") String password,@FormParam("emailUser")String emailUser) {
+     public Viewable editUser(@PathParam("id") Integer id,@FormParam("password") String password,@FormParam("emailUser")String emailUser) {
       boolean success;
          try{  
        DatabaseDAO db = new DatabaseDAO();
@@ -105,7 +105,7 @@ public class ProfileFascade {
      {
      }
          
-         return true;
+          return new Viewable("/test", null);
      }
     
     

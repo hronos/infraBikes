@@ -24,31 +24,33 @@ public class OrderFascade {
    @POST
    public Viewable editOrder()
    {
-   
+   return new Viewable("/test", null); 
    }
    
    @PUT
    public Viewable addOrder()
    {
+        return new Viewable("/test", null);
    }
    
    @GET 
    @Path("{user}")
    public Viewable showOrder()
    {
+        return new Viewable("/test", null);
    
    }
    
    @GET
    public Viewable showOrders()
    {
-       
+        return new Viewable("/test", null);
    }
   
    @DELETE
    public Viewable deleteOrders()
    {
-       
+        return new Viewable("/test", null);
    
    }
    

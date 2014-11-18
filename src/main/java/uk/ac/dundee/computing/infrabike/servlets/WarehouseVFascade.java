@@ -42,7 +42,7 @@ public class WarehouseVFascade {
         {
              
         }        
-        
+         return new Viewable("/test", null);
     }
       
     
@@ -61,6 +61,7 @@ public class WarehouseVFascade {
         {
              
         }        
+          return new Viewable("/test", null);
     }
             
     @DELETE
@@ -78,6 +79,7 @@ public class WarehouseVFascade {
         {
              
         }        
+          return new Viewable("/test", null);
     }
              
     @POST
@@ -94,7 +96,8 @@ public class WarehouseVFascade {
         catch(Exception e)
         {
              
-        }        
+        }
+          return new Viewable("/test", null);
     }
     
   
