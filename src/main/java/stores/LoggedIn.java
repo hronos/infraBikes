@@ -23,11 +23,11 @@ public class LoggedIn {
     public String getUsername(){
         return username;
     }
-    public void setRole(String name){
-        this.username=name;
+    public void setRole(String role){
+        this.role=role;
     }
     public String getRole(){
-        return username;
+        return role;
     }
     public void setLoggedin(){
         loggedin=true;
@@ -37,7 +37,7 @@ public class LoggedIn {
     }
     
     public void setLoginState(boolean logedin){
-        this.loggedin=logedin;
+        this.loggedin=loggedin;
     }
     public boolean getloggedin(){
         return loggedin;
