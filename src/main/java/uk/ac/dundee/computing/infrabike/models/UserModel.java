@@ -7,8 +7,8 @@ package uk.ac.dundee.computing.infrabike.models;
 
 import java.sql.Connection;
 import uk.ac.dundee.computing.infrabike.dao.UserDAO;
-import uk.ac.dundee.computing.infrabike.dto.CustomerV;
-import uk.ac.dundee.computing.infrabike.dto.DealerV;
+import uk.ac.dundee.computing.infrabike.dto.CustomerLo;
+import uk.ac.dundee.computing.infrabike.dto.DealerLo;
 import uk.ac.dundee.computing.infrabike.dto.Profile;
 import uk.ac.dundee.computing.infrabike.dto.Roles;
 import uk.ac.dundee.computing.infrabike.dto.UserV;
@@ -60,8 +60,8 @@ public class UserModel {
     {
         Profile profile=new Profile();
         UserV user;
-        CustomerV customer=null;
-        DealerV dealer=null;
+        CustomerLo customer=null;
+        DealerLo dealer=null;
          try {
             UserDAO c = new UserDAO();
             user=c.getUser(Id,connection);
