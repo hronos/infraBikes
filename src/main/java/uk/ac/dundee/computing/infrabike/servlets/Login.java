@@ -6,15 +6,15 @@
 package uk.ac.dundee.computing.infrabike.servlets;
 
 import java.sql.Connection;
-import java.util.HashMap;
-import java.util.Map;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import org.glassfish.jersey.server.mvc.Viewable;
+import stores.LoggedIn;
 import uk.ac.dundee.computing.infrabike.dao.DatabaseDAO;
 import uk.ac.dundee.computing.infrabike.models.UserModel;
 
@@ -31,6 +31,7 @@ public class Login {
     //@Consumes({"application/xml", "application/json"})
     public Viewable exists(@Context HttpServletRequest request, @FormParam("username") String username, @FormParam("password")String password) {
         boolean exists=false;
+        HttpSession session=request.getSession();
                 System.out.println("Login " + username + " " + password);
         try{
            
@@ -44,7 +45,16 @@ public class Login {
         }        
         if(exists){ 
            
-            request.setAttribute("username", new String(username));
+            
+            LoggedIn lg= new LoggedIn();
+            lg.setLoggedin();
+            lg.setUsername(username);
+            //request.setAttribute("LoggedIn", lg);
+            session.setAttribute("LoggedIn", lg);
+            System.out.println("Session in servlet "+session);
+            String usr = lg.getUsername();
+            request.setAttribute("username", new String(usr));
+
             
             return new Viewable("/works",null);
         }

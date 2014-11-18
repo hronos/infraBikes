@@ -10,5 +10,36 @@ package stores;
  * @author dlennart
  */
 public class LoggedIn {
+    boolean loggedin=false;
+    String username=null;
+    String role="user";
+    public void LoggedIn(){
+        
+    }
     
+    public void setUsername(String name){
+        this.username=name;
+    }
+    public String getUsername(){
+        return username;
+    }
+    public void setRole(String name){
+        this.username=name;
+    }
+    public String getRole(){
+        return username;
+    }
+    public void setLoggedin(){
+        loggedin=true;
+    }
+    public void setLoggedout(){
+        loggedin=false;
+    }
+    
+    public void setLoginState(boolean logedin){
+        this.loggedin=logedin;
+    }
+    public boolean getloggedin(){
+        return loggedin;
+    }
 }
