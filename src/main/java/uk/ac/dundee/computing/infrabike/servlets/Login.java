@@ -16,6 +16,7 @@ import javax.ws.rs.core.Context;
 import org.glassfish.jersey.server.mvc.Viewable;
 import stores.LoggedIn;
 import uk.ac.dundee.computing.infrabike.dao.DatabaseDAO;
+import uk.ac.dundee.computing.infrabike.dto.Roles;
 import uk.ac.dundee.computing.infrabike.models.UserModel;
 
 /**
@@ -31,14 +32,20 @@ public class Login {
     //@Consumes({"application/xml", "application/json"})
     public Viewable exists(@Context HttpServletRequest request, @FormParam("username") String username, @FormParam("password")String password) {
         boolean exists=false;
+        UserModel c = new UserModel();
+        Roles r;
+        String role = "user";
         HttpSession session=request.getSession();
                 System.out.println("Login " + username + " " + password);
         try{
            
         DatabaseDAO db = new DatabaseDAO();
-        UserModel c = new UserModel();
+        
+        
          Connection conn = db.Get_Connection();
            exists= c.valid(conn, username, password);
+           r = c.showRole(username, conn);
+           role = r.getRoleName();
             }
         catch(Exception e)
         {
@@ -49,11 +56,17 @@ public class Login {
             LoggedIn lg= new LoggedIn();
             lg.setLoggedin();
             lg.setUsername(username);
+            lg.setRole(role);
+            System.out.println("role: " +role);
+            System.out.println("user: " +username);
             //request.setAttribute("LoggedIn", lg);
             session.setAttribute("LoggedIn", lg);
             System.out.println("Session in servlet "+session);
             String usr = lg.getUsername();
-            request.setAttribute("username", new String(usr));
+            String rl = lg.getRole();
+            //request.setAttribute("username", new String(usr));
+            //request.setAttribute("role", new String(rl));
+            
 
             
             return new Viewable("/works",null);
