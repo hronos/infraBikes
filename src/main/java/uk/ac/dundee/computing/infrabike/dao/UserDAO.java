@@ -140,7 +140,7 @@ public class UserDAO {
          while(rs.next())
          {
          role.setRoleName(username);
-         role.setRoleName("role_name");
+         role.setRoleName(rs.getString("role_name"));
          }
       }catch(SQLException e)
       { 
