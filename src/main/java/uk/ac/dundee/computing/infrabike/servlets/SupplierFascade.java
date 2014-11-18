@@ -102,7 +102,7 @@ public class SupplierFascade {
              
     @POST
     @Path("{name}")
-    public Viewable updateSupplier(@PathParam("name")String name,@FormParam("location")String location,@FormParam("phone")String phone,@formParam("email")String email)
+    public Viewable updateSupplier(@PathParam("name")String name,@FormParam("location")String location,@FormParam("phone")String phone,@FormParam("email")String email)
     {
         int ph=Integer.parseInt(phone);
         boolean success=false;
