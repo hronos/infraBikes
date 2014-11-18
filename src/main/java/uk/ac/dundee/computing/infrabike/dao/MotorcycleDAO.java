@@ -68,7 +68,8 @@ public class MotorcycleDAO {
     }
       
     }
-    public void updateSpec(int Id,String model_name,int top_speed,int weight,int seat_height,String frame,int tank,
+
+    /* public void updateSpec(int Id,String model_name,int top_speed,int weight,int seat_height,String frame,int tank,
             int engine_size_cc,int front_brakes,int rear_brakes,int front_tyre_size,int rear_tyre_size,int power_kw,Connection connection)
     {
          try{
@@ -112,7 +113,7 @@ public class MotorcycleDAO {
     }
      
     }
-    
+    */
     
     
     
@@ -130,7 +131,7 @@ public class MotorcycleDAO {
       
     }
    
-    public void addProduct(int Id ,int serial, String colour,int price, int prod_weight,Connection connection)
+    /*public void addProduct(int Id ,int serial, String colour,int price, int prod_weight,Connection connection)
     {
         try{
     PreparedStatement ps=connection.prepareStatement("INSERT INTO product_v (id_type,color,price,weight,id_model) " );
@@ -146,7 +147,7 @@ public class MotorcycleDAO {
     }
     
     }
-    
+    */
     
     public void addSpec(String model_name,int top_speed,int weight,int seat_height,String frame,int tank,
             int engine_size_cc,int front_brakes,int rear_brakes,int front_tyre_size,int rear_tyre_size,int power_kw,int serial, String colour,int price, int prod_weight,int Id,Connection connection){
@@ -189,10 +190,48 @@ public class MotorcycleDAO {
     }  catch(SQLException e){
           e.printStackTrace();  
     }
-    
-    
-    
     }
+    
+   public void updateSpec(int Id,String model_name,int top_speed,int weight,int seat_height,String frame,int tank,
+            int engine_size_cc,int front_brakes,int rear_brakes,int front_tyre_size,int rear_tyre_size,int power_kw,int serial,String colour,int price,Connection connection)
+    {
+         try{
+        //PreparedStatement ps=connection.prepareStatement("START TRANSACTION");
+        PreparedStatement ps2 = connection.prepareStatement("UPDATE motorcycle_spec_v SET model_name=?, top_speed=?, weight=?,seat_height=?,frame=?,tank=?,"
+                 + "engine_size_cc=?,front_brakes=?,rear_brakes=?,front_tyre_size=?,rear_tyre_size=?,power_kw=?"
+                 + " WHERE id_model=?"  );
+        PreparedStatement ps3=connection.prepareStatement("UPDATE product_v SET serial=?,color=?, price=?,weight=? WHERE id_model=?");
+       // PreparedStatement ps4=connection.prepareStatement ("COMMIT");
+            ps2.setString(1, model_name);
+            ps2.setInt(2, top_speed);
+            ps2.setInt(3, weight);
+            ps2.setInt(4, seat_height);
+            ps2.setString(5, frame);
+            ps2.setInt(6, tank);
+            ps2.setInt(7, engine_size_cc);
+            ps2.setInt(8, front_brakes);
+            ps2.setInt(9,  rear_brakes);
+            ps2.setInt(10, front_tyre_size);
+            ps2.setInt(11, rear_tyre_size);
+            ps2.setInt(12, power_kw);
+            ps2.setInt(13, Id);
+            ps3.setInt(1,serial);
+            ps3.setString(2, colour);
+            ps3.setInt(3,  price);
+            ps3.setInt(4, weight);
+            ps3.setInt(5, Id);
+          //  ps.executeUpdate();
+            ps2.executeUpdate();
+            ps3.executeUpdate();
+            //ps4.executeUpdate();    
+         }
+         catch(SQLException e)
+         {
+          e.printStackTrace(); 
+         }
+   }
+   
+    
     
     
     

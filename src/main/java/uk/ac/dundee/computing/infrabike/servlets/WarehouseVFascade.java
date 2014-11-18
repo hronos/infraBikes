@@ -5,60 +5,97 @@
  */
 package uk.ac.dundee.computing.infrabike.servlets;
 
-import java.util.List;
+import java.sql.Connection;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import uk.ac.dundee.computing.infrabike.dto.UserV;
-
-import uk.ac.dundee.computing.infrabike.dto.WarehouseV;
+import org.glassfish.jersey.server.mvc.Viewable;
+import uk.ac.dundee.computing.infrabike.dao.DatabaseDAO;
+import uk.ac.dundee.computing.infrabike.dto.WarehouseLo;
+import uk.ac.dundee.computing.infrabike.models.WarehouseModel;
 
 /**
  *
  * @author Anna
  */
 @Stateless
-@Path("WarehouseV")
-public class WarehouseVFascade extends AbstractFacade<WarehouseV>{
+@Path("Warehouse")
+public class WarehouseVFascade {
     
-     private EntityManager em;
-
-    public WarehouseVFascade() {
-        super(WarehouseV.class);
-    }
-    
-    @GET
-    @Path("{id}")
-    @Produces({"application/xml", "application/json"})
-    public WarehouseV find(@PathParam("id") Integer id) {
-        return super.find(id);
-    }
-
-    @GET
-    @Override
-    @Produces({"application/xml", "application/json"})
-    public List<WarehouseV> findAll() {
-        return super.findAll();
-    }
     
     @PUT
+    public Viewable addWarehouse(@FormParam("location")String location,@FormParam("storage_size")int storage_size,@FormParam("phone")String phone)
+    {
+        boolean success=false;
+         try{  
+        DatabaseDAO db = new DatabaseDAO();
+        WarehouseModel c = new WarehouseModel();
+        Connection conn = db.Get_Connection();
+        success= c.addWarehouse(conn, location, storage_size, phone);
+            }
+        catch(Exception e)
+        {
+             
+        }        
+        
+    }
+      
+    
+    @GET
+    @Path("{location}")
+    public Viewable showWarehouse(@PathParam("location")String location)
+    {
+      
+         try{  
+        DatabaseDAO db = new DatabaseDAO();
+        WarehouseModel c = new WarehouseModel();
+        Connection conn = db.Get_Connection();
+        WarehouseLo wh= c.showWarehouse(location, conn);
+            }
+        catch(Exception e)
+        {
+             
+        }        
+    }
+            
+    @DELETE
     @Path("{id}")
-    @Consumes({"application/xml", "application/json"})
-    public void edit(@PathParam("id") Integer id) {
-        ;
+    public Viewable deleteWarehouse(@PathParam("id")int id)
+    {
+     boolean success=false;
+         try{  
+        DatabaseDAO db = new DatabaseDAO();
+        WarehouseModel c = new WarehouseModel();
+        Connection conn = db.Get_Connection();
+        success= c.deleteWarehouse(conn, id);
+            }
+        catch(Exception e)
+        {
+             
+        }        
+    }
+             
+    @POST
+    public Viewable updateWarehouse(@FormParam("id")int id,@FormParam("storage_size")int storage_size,@FormParam("phone")String phone)
+    {
+     boolean success=false;
+         try{  
+        DatabaseDAO db = new DatabaseDAO();
+        WarehouseModel c = new WarehouseModel();
+        Connection conn = db.Get_Connection();
+        success= c.updateWarehouse(conn, id, storage_size, phone);
+            }
+        catch(Exception e)
+        {
+             
+        }        
     }
     
-    
-    @Override
-    protected EntityManager getEntityManager() {
-        em = Persistence.createEntityManagerFactory("uk.ac.dundee.computing_infraBike_war_1.0-SNAPSHOTPU").createEntityManager();
-        return em;
-    }
+  
     
 }

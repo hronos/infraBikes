@@ -1,6 +1,6 @@
 <%-- 
-    Document   : addMotorcycle
-    Created on : 16-Nov-2014, 14:42:45
+    Document   : updateMotorcycle
+    Created on : 16-Nov-2014, 16:56:24
     Author     : Anna
 --%>
 
@@ -12,7 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-      <form action="/infraBike/webapi/Motorcycle/Specification" method="POST">
+        <form action="/infraBike/webapi/Motorcycle/Update" method="POST">
+          Id Model: <input type="text" name="idModel"> <br />
           Model Name: <input type="text" name="model_name"> <br />
           Top Speed: <input type="text" name="top_speed" /><br />
           Weight: <input type="text" name="weight" /><br />

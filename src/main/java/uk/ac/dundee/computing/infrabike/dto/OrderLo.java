@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package uk.ac.dundee.computing.infrabike.dto;
 
 import java.io.Serializable;
@@ -11,7 +10,6 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -31,25 +29,27 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "OrderLo.findAll", query = "SELECT o FROM OrderLo o"),
     @NamedQuery(name = "OrderLo.findByIdOrder", query = "SELECT o FROM OrderLo o WHERE o.idOrder = :idOrder"),
-    @NamedQuery(name = "OrderLo.findByIdDealer", query = "SELECT o FROM OrderLo o WHERE o.idDealer = :idDealer"),
+    @NamedQuery(name = "OrderLo.findByDealerName", query = "SELECT o FROM OrderLo o WHERE o.dealerName = :dealerName"),
     @NamedQuery(name = "OrderLo.findByDate", query = "SELECT o FROM OrderLo o WHERE o.date = :date"),
     @NamedQuery(name = "OrderLo.findByDeliveryPrice", query = "SELECT o FROM OrderLo o WHERE o.deliveryPrice = :deliveryPrice"),
     @NamedQuery(name = "OrderLo.findByRegion", query = "SELECT o FROM OrderLo o WHERE o.region = :region"),
-    @NamedQuery(name = "OrderLo.findByIdCustomer", query = "SELECT o FROM OrderLo o WHERE o.idCustomer = :idCustomer"),
+    @NamedQuery(name = "OrderLo.findByCustomerName", query = "SELECT o FROM OrderLo o WHERE o.customerName = :customerName"),
     @NamedQuery(name = "OrderLo.findBySerial", query = "SELECT o FROM OrderLo o WHERE o.serial = :serial"),
     @NamedQuery(name = "OrderLo.findByColor", query = "SELECT o FROM OrderLo o WHERE o.color = :color"),
     @NamedQuery(name = "OrderLo.findByPrice", query = "SELECT o FROM OrderLo o WHERE o.price = :price"),
     @NamedQuery(name = "OrderLo.findByWeigh", query = "SELECT o FROM OrderLo o WHERE o.weigh = :weigh"),
-    @NamedQuery(name = "OrderLo.findByIdModel", query = "SELECT o FROM OrderLo o WHERE o.idModel = :idModel")})
+    @NamedQuery(name = "OrderLo.findByModel", query = "SELECT o FROM OrderLo o WHERE o.model = :model")})
 public class OrderLo implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_order")
     private int idOrder;
-    @Column(name = "id_dealer")
-    private Integer idDealer;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "dealer_name")
+    private String dealerName;
     @Basic(optional = false)
     @NotNull
     @Column(name = "date")
@@ -64,8 +64,9 @@ public class OrderLo implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "region")
     private String region;
-    @Column(name = "id_customer")
-    private Integer idCustomer;
+    @Size(max = 91)
+    @Column(name = "customer name")
+    private String customerName;
     @Basic(optional = false)
     @NotNull
     @Column(name = "serial")
@@ -85,8 +86,9 @@ public class OrderLo implements Serializable {
     private float weigh;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_model")
-    private int idModel;
+    @Size(min = 1, max = 45)
+    @Column(name = "model")
+    private String model;
 
     public OrderLo() {
     }
@@ -99,12 +101,12 @@ public class OrderLo implements Serializable {
         this.idOrder = idOrder;
     }
 
-    public Integer getIdDealer() {
-        return idDealer;
+    public String getDealerName() {
+        return dealerName;
     }
 
-    public void setIdDealer(Integer idDealer) {
-        this.idDealer = idDealer;
+    public void setDealerName(String dealerName) {
+        this.dealerName = dealerName;
     }
 
     public Date getDate() {
@@ -131,12 +133,12 @@ public class OrderLo implements Serializable {
         this.region = region;
     }
 
-    public Integer getIdCustomer() {
-        return idCustomer;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setIdCustomer(Integer idCustomer) {
-        this.idCustomer = idCustomer;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public int getSerial() {
@@ -171,12 +173,12 @@ public class OrderLo implements Serializable {
         this.weigh = weigh;
     }
 
-    public int getIdModel() {
-        return idModel;
+    public String getModel() {
+        return model;
     }
 
-    public void setIdModel(int idModel) {
-        this.idModel = idModel;
+    public void setModel(String model) {
+        this.model = model;
     }
-
+    
 }

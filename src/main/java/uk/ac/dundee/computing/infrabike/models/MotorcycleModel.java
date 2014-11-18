@@ -36,8 +36,29 @@ public class MotorcycleModel {
        
        
    }
-   public void addMotorcycle()
+   
+   public void updateSpec(int idModel,String name,int top_speed,int weight, int seat_height,String frame,
+   int tank,int engineSize,int frontB,int rearB,int frontT,
+    int rearT,int power,int serial,String colour,int price,int Id,Connection connection)
    {
+        try {
+            MotorcycleDAO c = new MotorcycleDAO();
+            c.updateSpec(idModel, name, top_speed, weight, seat_height, frame, tank, engineSize, frontT, rearT, frontT, engineSize, power,serial,colour,price, connection);
+        } catch (Exception e) {
+            throw e;
+        }
    }
+   
+   public void addMotorcycle(int id,int serial,int id_part,Connection connection)
+   {
+        try {
+            MotorcycleDAO c = new MotorcycleDAO();
+            c.addMotorcycle(id,serial,id_part, connection);
+        } catch (Exception e) {
+            throw e;
+        }
+   }
+   
+   
    
 }

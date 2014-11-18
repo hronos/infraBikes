@@ -45,14 +45,30 @@ public class MotorcycleVFascade  {
         
         return motorcycle;
     }
+    @POST
+    @Path("Motorcycle")
+    public void addMotorcycle(@FormParam ("id_model")String id,@FormParam("serial")String serial,@FormParam("id_part")String part)    {
+    try{
+        DatabaseDAO db = new DatabaseDAO();
+        MotorcycleModel c = new MotorcycleModel();
+        Connection conn = db.Get_Connection();
+         int idm=Integer.parseInt(id);
+         int s=Integer.parseInt(serial);
+        int idp=Integer.parseInt(part);
+        c.addMotorcycle(idm,s,idp,conn);
+    }catch(Exception e)
+    {
+    }
+    
+    }
     
     
     @POST
-   
+    @Path("Specification")
     public void createMotorcycleSpec(@FormParam ("model_name")String name,@FormParam("top_speed")String top_speed,@FormParam("weight")String weight,@FormParam("seat_height")String seat_height,@FormParam("frame")String frame,
-   @FormParam("tank")String tank,@FormParam("engine_size")String engineSize,@FormParam("front_brakes")String frontB,@FormParam("rear_brakes")String rearB,@FormParam("front_tyre")String frontT,
+    @FormParam("tank")String tank,@FormParam("engine_size")String engineSize,@FormParam("front_brakes")String frontB,@FormParam("rear_brakes")String rearB,@FormParam("front_tyre")String frontT,
     @FormParam("rear_tyre")String rearT,@FormParam("power")String power,@FormParam ("serial")String serial,@FormParam("colour")String colour,@FormParam("price")String price,@FormParam("Id")String Id) {
-    System.out.println("TEST");
+        
      int speed=Integer.parseInt(top_speed);
      int w=Integer.parseInt(weight);
      int sh=Integer.parseInt(seat_height);
@@ -66,7 +82,6 @@ public class MotorcycleVFascade  {
      int s=Integer.parseInt(serial);
      int pr=Integer.parseInt(price);
      int id=Integer.parseInt(Id);
-              System.out.println("TEST2");
         try{
         DatabaseDAO db = new DatabaseDAO();
          Connection conn = db.Get_Connection();
@@ -75,11 +90,45 @@ public class MotorcycleVFascade  {
         c.addSpec(name,speed,w,sh,frame,t,es,fb,rb,ft,rt,pw,s,colour, pr,id,conn) ; 
         }catch(Exception e)
         {
+          
+        }
+        
+    }
+    
+    @POST
+    @Path("Update")
+     public void updateMotorcycleSpec(@FormParam ("idModel")String idModel,@FormParam ("model_name")String name,@FormParam("top_speed")String top_speed,@FormParam("weight")String weight,@FormParam("seat_height")String seat_height,@FormParam("frame")String frame,
+    @FormParam("tank")String tank,@FormParam("engine_size")String engineSize,@FormParam("front_brakes")String frontB,@FormParam("rear_brakes")String rearB,@FormParam("front_tyre")String frontT,
+    @FormParam("rear_tyre")String rearT,@FormParam("power")String power,@FormParam ("serial")String serial,@FormParam("colour")String colour,@FormParam("price")String price,@FormParam("Id")String Id) {
+   
+     int idM=Integer.parseInt(idModel);
+     int speed=Integer.parseInt(top_speed);
+     int w=Integer.parseInt(weight);
+     int sh=Integer.parseInt(seat_height);
+     int t=Integer.parseInt(tank);
+     int es=Integer.parseInt(engineSize);
+     int fb=Integer.parseInt(frontB);
+     int rb=Integer.parseInt(rearB);
+     int ft=Integer.parseInt(frontT);
+     int rt=Integer.parseInt(rearT);
+     int pw=Integer.parseInt(power);
+     int s=Integer.parseInt(serial);
+     int pr=Integer.parseInt(price);
+     int id=Integer.parseInt(Id);
+           
+        try{
+        DatabaseDAO db = new DatabaseDAO();
+         Connection conn = db.Get_Connection();
+        MotorcycleModel c = new MotorcycleModel();
+         System.out.println("TEST3"+name);
+        c.updateSpec(idM,name,speed,w,sh,frame,t,es,fb,rb,ft,rt,pw,s,colour, pr,id,conn) ; 
+        }catch(Exception e)
+        {
              System.out.println("TEST4");
         }
         
     }
-
+    
     
     
     /* 
