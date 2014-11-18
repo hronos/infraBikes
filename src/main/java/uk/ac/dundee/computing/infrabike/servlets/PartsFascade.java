@@ -32,14 +32,18 @@ import uk.ac.dundee.computing.infrabike.models.WarehouseModel;
 public class PartsFascade {
     
     @PUT
-    public Viewable addPart(@FormParam("name") String name, @FormParam("part_type") String part,@FormParam("price") int price,@FormParam("quantity") int quantity,@FormParam("id_warehouse") int wid,@FormParam("id_supplier") int sid) {
+    public Viewable addPart(@FormParam("name") String name, @FormParam("part_type") String part,@FormParam("price") String price,@FormParam("quantity") String quantity,@FormParam("id_warehouse") String wid,@FormParam("id_supplier") String sid) {
          boolean success=false;
         
         try{  
         DatabaseDAO db = new DatabaseDAO();
         WarehouseModel c = new WarehouseModel();
          Connection conn = db.Get_Connection();
-           success= c.addPart(conn,name,part,price,quantity,wid,sid);
+         int s=Integer.parseInt(sid);
+         int w=Integer.parseInt(wid);
+         int p=Integer.parseInt(price);
+         int q=Integer.parseInt(quantity);
+           success= c.addPart(conn,name,part,p,q,w,s);
             }
         catch(Exception e)
         {
@@ -53,14 +57,18 @@ public class PartsFascade {
     
     
     @POST
-    public Viewable updatePart(@FormParam("name") String name, @FormParam("part_type") String part,@FormParam("price") int price,@FormParam("quantity") int quantity,@FormParam("id_warehouse") int wid,@FormParam("id_supplier") int sid)
+    public Viewable updatePart(@FormParam("name") String name, @FormParam("part_type") String part,@FormParam("price") String price,@FormParam("quantity") String quantity,@FormParam("id_supplier") String sid)
     {
         boolean success;
         try{  
         DatabaseDAO db = new DatabaseDAO();
         WarehouseModel c = new WarehouseModel();
         Connection conn = db.Get_Connection();
-        success= c.updatePart(conn, sid, name, part, price, quantity);
+        int p=Integer.parseInt(price);
+        int s=Integer.parseInt(sid);
+        int q=Integer.parseInt(quantity);
+       
+        success= c.updatePart(conn, s, name, part, p, q);
             }
         catch(Exception e)
         {
@@ -108,14 +116,15 @@ public class PartsFascade {
     
     @DELETE
      @Path("{id}")
-    public Viewable deletePart(@PathParam ("id")int id)
+    public Viewable deletePart(@PathParam ("id")String id)
     {
         boolean success= false;
          try{  
         DatabaseDAO db = new DatabaseDAO();
         WarehouseModel c = new WarehouseModel();
         Connection conn = db.Get_Connection();
-        success= c.deletePart(conn, id);
+        int Id=Integer.parseInt(id);
+        success= c.deletePart(conn, Id);
             }
         catch(Exception e)
         {

@@ -37,11 +37,11 @@ public class MotorcycleVFascade  {
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public MotorcycleLo find(@PathParam("id") Integer id) {
+    public MotorcycleLo find(@PathParam("id") String id) {
         DatabaseDAO db = new DatabaseDAO();
         MotorcycleModel c = new MotorcycleModel();
-       
-        MotorcycleLo motorcycle =c.findMotorcycle(id) ;
+        int Id=Integer.parseInt(id);
+        MotorcycleLo motorcycle =c.findMotorcycle(Id) ;
         
         return motorcycle;
     }

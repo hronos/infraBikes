@@ -63,8 +63,8 @@ public class Users {
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public Viewable find(@PathParam("id") Integer id){
-        
+    public Viewable find(@PathParam("id") String id){
+        int Id=Integer.parseInt(id);
         
         return new Viewable("/users", null);
     }

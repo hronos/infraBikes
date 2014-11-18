@@ -29,14 +29,15 @@ public class WarehouseVFascade {
     
     
     @PUT
-    public Viewable addWarehouse(@FormParam("location")String location,@FormParam("storage_size")int storage_size,@FormParam("phone")String phone)
+    public Viewable addWarehouse(@FormParam("location")String location,@FormParam("storage_size")String storage_size,@FormParam("phone")String phone)
     {
         boolean success=false;
          try{  
         DatabaseDAO db = new DatabaseDAO();
         WarehouseModel c = new WarehouseModel();
         Connection conn = db.Get_Connection();
-        success= c.addWarehouse(conn, location, storage_size, phone);
+        int s=Integer.parseInt(storage_size);
+        success= c.addWarehouse(conn, location, s, phone);
             }
         catch(Exception e)
         {
@@ -66,14 +67,15 @@ public class WarehouseVFascade {
             
     @DELETE
     @Path("{id}")
-    public Viewable deleteWarehouse(@PathParam("id")int id)
+    public Viewable deleteWarehouse(@PathParam("id")String id)
     {
      boolean success=false;
          try{  
         DatabaseDAO db = new DatabaseDAO();
         WarehouseModel c = new WarehouseModel();
         Connection conn = db.Get_Connection();
-        success= c.deleteWarehouse(conn, id);
+        int Id=Integer.parseInt(id);
+        success= c.deleteWarehouse(conn, Id);
             }
         catch(Exception e)
         {
@@ -84,14 +86,16 @@ public class WarehouseVFascade {
              
     @POST
     
-    public Viewable updateWarehouse(@FormParam("id")int id,@FormParam("storage_size")int storage_size,@FormParam("phone")String phone)
+    public Viewable updateWarehouse(@FormParam("id")String id,@FormParam("storage_size")String storage_size,@FormParam("phone")String phone)
     {
      boolean success=false;
          try{  
         DatabaseDAO db = new DatabaseDAO();
         WarehouseModel c = new WarehouseModel();
         Connection conn = db.Get_Connection();
-        success= c.updateWarehouse(conn, id, storage_size, phone);
+        int Id=Integer.parseInt(id);
+        int s=Integer.parseInt(storage_size);
+        success= c.updateWarehouse(conn, Id, s, phone);
             }
         catch(Exception e)
         {

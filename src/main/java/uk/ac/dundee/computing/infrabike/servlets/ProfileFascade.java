@@ -41,13 +41,14 @@ public class ProfileFascade {
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public Profile find(@PathParam("id") Integer id) {
+    public Profile find(@PathParam("id") String id) {
         Profile profile=new Profile();
         try{  
         DatabaseDAO db = new DatabaseDAO();
         UserModel c = new UserModel();
         Connection conn = db.Get_Connection();
-           profile=c.findUser(id,conn);
+        int Id=Integer.parseInt(id);
+           profile=c.findUser(Id,conn);
             }
         catch(Exception e)
         {
@@ -58,13 +59,14 @@ public class ProfileFascade {
     
     @POST
     @Path("Customer/{id}")
-     public Viewable editCustomer(@PathParam("id") Integer id,@FormParam("first_name") String first_name,@FormParam("last_name")String last_name,@FormParam("location")String location,@FormParam("phone_number")String phone_number,@FormParam("emailUser")String emailUser,@FormParam("password") String password) {
+     public Viewable editCustomer(@PathParam("id") String id,@FormParam("first_name") String first_name,@FormParam("last_name")String last_name,@FormParam("location")String location,@FormParam("phone_number")String phone_number,@FormParam("emailUser")String emailUser,@FormParam("password") String password) {
      boolean success;
          try{  
        DatabaseDAO db = new DatabaseDAO();
         UserModel c = new UserModel();
         Connection conn = db.Get_Connection();
-        success=c.editCustomer(id,first_name,last_name,location,phone_number,emailUser,password,conn);  
+        int Id=Integer.parseInt(id);
+        success=c.editCustomer(Id,first_name,last_name,location,phone_number,emailUser,password,conn);  
      }
      catch(Exception e)
      {
@@ -75,13 +77,14 @@ public class ProfileFascade {
      
      @POST
     @Path("Dealer/{id}")
-     public Viewable editDealer(@PathParam("id") Integer id,@FormParam("name") String name,@FormParam("location")String location,@FormParam("phone")String phone,@FormParam("emailUser")String emailUser,@FormParam("password") String password,@FormParam("email")String email) {
+     public Viewable editDealer(@PathParam("id") String id,@FormParam("name") String name,@FormParam("location")String location,@FormParam("phone")String phone,@FormParam("emailUser")String emailUser,@FormParam("password") String password,@FormParam("email")String email) {
      boolean success=false;
          try{  
        DatabaseDAO db = new DatabaseDAO();
         UserModel c = new UserModel();
         Connection conn = db.Get_Connection();
-        success=c.editDealer(id,name,location,phone,emailUser,password,email,conn);  
+        int Id=Integer.parseInt(id);
+        success=c.editDealer(Id,name,location,phone,emailUser,password,email,conn);  
      }
      catch(Exception e)
      {
@@ -92,13 +95,14 @@ public class ProfileFascade {
      
     @POST
     @Path("User/{id}")
-     public Viewable editUser(@PathParam("id") Integer id,@FormParam("password") String password,@FormParam("emailUser")String emailUser) {
+     public Viewable editUser(@PathParam("id")String id,@FormParam("password") String password,@FormParam("emailUser")String emailUser) {
       boolean success;
          try{  
        DatabaseDAO db = new DatabaseDAO();
         UserModel c = new UserModel();
         Connection conn = db.Get_Connection();
-        success=c.editUser(id,password,emailUser,conn);  
+        int Id=Integer.parseInt(id);
+        success=c.editUser(Id,password,emailUser,conn);  
          
      }
      catch(Exception e)
