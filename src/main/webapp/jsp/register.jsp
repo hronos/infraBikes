@@ -48,10 +48,10 @@
         </script>
     </head>
     <body>
-        <%@ include file="header.jsp" %>
         
-        <!--form method="POST"  action="/infraBike/webapi/UserV">
-                <!--ul>
+        
+        <form method="POST"  action="/infraBike/webapi/UserV">
+                <ul>
                     <li>User Name <input type="text" name="username" value=""></li>
                     <li>Password <input type="password" name="password" value=""></li>
                     <li>Email <input type="email" name="email"></li>
@@ -59,7 +59,7 @@
                 </ul>
                 <br/>
                 <input type="submit" value="Register"> 
-        </form-->
+        </form>
         
 <div class="cont">
     <section id="content">

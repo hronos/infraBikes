@@ -16,9 +16,13 @@
             }
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<<<<<<< HEAD
 
         <title>Profile</title>
 
+=======
+        <title>Warehouses</title>
+>>>>>>> parent of 4929714... header added!
         
         <script>
               // getting JSON from the document works, but of what use is that?
@@ -41,7 +45,10 @@
               }); 
             });
         </script>    
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 4929714... header added!
     </head>
     <body>
         <%@ include file="header.jsp" %>

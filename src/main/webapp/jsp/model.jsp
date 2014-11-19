@@ -9,12 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="infra.css" rel="stylesheet" type="text/css">
-        <script src="tabsheet.js"></script>
         <title>model</title>
+        <link href="infra.css" rel="stylesheet">
+        <script src="tabsheet.js"></script>
     </head>
     <body onload="init()">
-        <%@ include file="header.jsp" %>
         <h1>Model</h1>
         
         <ul id="tabs">
