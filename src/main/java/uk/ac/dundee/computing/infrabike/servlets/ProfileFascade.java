@@ -73,7 +73,7 @@ public class ProfileFascade {
         conn.close();
         //out.close();
         
-        request.setAttribute("profile", profile);
+        request.setAttribute("profile", "["+profile+"]");
         
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
