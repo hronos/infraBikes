@@ -9,24 +9,18 @@ import com.google.gson.Gson;
 import static java.lang.System.out;
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import org.glassfish.jersey.server.mvc.Viewable;
 import uk.ac.dundee.computing.infrabike.dao.DatabaseDAO;
+import uk.ac.dundee.computing.infrabike.dao.UserDAO;
 import uk.ac.dundee.computing.infrabike.dto.Profile;
 import uk.ac.dundee.computing.infrabike.models.UserModel;
-import uk.ac.dundee.computing.infrabike.models.WarehouseModel;
 
 /**
  *
@@ -47,37 +41,73 @@ public class ProfileFascade {
     @Path("{username}")
     @Produces("text/html")
     public Viewable find(@PathParam ("username")String username, @Context HttpServletRequest request) {
-       out.println("TUTTUT3");
-        System.out.println("TUTTUT3");
-      
+       
         try{  
         DatabaseDAO db = new DatabaseDAO();
         UserModel c = new UserModel();
         Connection conn = db.Get_Connection();
-        Profile profile=new Profile();
-        profile = c.findUser(username, conn);
+        Profile profiles=new Profile();
+        profiles = c.findUser(username, conn);
         
         Gson gson = new Gson();
         ArrayList userData = null;
      
-        String profiles=gson.toJson("test");
-                if(profile.getCustomer()!=null)
+        String profile="";
+                if(profiles.getCustomer()!=null)
                 {
-                    userData.add(profile.getCustomer());
-                    profiles=gson.toJson(userData);
+                 
+                    profile=gson.toJson("["+profiles.getCustomer()+"]");
                 }
-                else if(profile.getDealer()!=null)
-                {   userData.add(profile.getDealer());
-                    profiles=gson.toJson(profile.getDealer());
-                System.out.println("TUT2");}
+                else if(profiles.getDealer()!=null)
+                {   
+                    profile=gson.toJson("["+profiles.getDealer()+"]");
+                }
+                else 
+                {
+                    profile=gson.toJson("["+profiles.getUser()+"]");
+                }
         
-        out.println("{\"Profile\":"+profiles+"}");
+        out.println("{\"Profile\":"+profile+"}");
         
         
         conn.close();
         //out.close();
         
-        request.setAttribute("profile", profiles);
+        request.setAttribute("profile", profile);
+        
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+        
+        
+        return new Viewable("/profile", null);
+    }
+    
+    
+    @GET
+    @Produces("text/html")
+    public Viewable allProfiles(@PathParam ("username")String username, @Context HttpServletRequest request) {
+        try{  
+        DatabaseDAO db = new DatabaseDAO();
+        UserDAO c = new UserDAO();
+        Connection conn = db.Get_Connection();
+       
+        
+        Gson gson = new Gson();
+        ArrayList userData =   c.viewUsers(conn);;
+     
+         String profile="";
+                
+                    profile=gson.toJson(userData);
+                
+        
+        out.println("{\"Profile\":"+profile+"}");
+        
+        
+        conn.close();
+        //out.close();
+        
+        request.setAttribute("profile", profile);
         
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());

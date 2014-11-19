@@ -1,0 +1,113 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 19-Nov-2014, 17:46:31
+    Author     : Anna
+*/
+.form-container {
+   border: 0px solid #0d0d0d;
+   background: #383634;
+   background: -webkit-gradient(linear, left top, left bottom, from(#000000), to(#383634));
+   background: -webkit-linear-gradient(top, #000000, #383634);
+   background: -moz-linear-gradient(top, #000000, #383634);
+   background: -ms-linear-gradient(top, #000000, #383634);
+   background: -o-linear-gradient(top, #000000, #383634);
+   background-image: -ms-linear-gradient(top, #000000 0%, #383634 100%);
+   -webkit-border-radius: 0px;
+   -moz-border-radius: 0px;
+   border-radius: 0px;
+   -webkit-box-shadow: rgba(000,000,000,0.9) 0 0px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+   -moz-box-shadow: rgba(000,000,000,0.9) 0 0px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+   box-shadow: rgba(000,000,000,0.9) 0 0px 2px, inset rgba(255,255,255,0.4) 0 1px 0;
+   font-family: 'Helvetica Neue',Helvetica,sans-serif;
+   text-decoration: none;
+   vertical-align: middle;
+   min-width:300px;
+   padding:20px;
+   width:300px;
+   }
+.form-field {
+   border: 0px solid #000000;
+   background: #e8ddd0;
+   -webkit-border-radius: 0px;
+   -moz-border-radius: 0px;
+   border-radius: 0px;
+   color: #030303;
+   -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(000,000,000,0.7) 0 0px 0px;
+   -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(000,000,000,0.7) 0 0px 0px;
+   box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(000,000,000,0.7) 0 0px 0px;
+   padding:8px;
+   margin-bottom:20px;
+   width:280px;
+   }
+.form-field:focus {
+   background: #fff;
+   color: #000000;
+   }
+.form-container h2 {
+   text-shadow: #ffffff 0 1px 0;
+   font-size:18px;
+   margin: 0 0 10px 0;
+   font-weight:bold;
+   text-align:center;
+    }
+.form-title {
+   margin-bottom:10px;
+   color: #fafafa;
+   text-shadow: #ffffff 0 1px 0;
+   }
+.submit-container {
+   margin:8px 0;
+   text-align:right;
+   }
+.submit-button {
+   border: 0px solid #0a0a0a;
+   background: #db8181;
+   background: -webkit-gradient(linear, left top, left bottom, from(#f58282), to(#db8181));
+   background: -webkit-linear-gradient(top, #f58282, #db8181);
+   background: -moz-linear-gradient(top, #f58282, #db8181);
+   background: -ms-linear-gradient(top, #f58282, #db8181);
+   background: -o-linear-gradient(top, #f58282, #db8181);
+   background-image: -ms-linear-gradient(top, #f58282 0%, #db8181 100%);
+   -webkit-border-radius: 0px;
+   -moz-border-radius: 0px;
+   border-radius: 0px;
+   -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   text-shadow: #f8faf5 0 1px 0;
+   color: #ffffff;
+   font-family: helvetica, serif;
+   padding: 8.5px 18px;
+   font-size: 14px;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+.submit-button:hover {
+   border: 0px solid #ffffff;
+   text-shadow: #fdfffa 0 1px 0;
+   background: #f54251;
+   background: -webkit-gradient(linear, left top, left bottom, from(#e37d82), to(#f54251));
+   background: -webkit-linear-gradient(top, #e37d82, #f54251);
+   background: -moz-linear-gradient(top, #e37d82, #f54251);
+   background: -ms-linear-gradient(top, #e37d82, #f54251);
+   background: -o-linear-gradient(top, #e37d82, #f54251);
+   background-image: -ms-linear-gradient(top, #e37d82 0%, #f54251 100%);
+   color: #fff;
+   }
+.submit-button:active {
+   text-shadow: #f5f5f5 0 1px 0;
+   border: 0px solid #ff0d19;
+   background: #ff0000;
+   background: -webkit-gradient(linear, left top, left bottom, from(#fc0303), to(#f54251));
+   background: -webkit-linear-gradient(top, #fc0303, #ff0000);
+   background: -moz-linear-gradient(top, #fc0303, #ff0000);
+   background: -ms-linear-gradient(top, #fc0303, #ff0000);
+   background: -o-linear-gradient(top, #fc0303, #ff0000);
+   background-image: -ms-linear-gradient(top, #fc0303 0%, #ff0000 100%);
+   color: #fff;
+   }
+

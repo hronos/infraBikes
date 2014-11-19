@@ -75,7 +75,7 @@
     <th>idUser</th>
     <th>username</th>
     <th>email</th>
-    <th><a href="/infraBike/webapi/Profile/" id="delete" onclick="deleteUser()">Delete user</a></th>
+   <%--<th><a href="/infraBike/webapi/Profile/" id="delete" onclick="deleteUser()">Delete user</a></th> --%>
   
     
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
