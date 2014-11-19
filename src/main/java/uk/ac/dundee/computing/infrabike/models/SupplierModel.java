@@ -9,10 +9,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import uk.ac.dundee.computing.infrabike.dao.SupplierDAO;
 import uk.ac.dundee.computing.infrabike.dao.WarehouseDAO;
-import static uk.ac.dundee.computing.infrabike.dto.DealerV_.location;
-import static uk.ac.dundee.computing.infrabike.dto.DealerV_.phone;
 import uk.ac.dundee.computing.infrabike.dto.SupplierLo;
-import static uk.ac.dundee.computing.infrabike.dto.WarehouseV_.storageSize;
 
 /**
  *
@@ -64,12 +61,12 @@ public class SupplierModel {
         return success;
     }
     
-    public ArrayList showSuppliers(Connection connection)
+    public ArrayList showSuppliers(Connection connection) throws Exception
     {        
        ArrayList list = new ArrayList();
         try {
             SupplierDAO c = new SupplierDAO();
-             list=c.showSuppliers(connection);
+             list=c.showSuppliers(connection, null, null);
         } 
         catch (Exception e) {
             throw e;

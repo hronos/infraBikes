@@ -94,6 +94,31 @@ public class UserDAO {
     
     }
      
+    public ArrayList viewDealers(Connection connection, HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+        ArrayList dealers = new ArrayList();
+        try{
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM dealer_lo ORDER BY username DESC");
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                DealerLo  d = new DealerLo();
+                d.setIdDealer(rs.getInt("id_dealer"));
+                d.setUsername(rs.getString("username"));
+                d.setName(rs.getString("name"));
+                d.setLocation(rs.getString("location"));
+                d.setPhone(rs.getString("phone"));
+                d.setPersonalEmail(rs.getString("personal_email"));
+                d.setDealerEmail(rs.getString("dealer_email"));
+                dealers.add(d);         
+        }
+            }
+        catch (Exception e){
+            
+        }
+        return dealers;
+       }
+    
     public boolean userExists(String username,String password,Connection connection){
       try{
          
