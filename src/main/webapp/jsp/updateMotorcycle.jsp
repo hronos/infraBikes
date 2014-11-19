@@ -9,9 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Update Motorcycle</title>
     </head>
     <body>
+        <%@ include file="header.jsp" %>
         <form action="/infraBike/webapi/Motorcycle/Update" method="POST">
           Id Model: <input type="text" name="idModel"> <br />
           Model Name: <input type="text" name="model_name"> <br />

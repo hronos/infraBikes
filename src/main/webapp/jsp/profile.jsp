@@ -17,6 +17,7 @@
             }
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<<<<<<< Updated upstream
         <title>Warehouses</title>
         
         <script>
@@ -40,6 +41,9 @@
               }); 
             });
         </script>    
+=======
+        <title>Profile Page</title>
+>>>>>>> Stashed changes
     </head>
     <body>
         <%@ include file="header.jsp" %>

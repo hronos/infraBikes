@@ -12,6 +12,7 @@
         <title>Search</title>
     </head>
     <body>
+        <%@ include file="header.jsp" %>
         <h1>Search</h1>
         <div>
             <input type="text" name="search_field" value="" size="60"/><br>
