@@ -40,6 +40,11 @@
                 },
                 table: {
                   copyHeaderClass: true
+                },
+                writers: {
+                    link: function(v) {
+                    return '<a href="Warehouse/'+v.idWarehouse+'">Edit</a>';
+                    }   
                 }
               }); 
             });
@@ -53,6 +58,7 @@
     <th>location</th>
     <th>storageSize</th>
     <th>phone</th>
+    <th>link</th>
  
   </thead>
   <tbody>

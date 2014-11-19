@@ -40,7 +40,7 @@
                 },
                 writers: {
                     link: function(v) {
-                    return '<a href="webapi/Users/'+v.username+'">Edit</a>';
+                    return '<a href="Users/'+v.username+'">Edit</a>';
                     }   
                 }
               }); 

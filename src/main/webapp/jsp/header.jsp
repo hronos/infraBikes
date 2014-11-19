@@ -24,8 +24,9 @@
                         <ul>
                             <li><a href="">Profile</a></li>
                             <li><a href="">Motorcycles</a></li>
-                            <li><a href="">Orders</a></li>
-                            <% } else if (role.equals("admin")){%>
+                            <li><a href="">Orders</a></li> </ul>
+                            <% } 
+                        else if (role.equals("admin")){%>
                             <li><a href="">Motorcycles</a></li>
                             <li><a href="">Orders</a></li>
                             <li><a href="">Reports</a></li>
@@ -35,7 +36,54 @@
                                 <li><a href="">Info</a></li>
                             </ul>
                             <li><a href="/infraBike/webapi/Users">Users</a></li>
-                            <% }} %>
+                            <% } 
+                        else if (role.equals("marketing")) { %>
+                        <ul>
+                            <li><a href="">Demographics</a></li>
+                            <li><a href="">Customers</a></li>
+                            <li><a href="">Dealers</a></li>
+                            <li><a href="">Suppliers</a></li>
+                            <li><a href="">Warehouse</a></li>
+                            <li><a href="">Motorcycles</a></li>
+                            <li><a href="">Orders</a></li> </ul>
+                        
+                        <% }
+                        else if(role.equals("manager")) { %>
+                        <ul>
+                            <li><a href="">Customers</a></li>
+                            <li><a href="">Dealers</a></li>
+                            <li><a href="">Suppliers</a></li>
+                            <li><a href="">Orders</a></li>
+                        </ul>
+                        <% }
+                        else if(role.equals("tech")) { %>
+                        <ul>
+                            <li><a href="">Products</a></li>
+                            <li><a href="">Motorcycle</a></li>
+                            <ul>
+                                <li><a href="">Specifications</a></li>
+                                <li><a href="">Parts</a></li>
+                            </ul>
+                        </ul>
+                        
+                        <% }
+                        else if(role.equals("warehouse_keeper")) { %>
+                        <ul>
+                            <li><a href="">Warehouse</a></li>
+                            <li><a href="">Parts</a></li>
+                            <li><a href="">Motorcycles</a></li>
+                            <li><a href="">Suppliers</a></li>
+                            <li><a href="">Products</a></li>
+                            <li><a href="">Orders</a></li>
+                        </ul>
+                        <% }
+                        else if(role.equals("dealer")) { %>
+                            <ul>
+                            <li><a href="">Profile</a></li>
+                            <li><a href="">Motorcycles</a></li>
+                            <li><a href="">Orders</a></li> </ul>
+                        <% }} %>
+         
                 </ul>   
             </div>
         </div>
