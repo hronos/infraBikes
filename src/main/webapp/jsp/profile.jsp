@@ -61,7 +61,8 @@
     <th>location</th>
     <th>phoneNumber</th>
     <th>email</th>
-    <th>roleName</th><%}else if(role.equals("dealer")){
+    <th>roleName</th><%}
+else if(role.equals("dealer")){
  %>
     <th>idDealer</th>
     <th>username</th>

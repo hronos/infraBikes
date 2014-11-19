@@ -60,11 +60,11 @@ public class ProfileFascade {
                 }
                 else if(profiles.getDealer()!=null)
                 {   
-                    profile=gson.toJson("["+profiles.getDealer()+"]");
+                    profile=gson.toJson(profiles.getDealer());
                 }
                 else 
                 {
-                    profile=gson.toJson("["+profiles.getUser()+"]");
+                    profile=gson.toJson(profiles.getUser());
                 }
         
         out.println("{\"Profile\":"+profile+"}");
