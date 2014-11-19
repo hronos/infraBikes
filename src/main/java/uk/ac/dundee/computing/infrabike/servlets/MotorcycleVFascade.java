@@ -82,7 +82,7 @@ public class MotorcycleVFascade  {
         return new Viewable("/model", null);
   
     }
-    
+    /*
     @GET
     @Produces({"application/xml", "application/json"})
     public Viewable findMotorcycles(@FormParam("")String type,@FormParam("search_field")String search, @Context HttpServletRequest request) {
@@ -115,7 +115,7 @@ public class MotorcycleVFascade  {
       request.setAttribute("list", list);  
       return new Viewable("/search", null);
     }
-    
+*/    
     
     
     
