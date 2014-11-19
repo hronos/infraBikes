@@ -10,7 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import static uk.ac.dundee.computing.infrabike.dto.DealerV_.location;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import uk.ac.dundee.computing.infrabike.dto.SupplierLo;
 
 /**
@@ -74,7 +75,7 @@ public class SupplierDAO {
             ResultSet rs= ps.executeQuery();
             while(rs.next()){
                
-                supplier.setName(name);
+                supplier.setName(rs.getString("name"));
                 supplier.setLocation(rs.getString("location"));
                 supplier.setEmail(rs.getString("email"));
                 supplier.setPhone(rs.getInt("phone"));
@@ -91,10 +92,11 @@ public class SupplierDAO {
     }
    
     
-    public ArrayList showSuppliers(Connection connection){
+    public ArrayList showSuppliers(Connection connection, HttpServletRequest request, HttpServletResponse response)
+        throws Exception {
     ArrayList list=new ArrayList();
         try{
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM supplier_lo  ");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM supplier ORDER BY name DESC");
            
             ResultSet rs= ps.executeQuery();
             while(rs.next()){
@@ -106,11 +108,12 @@ public class SupplierDAO {
                 list.add(supplier);
             }
     }
+       
     catch(SQLException e)
     {
         
     }
-    return list;
+     return list;
     }
     
     

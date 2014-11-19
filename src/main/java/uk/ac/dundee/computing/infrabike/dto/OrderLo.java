@@ -40,6 +40,15 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "OrderLo.findByWeigh", query = "SELECT o FROM OrderLo o WHERE o.weigh = :weigh"),
     @NamedQuery(name = "OrderLo.findByModel", query = "SELECT o FROM OrderLo o WHERE o.model = :model")})
 public class OrderLo implements Serializable {
+    @Column(name = "dealer")
+    private Integer dealer;
+    @Size(max = 91)
+    @Column(name = "name")
+    private String name;
+    @Column(name = "id_customer")
+    private Integer idCustomer;
+    @Column(name = "serial")
+    private Integer serial;
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @NotNull
@@ -67,10 +76,6 @@ public class OrderLo implements Serializable {
     @Size(max = 91)
     @Column(name = "customer name")
     private String customerName;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "serial")
-    private int serial;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -141,13 +146,6 @@ public class OrderLo implements Serializable {
         this.customerName = customerName;
     }
 
-    public int getSerial() {
-        return serial;
-    }
-
-    public void setSerial(int serial) {
-        this.serial = serial;
-    }
 
     public String getColor() {
         return color;
@@ -179,6 +177,38 @@ public class OrderLo implements Serializable {
 
     public void setModel(String model) {
         this.model = model;
+    }
+
+    public Integer getDealer() {
+        return dealer;
+    }
+
+    public void setDealer(Integer dealer) {
+        this.dealer = dealer;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getIdCustomer() {
+        return idCustomer;
+    }
+
+    public void setIdCustomer(Integer idCustomer) {
+        this.idCustomer = idCustomer;
+    }
+
+    public Integer getSerial() {
+        return serial;
+    }
+
+    public void setSerial(Integer serial) {
+        this.serial = serial;
     }
     
 }
