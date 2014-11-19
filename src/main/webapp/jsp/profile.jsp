@@ -1,5 +1,3 @@
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -8,6 +6,7 @@
 <html>
     <head>
         <link href="/infraBike/jsp/header_css.css" rel="stylesheet" type="text/css"/>
+        <link href="/infraBike/jsp/edit_form.css" rel="stylesheet" type="text/css"/>
         <link href="/infraBike/dynatable/jquery.dynatable.css" rel="stylesheet" type="text/css"/>
         <script src="http://code.jquery.com/jquery-1.7.2.min.js" type="text/javascript"></script>
         <script src="/infraBike/dynatable/jquery.dynatable.js" type="text/javascript"></script>
@@ -17,8 +16,9 @@
             }
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<<<<<<< Updated upstream
-        <title>Warehouses</title>
+
+        <title>Profile</title>
+
         
         <script>
               // getting JSON from the document works, but of what use is that?
@@ -41,9 +41,7 @@
               }); 
             });
         </script>    
-=======
-        <title>Profile Page</title>
->>>>>>> Stashed changes
+
     </head>
     <body>
         <%@ include file="header.jsp" %>
@@ -59,28 +57,76 @@
   <table id="my-final-table">
   <thead>
 <%if (role.equals("customer")) {%>
-    <th>Id</th>
-    <th>Username</th>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Location</th>
-    <th>Phone Number</th>
-    <th>Email</th>
-    <th>Role Name</th><%}else if(role.equals("dealer")){
+    <th>idCustomer</th>
+    <th>username</th>
+    <th>firstName</th>
+    <th>lastName</th>
+    <th>location</th>
+    <th>phoneNumber</th>
+    <th>email</th>
+    <th>roleName</th><%}else if(role.equals("dealer")){
  %>
-    <th>Id</th>
-    <th>Username</th>
-    <th>Name</th>
-    <th>Location</th>
-    <th>Phone Number</th>
-    <th>Personal Email</th>
-    <th>Dealer Email</th>
-    <%}}%>
+    <th>idDealer</th>
+    <th>username</th>
+    <th>name</th>
+    <th>location</th>
+    <th>phone</th>
+    <th>personalEmail</th>
+    <th>dealerEmail</th>
+    <%}else{%>
+    
+    <th>idUser</th>
+    <th>username</th>
+    <th>email</th>
+    <th><a href="/infraBike/webapi/Profile/" id="delete" onclick="deleteUser()">Delete user</a></th>
+  
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                function deleteUser (user) {
+				var obj = ${profile};
+        
+                                  var user_del=document.getElementById('user').value;alert(user_del);
+				  var user = this.name;
+			            if (confirm('Are you sure you want to Delete User '+user_del+'?')) {
+                    jQuery.ajax({
+                        type: "DELETE",
+                        url: "http://localhost:8080/Instagrim-AS/Profile/"+user_del,
+                      
+                        success: function (data, status, jqXHR) {
+                             
+                             $(location).attr('href',"/Instagrim-AS/login.jsp");
+                        },
+                    
+                        error: function (jqXHR, status,errorThrown) {            
+                           
+                            alert(errorThrown);
+                        
+                        }
+                    });
+			      }
+               }
+				</script>
+    
+<%}}%>
+
+
   </thead>
   <tbody>
   </tbody>
 </table>
 
+<form class="form-container">
+<div class="form-title"><h2>Edit Profile</h2></div>
+<div class="form-title">Name</div>
+<input class="form-field" type="text" name="firstname" /><br />
+<div class="form-title">Email</div>
+<input class="form-field" type="text" name="email" /><br />
+<div class="submit-container">
+<input class="submit-button" type="submit" value="Submit" />
+</div>
+</form>
+  
 <span id="usr-span"></span>  
     </body>
 </html>
