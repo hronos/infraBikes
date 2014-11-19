@@ -56,7 +56,7 @@ public class UserModel {
     }
    
     
-      public Profile findUser(int Id,Connection connection)
+      public Profile findUser(String username,Connection connection)
     {
         Profile profile=new Profile();
         UserV user;
@@ -64,14 +64,17 @@ public class UserModel {
         DealerLo dealer=null;
          try {
             UserDAO c = new UserDAO();
-            user=c.getUser(Id,connection);
+            user=c.getUser(username,connection);
+            System.out.println("KUKUKU" );
             if(user.getIdRole()==6)
             {
-                customer=c.viewCustomer(Id, connection);
+                customer=c.viewCustomer(username, connection);
+                System.out.println("KUKU" + customer.getEmail()+customer.getFirstName()+customer.getLastName());
             }
             else if(user.getIdRole()==7)
             {
-                dealer=c.viewDealer(Id, connection);
+                dealer=c.viewDealer(username, connection);
+                System.out.println("KUKU2" + dealer.getDealerEmail()+dealer.getLocation());
             }
              
          profile.setCustomer(customer);
@@ -80,6 +83,7 @@ public class UserModel {
          }catch (Exception e) {
             throw e;
         }
+         
         return profile;
     }
       

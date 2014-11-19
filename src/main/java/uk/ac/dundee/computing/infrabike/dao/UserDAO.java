@@ -52,12 +52,12 @@ public class UserDAO {
         }
     }
     
-    public UserV getUser(int Id,Connection connection)
+    public UserV getUser(String username,Connection connection)
     { 
     UserV  u=new UserV();
     try{
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM user_v WHERE id_user=?");
-            ps.setInt(1, Id);
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM user_v WHERE username=?");
+            ps.setString(1, username);
             ResultSet rs = ps.executeQuery();       
             while(rs.next()){
                u = new UserV();
@@ -245,12 +245,12 @@ public class UserDAO {
     //for dealer profile
    
     
-     public DealerLo viewDealer(int Id,Connection connection)
+     public DealerLo viewDealer(String username,Connection connection)
     {
         DealerLo dealer= new DealerLo();
         try{     
-        PreparedStatement ps = connection.prepareStatement("SELECT * FROM dealer_lo WHERE id_user=?");
-        ps.setInt(1, Id); 
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM dealer_lo WHERE username=?");
+        ps.setString(1, username); 
         ResultSet rs=ps.executeQuery();
         while(rs.next()){
                  
@@ -266,21 +266,21 @@ public class UserDAO {
       { 
           e.printStackTrace();  
       }
-        return null;
+        return dealer;
     }
     
    
      
-     public CustomerLo viewCustomer(int Id,Connection connection)
+     public CustomerLo viewCustomer(String username,Connection connection)
     {
         CustomerLo customer= new CustomerLo();
         try{     
-        PreparedStatement ps = connection.prepareStatement("SELECT * FROM customer_lo WHERE id_user=?");
-        ps.setInt(1, Id);
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM customer_lo WHERE username=?");
+        ps.setString(1, username);
         ResultSet rs= ps.executeQuery();
         while(rs.next()){
                 
-                customer.setIdCustomer(rs.getInt(rs.getInt("id_dealer")));; 
+                customer.setIdCustomer(rs.getInt(rs.getInt("id_customer")));; 
                customer.setUsername(rs.getString("username"));
                customer.setRoleName(rs.getString("role_name"));
                 customer.setLocation(rs.getString("location"));
@@ -305,6 +305,7 @@ public class UserDAO {
               ps.executeUpdate();
       }catch(SQLException e)
       { 
+          
           e.printStackTrace();  
       }
         return true;
