@@ -123,6 +123,7 @@ public class OrderDAO {
         ResultSet rs = ps.executeQuery();
         
         while(rs.next()){
+            //CHECK THAT, PROBABLY NOT WORKING CORRECTLY
             OrderLo order=new OrderLo();
             order.setColor(rs.getString("color"));
             order.setDate(rs.getDate("date"));
