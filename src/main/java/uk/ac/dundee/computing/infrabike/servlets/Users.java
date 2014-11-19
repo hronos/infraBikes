@@ -20,8 +20,9 @@ import uk.ac.dundee.computing.infrabike.dao.UserDAO;
 /**
  * Root resource (exposed at "myresource" path)
  */
-@Path("Users")
+
 @Stateless
+@Path("Users")
 public class Users {
 
     /**
@@ -31,6 +32,7 @@ public class Users {
      * @return String that will be returned as a text/plain response.
      */
     @GET
+    
     @Produces("text/html")
     public Viewable getIt(@Context HttpServletRequest request) {
         System.out.println("/users called");       
@@ -60,6 +62,39 @@ public class Users {
         
         return new Viewable("/test", null);
     }
+    
+    @GET
+    @Path("Dealer")
+    @Produces("text/html")
+    public Viewable getItDealer(@Context HttpServletRequest request) {
+        System.out.println("/dealer called");       
+        try {        
+        DatabaseDAO db = new DatabaseDAO();
+        UserDAO deal = new UserDAO();
+        ArrayList dealData = null;
+        
+        Connection conn = db.Get_Connection();
+        dealData = deal.viewDealers(conn, null, null);
+        
+        Gson gson = new Gson();
+        
+        String dealers = gson.toJson(dealData);
+        
+        out.println("{\"Dealer\":"+dealers+"}");
+        
+        
+        conn.close();
+        out.close();
+        
+        request.setAttribute("dealer", dealers);
+        
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+        
+        return new Viewable("/dealer", null);
+    }
+    
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
