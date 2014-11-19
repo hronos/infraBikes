@@ -125,11 +125,11 @@ public class UserDAO {
     public boolean registerUser(String username,String password,String email,Connection connection){
       try{
           
-        PreparedStatement ps = connection.prepareStatement("INSERT INTO user_v (username,password,email,id_role) VALUES(?,?,?,?) "  );
+        PreparedStatement ps = connection.prepareStatement("INSERT INTO user_v (username,password,email) VALUES(?,?,?) "  );
         ps.setString(1, username);
         ps.setString(2, password);
         ps.setString(3, email);
-        ps.setInt(4, 1);
+        //ps.setInt(4, 1);
          ps.executeUpdate();
       }catch(SQLException e)
       { 
