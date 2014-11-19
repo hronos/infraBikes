@@ -287,6 +287,7 @@ public class UserDAO {
                 customer.setFirstName(rs.getString("first_name"));
                 customer.setLastName(rs.getString("last_name"));
                 customer.setPhoneNumber(rs.getString("phone_number"));  
+                customer.setEmail(rs.getString("email"));
             }
       }catch(SQLException e)
       { 
@@ -294,6 +295,32 @@ public class UserDAO {
       }
         return customer;
     }
+     
+     public boolean deleteUser(int Id, Connection connection)
+     {
+         try{     
+        
+         PreparedStatement ps=connection.prepareStatement("START TRANSACTION");
+         PreparedStatement ps2=connection.prepareStatement("DELETE FROM customer_v WHERE id_user=?");
+         PreparedStatement ps3=connection.prepareStatement("DELETE FROM dealer_v WHERE id_user=?");
+         PreparedStatement ps4=connection.prepareStatement("DELETE FROM user_v WHERE id_user?");        
+         PreparedStatement ps5=connection.prepareStatement ("COMMIT");
+         ps2.setInt(1, Id);
+         ps3.setInt(1, Id);
+         ps4.setInt(1, Id);
+              ps.executeUpdate();
+              ps2.executeUpdate();
+              ps3.executeUpdate();
+              ps4.executeUpdate();
+              ps5.executeUpdate();
+              
+      }catch(SQLException e)
+      { 
+          e.printStackTrace(); 
+          return false;
+      }
+         return true;
+     }
     
      
      public boolean deleteCustomer(int Id,Connection connection)
@@ -358,7 +385,31 @@ public class UserDAO {
         return true;
     }
     
-
+ public ArrayList viewUsers(Connection connection)
+    {
+        ArrayList list=new ArrayList();
+        try{     
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM user_v");
+        ResultSet rs= ps.executeQuery();
+        while(rs.next())
+        {
+        UserV user=new UserV();
+        user.setEmail(rs.getString("email"));
+        user.setIdRole(rs.getInt("id_role"));
+        user.setIdUser(rs.getInt("id_user"));
+        user.setPassword(rs.getString("password"));
+        user.setUsername(rs.getString("username"));
+        list.add(user);
+        }
+      }catch(SQLException e)
+      { 
+          e.printStackTrace();  
+      }
+        return list;
+    }
+       
+       
+       
  public boolean viewCustomerLo(int Id,Connection connection)
     {
         try{     
