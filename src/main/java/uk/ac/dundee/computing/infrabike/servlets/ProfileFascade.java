@@ -105,7 +105,7 @@ public class ProfileFascade {
         
         
         conn.close();
-        //out.close();
+        out.close();
         
         request.setAttribute("profile", profile);
         

@@ -5,16 +5,23 @@
  */
 package uk.ac.dundee.computing.infrabike.servlets;
 
+import com.google.gson.Gson;
+import static java.lang.System.out;
 import java.sql.Connection;
+import java.util.ArrayList;
 import javax.ejb.Stateless;
-import javax.ws.rs.Consumes;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import org.glassfish.jersey.server.mvc.Viewable;
 import uk.ac.dundee.computing.infrabike.dao.DatabaseDAO;
+import uk.ac.dundee.computing.infrabike.dao.MotorcycleDAO;
+import uk.ac.dundee.computing.infrabike.dto.MotPartLo;
 import uk.ac.dundee.computing.infrabike.dto.MotorcycleLo;
 import uk.ac.dundee.computing.infrabike.models.MotorcycleModel;
 
@@ -24,7 +31,7 @@ import uk.ac.dundee.computing.infrabike.models.MotorcycleModel;
  * @author dlennart
  */
 @Stateless
-@Path("Motorcycle")
+@Path("Model")
 public class MotorcycleVFascade  {
     //@PersistenceContext(unitName = "uk.ac.dundee.computing_infraBike_war_1.0-SNAPSHOTPU")
   
@@ -37,14 +44,49 @@ public class MotorcycleVFascade  {
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public MotorcycleLo find(@PathParam("id") String id) {
-        DatabaseDAO db = new DatabaseDAO();
-        MotorcycleModel c = new MotorcycleModel();
-        int Id=Integer.parseInt(id);
-        MotorcycleLo motorcycle =c.findMotorcycle(Id) ;
+    public Viewable find(@PathParam("id") String id,@Context HttpServletRequest request) {
         
-        return motorcycle;
+        try{
+        DatabaseDAO db = new DatabaseDAO();
+        MotorcycleDAO c = new MotorcycleDAO();
+        int Id=Integer.parseInt(id);
+        Connection conn= db.Get_Connection();
+        MotorcycleLo motorcycle =c.viewMotorcycle(Id, conn) ;
+        MotPartLo part= c.viewMotPart(motorcycle.getModelName(), conn);
+        
+        Gson gson = new Gson();
+       
+     
+         String model="";
+                
+                    model=gson.toJson(motorcycle);
+                    model+=gson.toJson(part);
+                
+        
+        out.println("{\"Model\":"+model+"}");
+        
+        conn.close();
+        out.close();
+        
+        request.setAttribute("model", model);
+        
+        
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error: " + e.getMessage());
+        }
+        
+        
+        return new Viewable("/model", null);
+  
     }
+    
+    
+    
+    
+    
+    
     @POST
     @Path("Motorcycle")
     public void addMotorcycle(@FormParam ("id_model")String id,@FormParam("serial")String serial,@FormParam("id_part")String part)    {
