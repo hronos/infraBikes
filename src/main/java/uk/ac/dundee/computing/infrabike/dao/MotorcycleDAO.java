@@ -9,7 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import org.glassfish.jersey.server.mvc.Viewable;
+import java.util.ArrayList;
 import uk.ac.dundee.computing.infrabike.dto.MotPartLo;
 import uk.ac.dundee.computing.infrabike.dto.MotorcycleLo;
 import uk.ac.dundee.computing.infrabike.dto.PartLo;
@@ -314,8 +314,73 @@ public class MotorcycleDAO {
         }
     }
     
+    
+    public ArrayList searchByModel(String model,Connection connection){
+    ArrayList list=new ArrayList();
+    try{
+    PreparedStatement ps=connection.prepareStatement("SELECT * FROM motorcycle_lo WHERE model_name=?");
+    ps.setString(1,model);
+    ResultSet rs=ps.executeQuery();
+    while(rs.next())
+    {
+       MotorcycleLo motorcycle=new MotorcycleLo();
+       motorcycle.setIdModel(rs.getInt("id_model"));
+       motorcycle.setColor(rs.getString("color"));
+       motorcycle.setModelName(rs.getString("model_name"));
+       motorcycle.setPrice(rs.getFloat("price"));
+       list.add(motorcycle);
+    }
+    }
+    catch(SQLException e)
+    {
+    }
+   return list;
+    }
+    
+     public ArrayList searchByEngineSize(int engine,Connection connection){
+    ArrayList list=new ArrayList();
+    try{
+    PreparedStatement ps=connection.prepareStatement("SELECT * FROM motorcycle_lo WHERE engine_size_cc=?");
+    ps.setInt(1,engine);
+    ResultSet rs=ps.executeQuery();
+    while(rs.next())
+    {
+       MotorcycleLo motorcycle=new MotorcycleLo();
+       motorcycle.setIdModel(rs.getInt("id_model"));
+       motorcycle.setColor(rs.getString("color"));
+       motorcycle.setModelName(rs.getString("model_name"));
+       motorcycle.setPrice(rs.getFloat("price"));
+       list.add(motorcycle);
+    }
+    }
+    catch(SQLException e)
+    {
+    }
+   return list;
    
     }
+      public ArrayList searchByKeyword(String model,Connection connection){
+    ArrayList list=new ArrayList();
+    try{
+    PreparedStatement ps=connection.prepareStatement("SELECT * FROM motorcycle_lo WHERE model_name=?");
+    ps.setString(1,model);
+    ResultSet rs=ps.executeQuery();
+    while(rs.next())
+    {
+       MotorcycleLo motorcycle=new MotorcycleLo();
+       motorcycle.setIdModel(rs.getInt("id_model"));
+       motorcycle.setColor(rs.getString("color"));
+       motorcycle.setModelName(rs.getString("model_name"));
+       motorcycle.setPrice(rs.getFloat("price"));
+       list.add(motorcycle);
+    }
+    }
+    catch(SQLException e)
+    {
+    }
+   return list;
+    }
+}
     
         
     

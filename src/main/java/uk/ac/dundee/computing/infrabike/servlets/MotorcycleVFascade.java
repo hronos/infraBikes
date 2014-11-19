@@ -45,6 +45,7 @@ public class MotorcycleVFascade  {
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
     public Viewable find(@PathParam("id") String id,@Context HttpServletRequest request) {
+       
         
         try{
         DatabaseDAO db = new DatabaseDAO();
@@ -82,7 +83,38 @@ public class MotorcycleVFascade  {
   
     }
     
-    
+    @GET
+    @Produces({"application/xml", "application/json"})
+    public Viewable findMotorcycles(@FormParam("")String type,@FormParam("search_field")String search, @Context HttpServletRequest request) {
+       ArrayList list=new ArrayList();
+        try{
+        
+        DatabaseDAO db = new DatabaseDAO();
+        MotorcycleDAO c = new MotorcycleDAO();
+        Connection conn= db.Get_Connection();
+       
+        if(type.equals("Model"))
+        {
+          list= c.searchByKeyword(search, conn);
+        }
+        else if(equals("Engine Size"))
+        {
+            int engine=Integer.parseInt(search);
+           list= c.searchByEngineSize(engine, conn);
+        }
+        else
+        {
+            
+        }
+        
+       }
+       catch(Exception ex)
+       {
+       }
+        
+      request.setAttribute("list", list);  
+      return new Viewable("/search", null);
+    }
     
     
     
