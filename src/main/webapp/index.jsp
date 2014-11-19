@@ -29,7 +29,7 @@
 			</div>
 			<div>
 				<input type="submit" value="Log in" />
-				<a href="#">Lost your password?</a>
+				
 				<a href="jsp/register.jsp">Register</a>
 			</div>
 		</form><!-- form -->

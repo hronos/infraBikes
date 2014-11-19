@@ -37,6 +37,11 @@
                 },
                 table: {
                   copyHeaderClass: true
+                },
+                writers: {
+                    link: function(v) {
+                    return '<a href="webapi/Users/'+v.username+'">Edit</a>';
+                    }   
                 }
               }); 
             });
@@ -48,9 +53,11 @@
   <thead>
     <th>idUser</th>
     <th>username</th>
-    <th>password</th>
     <th>idRole</th>
+    <th>role</th>
     <th>email</th>
+    <th>link</th>
+    
   </thead>
   <tbody>
   </tbody>

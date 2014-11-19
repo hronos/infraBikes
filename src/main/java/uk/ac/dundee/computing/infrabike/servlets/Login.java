@@ -69,7 +69,7 @@ public class Login {
             
 
             
-            return new Viewable("/works",null);
+            return new Viewable("/home",null);
         }
         else {
             System.out.println("incorrect user");

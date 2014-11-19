@@ -46,11 +46,11 @@ public class Users {
         
         String users = gson.toJson(userData);
         
-        out.println("{\"Users\":"+users+"}");
+        System.out.println("{\"Users\":"+users+"}");
         
         
         conn.close();
-        out.close();
+        
         
         request.setAttribute("users", users);
         

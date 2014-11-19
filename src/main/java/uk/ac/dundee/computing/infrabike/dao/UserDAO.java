@@ -13,11 +13,11 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import uk.ac.dundee.computing.infrabike.dto.CustomerLo;
-import uk.ac.dundee.computing.infrabike.dto.CustomerV;
 import uk.ac.dundee.computing.infrabike.dto.DealerLo;
 import uk.ac.dundee.computing.infrabike.dto.Roles;
 import uk.ac.dundee.computing.infrabike.dto.UserLo;
 import uk.ac.dundee.computing.infrabike.dto.UserV;
+
 
 /**
  *
@@ -29,16 +29,17 @@ public class UserDAO {
             throws Exception {
         ArrayList userData = new ArrayList();
         try{
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM user_v ORDER BY id_user DESC");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM user_lo");
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
-                UserV  u = new UserV();
+                UserLo  u = new UserLo();
                 u.setIdUser(rs.getInt("id_user"));
                 u.setIdRole(rs.getInt("id_role"));
+                u.setRole(rs.getString("role"));
                 u.setEmail(rs.getString("email"));
-                u.setPassword(rs.getString("password"));
                 u.setUsername(rs.getString("username"));
+                
                
                 userData.add(u);
             

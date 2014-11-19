@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -18,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Fury
+ * @author dlennart
  */
 @Entity
 @Table(name = "user_lo")
@@ -26,6 +27,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "UserLo.findAll", query = "SELECT u FROM UserLo u"),
     @NamedQuery(name = "UserLo.findByUsername", query = "SELECT u FROM UserLo u WHERE u.username = :username"),
+    @NamedQuery(name = "UserLo.findByIdUser", query = "SELECT u FROM UserLo u WHERE u.idUser = :idUser"),
+    @NamedQuery(name = "UserLo.findByIdRole", query = "SELECT u FROM UserLo u WHERE u.idRole = :idRole"),
     @NamedQuery(name = "UserLo.findByRole", query = "SELECT u FROM UserLo u WHERE u.role = :role"),
     @NamedQuery(name = "UserLo.findByEmail", query = "SELECT u FROM UserLo u WHERE u.email = :email")})
 public class UserLo implements Serializable {
@@ -35,6 +38,15 @@ public class UserLo implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "username")
     private String username;
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "id_user")
+    private int idUser;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "id_role")
+    private int idRole;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -46,16 +58,40 @@ public class UserLo implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "email")
     private String email;
+    private String link;
 
     public UserLo() {
     }
 
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+
+    public int getIdRole() {
+        return idRole;
+    }
+
+    public void setIdRole(int idRole) {
+        this.idRole = idRole;
     }
 
     public String getRole() {
