@@ -50,7 +50,7 @@
     <body>
         
         
-        <form method="POST"  action="/infraBike/webapi/UserV">
+        <!--form method="POST"  action="/infraBike/webapi/UserV">
                 <ul>
                     <li>User Name <input type="text" name="username" value=""></li>
                     <li>Password <input type="password" name="password" value=""></li>
@@ -59,7 +59,7 @@
                 </ul>
                 <br/>
                 <input type="submit" value="Register"> 
-        </form>
+        </form-->
         
 <div class="cont">
     <section id="content">
