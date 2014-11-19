@@ -12,7 +12,7 @@
         <title>Add Motorcycle</title>
     </head>
     <body>
-        
+        <%@ include file="header.jsp" %>
         <form action="/infraBike/webapi/Motorcycle/Specification" method="POST">
             Model Name: <input type="text" name="model_name"> <br />
             Top Speed: <input type="text" name="top_speed" /><br />

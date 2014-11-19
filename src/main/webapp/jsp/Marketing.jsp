@@ -12,6 +12,7 @@
         <title>Marketing</title>
     </head>
     <body>
+        <%@ include file="header.jsp" %>
         <h1>Marketing</h1>
         
         <table border="0" width="20%">
