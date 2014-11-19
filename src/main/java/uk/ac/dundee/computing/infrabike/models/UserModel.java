@@ -65,16 +65,16 @@ public class UserModel {
          try {
             UserDAO c = new UserDAO();
             user=c.getUser(username,connection);
-            System.out.println("KUKUKU" );
+          
             if(user.getIdRole()==6)
             {
                 customer=c.viewCustomer(username, connection);
-                System.out.println("KUKU" + customer.getEmail()+customer.getFirstName()+customer.getLastName());
+                
             }
             else if(user.getIdRole()==7)
             {
                 dealer=c.viewDealer(username, connection);
-                System.out.println("KUKU2" + dealer.getDealerEmail()+dealer.getLocation());
+               
             }
              
          profile.setCustomer(customer);
@@ -127,6 +127,3 @@ public class UserModel {
       }
       
       }
-      
-      
-
