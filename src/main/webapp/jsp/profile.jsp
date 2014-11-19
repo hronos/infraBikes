@@ -78,32 +78,8 @@
    <%--<th><a href="/infraBike/webapi/Profile/" id="delete" onclick="deleteUser()">Delete user</a></th> --%>
   
     
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                <script>
-                function deleteUser (user) {
-				var obj = ${profile};
-        
-                                  var user_del=document.getElementById('user').value;alert(user_del);
-				  var user = this.name;
-			            if (confirm('Are you sure you want to Delete User '+user_del+'?')) {
-                    jQuery.ajax({
-                        type: "DELETE",
-                        url: "http://localhost:8080/Instagrim-AS/Profile/"+user_del,
-                      
-                        success: function (data, status, jqXHR) {
-                             
-                             $(location).attr('href',"/Instagrim-AS/login.jsp");
-                        },
-                    
-                        error: function (jqXHR, status,errorThrown) {            
-                           
-                            alert(errorThrown);
-                        
-                        }
-                    });
-			      }
-               }
-				</script>
+   
+    
     
 <%}}%>
 

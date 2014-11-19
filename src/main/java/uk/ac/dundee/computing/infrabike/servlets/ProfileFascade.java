@@ -56,7 +56,7 @@ public class ProfileFascade {
                 if(profiles.getCustomer()!=null)
                 {
                  
-                    profile=gson.toJson("["+profiles.getCustomer()+"]");
+                    profile=gson.toJson(profiles.getCustomer());
                 }
                 else if(profiles.getDealer()!=null)
                 {   
