@@ -29,7 +29,7 @@
     <body>
         <%@ include file="header.jsp" %>
         
-        <form action="/infraBike/webapi/Motorcycle/Add" method="POST">
+        <form action="/infraBike/webapi/Model/Add" method="POST">
             <div class="formrow">
                 <label for="model_name" id="Username-ariaLabel" >Model Name:</label> <input type="text" name="model_name"> <br />
             </div>
@@ -81,6 +81,10 @@
             </div>
             <div class="formrow">
                 <label for="Id" id="Username-ariaLabel" >Id: </label> <input type="text" name="Id" /><br />
+            </div>
+            
+            <div class="formrow">
+                <label for="Id" id="Username-ariaLabel" >Id Part: </label> <input type="text" name="id_part" /><br />
             </div>
             <input type="submit" value="Add" />
             

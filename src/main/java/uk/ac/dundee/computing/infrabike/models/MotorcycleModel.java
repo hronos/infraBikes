@@ -29,7 +29,7 @@ public class MotorcycleModel {
    {
         try {
             MotorcycleDAO c = new MotorcycleDAO();
-            c.addSpec(name,top_speed,weight,seat_height,frame,tank,engineSize,frontB,rearB,frontT,rearT,power,serial,colour,price,weight,Id,connection);
+           // c.addSpec(name,top_speed,weight,seat_height,frame,tank,engineSize,frontB,rearB,frontT,rearT,power,serial,colour,price,weight,Id,connection);
         } catch (Exception e) {
             throw e;
         }
@@ -43,7 +43,7 @@ public class MotorcycleModel {
    {
         try {
             MotorcycleDAO c = new MotorcycleDAO();
-            c.updateSpec(idModel, name, top_speed, weight, seat_height, frame, tank, engineSize, frontT, rearT, frontT, engineSize, power,serial,colour,price, connection);
+           // c.updateSpec(idModel, name, top_speed, weight, seat_height, frame, tank, engineSize, frontT, rearT, frontT, engineSize, power,serial,colour,price, connection);
         } catch (Exception e) {
             throw e;
         }

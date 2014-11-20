@@ -82,8 +82,15 @@
   </div>
 </div>
         
-        <a href="/infraBike/jsp/editMotorcycle.jsp"></a>
-            
+       
+            <%
+            LoggedIn lg2 = (LoggedIn) session.getAttribute("LoggedIn");
+            if (lg2 != null) {
+                String user = lg2.getUsername();
+
+                String role = lg2.getRole();
+        %>
+        <%if(role.equals("admin")){%> <a id="buttons" href="/infraBike/webapi/Model/Update/<%=mot.getIdModel()%>">Update</a><%}}%>
  
     
         

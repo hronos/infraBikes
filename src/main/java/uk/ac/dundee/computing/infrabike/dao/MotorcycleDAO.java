@@ -214,7 +214,7 @@ public class MotorcycleDAO {
     */
     
     public void addSpec(String model_name,int top_speed,int weight,int seat_height,String frame,int tank,
-            int engine_size_cc,int front_brakes,int rear_brakes,int front_tyre_size,int rear_tyre_size,int power_kw,int serial, String colour,float price, int prod_weight,int Id,Connection connection){
+            int engine_size_cc,int front_brakes,int rear_brakes,int front_tyre_size,int rear_tyre_size,int power_kw,int serial, String colour,float price, int prod_weight,int Id,int idPart,Connection connection){
    
          try{
          
@@ -227,7 +227,8 @@ public class MotorcycleDAO {
                      + ") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
             PreparedStatement ps3=connection.prepareStatement("SELECT @A:=id_model FROM motorcycle_spec_v WHERE model_name=?");
             PreparedStatement ps4=connection.prepareStatement("INSERT INTO product_v (serial,id_type,color,price,weight,id_model) VALUES(?,?,?,?,?,@A)");        
-            PreparedStatement ps5=connection.prepareStatement ("COMMIT");
+            PreparedStatement ps5=connection.prepareStatement("INSERT INTO motorcycle_v (id_part,serial,id_model) VALUES(?,?,@A)");   
+            PreparedStatement ps6=connection.prepareStatement ("COMMIT");
          ps2.setString(1, model_name);
          ps2.setInt(2, top_speed);
          ps2.setInt(3, weight);
@@ -246,18 +247,21 @@ public class MotorcycleDAO {
          ps4.setString(3,colour);
          ps4.setFloat(4, price);
          ps4.setInt(5, weight);
+         ps5.setInt(1, idPart);
+         ps5.setInt(2, serial);
          ps.executeUpdate();
          ps2.executeUpdate();
          ps3.executeQuery();
          ps4.executeUpdate();
          ps5.executeUpdate();
+         ps6.executeUpdate();
     }  catch(SQLException e){
           e.printStackTrace();  
     }
     }
     
-   public void updateSpec(int Id,String model_name,int top_speed,int weight,int seat_height,String frame,int tank,
-            int engine_size_cc,int front_brakes,int rear_brakes,int front_tyre_size,int rear_tyre_size,int power_kw,int serial,String colour,float price,Connection connection)
+   public void updateSpec(int Id,String model_name,int top_speed,float weight,int seat_height,String frame,int tank,
+            int engine_size_cc,int front_brakes,int rear_brakes,int front_tyre_size,int rear_tyre_size,int power_kw,int serial,String colour,float price,float product,Connection connection)
     {
          try{
         //PreparedStatement ps=connection.prepareStatement("START TRANSACTION");
@@ -268,7 +272,7 @@ public class MotorcycleDAO {
        // PreparedStatement ps4=connection.prepareStatement ("COMMIT");
             ps2.setString(1, model_name);
             ps2.setInt(2, top_speed);
-            ps2.setInt(3, weight);
+            ps2.setFloat(3, weight);
             ps2.setInt(4, seat_height);
             ps2.setString(5, frame);
             ps2.setInt(6, tank);
@@ -282,7 +286,7 @@ public class MotorcycleDAO {
             ps3.setInt(1,serial);
             ps3.setString(2, colour);
             ps3.setFloat(3,  price);
-            ps3.setInt(4, weight);
+            ps3.setFloat(4, product);
             ps3.setInt(5, Id);
           //  ps.executeUpdate();
             ps2.executeUpdate();
