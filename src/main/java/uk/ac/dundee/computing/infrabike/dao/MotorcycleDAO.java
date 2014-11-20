@@ -87,7 +87,7 @@ public class MotorcycleDAO {
          ResultSet rs=ps.executeQuery();
          while(rs.next()){
              motLo.setColor(rs.getString("color"));
-             motLo.setEngineSizeCc(rs.getInt("engline_size_cc"));
+             motLo.setEngineSizeCc(rs.getInt("engine_size_cc"));
              motLo.setFrame(rs.getString("frame"));
              motLo.setFrontBrakes(rs.getInt("front_brakes"));
              motLo.setFrontTyreSize(rs.getInt("front_tyre_size"));
@@ -315,8 +315,8 @@ public class MotorcycleDAO {
     }
     
     
-    public ArrayList searchByModel(String model,Connection connection){
-    ArrayList list=new ArrayList();
+    public ArrayList<MotorcycleLo> searchByModel(String model,Connection connection){
+    ArrayList <MotorcycleLo> list=new ArrayList <MotorcycleLo>();
     try{
     PreparedStatement ps=connection.prepareStatement("SELECT * FROM motorcycle_lo WHERE model_name=?");
     ps.setString(1,model);
@@ -337,8 +337,8 @@ public class MotorcycleDAO {
    return list;
     }
     
-     public ArrayList searchByEngineSize(int engine,Connection connection){
-    ArrayList list=new ArrayList();
+     public ArrayList <MotorcycleLo> searchByEngineSize(int engine,Connection connection){
+    ArrayList <MotorcycleLo> list=new ArrayList <MotorcycleLo>();
     try{
     PreparedStatement ps=connection.prepareStatement("SELECT * FROM motorcycle_lo WHERE engine_size_cc=?");
     ps.setInt(1,engine);

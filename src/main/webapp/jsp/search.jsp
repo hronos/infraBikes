@@ -6,18 +6,21 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import ="java.util.ArrayList"%>
-<%@page import =" java.util.Iterator"%>
+<%@page import =" java.util.ListIterator"%>
+<%@page import =" uk.ac.dundee.computing.infrabike.dto.MotorcycleLo"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Search</title>
     </head>
-    <%ArrayList list = (ArrayList) request.getAttribute("list");%>
+    
     <body>
+        <%ArrayList <MotorcycleLo> list =new ArrayList <MotorcycleLo>();
+          list= (ArrayList <MotorcycleLo>) request.getAttribute("list");%>
         <h1>Search</h1>
         <div>
-            <form action="/infraBike/webapi/Motorcycle" method="GET">
+            <form action="/infraBike/webapi/Model" method="POST">
             <input type="text" name="search_field" value="" size="60"/><br>
             &nbsp;&nbsp;&nbsp;&nbsp;
             <input type="radio" name="type" value="Model" />Model&nbsp;&nbsp;
@@ -38,9 +41,12 @@
         <h3>Search results</h3>
         
         <div>
-            <% Iterator<Object> it = list.iterator();
-                while(it.hasNext()){%>
-            &nbsp;&nbsp;&nbsp;&nbsp;<a href="#">Search result link</a>
+            <% 
+                ListIterator<MotorcycleLo> litr = list.listIterator();
+                while (litr.hasNext()) {
+                    MotorcycleLo mot = litr.next();
+                %>
+                &nbsp;&nbsp;&nbsp;&nbsp;<a href="/infraBike/webapi/Model/<%=mot.getIdModel()%>"> Model: <%=mot.getModelName()%>  Colour: <%=mot.getColor()%> Price: <%=mot.getPrice()%> </a>
             
             <br><br>
             <%}%>
