@@ -50,33 +50,32 @@
     </head>
     <body>
         
-<table id="population">
-  <thead>
-    
-    <th>region</th>
-    <th>population</th>
-    
-  </thead>
-  <tbody>
-  </tbody>
-</table>
-<div id="chart-example-chart" style="width: 310px;  margin: 0 auto"></div>
+
+<div id="chart-example-chart" style="margin: 0 auto"></div>
 <a class="btn primary" id="toggle-chart-table">Show Table to Sort the Chart Series</a>
 <span id="usr-span"></span>
 
 <table id="test" class="table table-bordered">
   <thead><tr><th>City</th><th>Population</th></tr></thead>
   <tbody>
-    <tr><td>Central</td><td>21</td></tr>
-    <tr><td>Yorkshire</td><td>32121</td></tr>
-    <tr><td>Highlands</td><td>21021</td></tr>
-    <tr><td>London</td><td>420000</td></tr>
-    <tr><td>Midlands</td><td>3232</td></tr>
-    <tr><td>MidWa</td><td>77</td></tr>
+    <tr><td>Central</td><td>2124698</td></tr>
+    <tr><td>East</td><td>6543216</td></tr>
+    <tr><td>Highlands</td><td>321547</td></tr>
+    <tr><td>London</td><td>8321065</td></tr>
+    <tr><td>Midlands</td><td>6845321</td></tr>
+    <tr><td>MidWales</td><td>1202365</td></tr>
     <tr><td>NorthEast</td><td>231231</td></tr>
-    <tr><td>NorthEastSc</td><td>45</td></tr>
+    <tr><td>NorthEastScotland</td><td>987624</td></tr>
     <tr><td>NorthernIreland</td><td>1800231</td></tr>
-    <tr><td>East</td><td>55</td></tr>
+    <tr><td>NorthWales</td><td>986321</td></tr>
+    <tr><td>NorthWest</td><td>6321658</td></tr>
+    <tr><td>SouthEast</td><td>5789463</td></tr>
+    <tr><td>SouthScotland</td><td>675231</td></tr>
+    <tr><td>SouthWales</td><td>279865</td></tr>
+    <tr><td>SouthWest</td><td>7689432</td></tr>
+    <tr><td>WestScotland</td><td>1190987</td></tr>
+    <tr><td>WestWales</td><td>638546</td></tr>
+    <tr><td>Yorkshire</td><td>6987653</td></tr>
   </tbody>
 </table>
 <script>
