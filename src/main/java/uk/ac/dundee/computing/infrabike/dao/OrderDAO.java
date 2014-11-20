@@ -128,14 +128,12 @@ public class OrderDAO {
             order.setColor(rs.getString("color"));
             order.setDate(rs.getDate("date"));
             order.setDeliveryPrice(rs.getInt("delivery_price"));
-            order.setCustomerName(rs.getString("customer name"));
-            order.setDealerName(rs.getString("dealer_name"));
+            order.setName(rs.getString("name"));
             order.setSerial(rs.getInt("serial"));
             order.setIdOrder(rs.getInt("id_order"));
             order.setPrice(rs.getInt("price"));
             order.setRegion(rs.getString("region"));
-            order.setModel(rs.getString("model"));
-            order.setWeigh(rs.getInt("weight"));
+            
             orderList.add(order);
         }
         }

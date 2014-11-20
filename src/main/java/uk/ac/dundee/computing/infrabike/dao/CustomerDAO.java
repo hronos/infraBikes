@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import uk.ac.dundee.computing.infrabike.dto.CustomerLo;
 import uk.ac.dundee.computing.infrabike.dto.CustomerV;
 
 //import uk.ac.dundee.computing.infrabike.dto.Customer;
@@ -38,6 +39,34 @@ public class CustomerDAO {
             }
             
             return customerData;
+        }
+        catch(Exception e){
+            throw e;
+        }
+    }
+    
+    public ArrayList showCustomers(Connection connection, HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+        ArrayList cusData = new ArrayList();
+        try{
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM customer_lo ORDER BY id_customer DESC");
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                CustomerLo c = new CustomerLo();
+                c.setIdCustomer(rs.getInt("id_customer"));
+                c.setUsername(rs.getString("username"));
+                c.setFirstName(rs.getString("first_name"));
+                c.setLastName(rs.getString("last_name"));
+                c.setLocation(rs.getString("location"));
+                c.setPhoneNumber(rs.getString("phone_number"));
+                c.setEmail(rs.getString("email"));
+                c.setRoleName(rs.getString("role_name"));
+                cusData.add(c);
+            
+            }
+            
+            return cusData;
         }
         catch(Exception e){
             throw e;

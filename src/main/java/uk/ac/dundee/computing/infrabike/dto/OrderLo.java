@@ -10,6 +10,7 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -50,6 +51,7 @@ public class OrderLo implements Serializable {
     @Column(name = "serial")
     private Integer serial;
     private static final long serialVersionUID = 1L;
+    @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_order")
@@ -112,6 +114,13 @@ public class OrderLo implements Serializable {
 
     public void setDealerName(String dealerName) {
         this.dealerName = dealerName;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getDate() {
@@ -185,14 +194,6 @@ public class OrderLo implements Serializable {
 
     public void setDealer(Integer dealer) {
         this.dealer = dealer;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Integer getIdCustomer() {

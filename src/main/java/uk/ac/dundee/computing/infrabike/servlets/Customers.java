@@ -17,6 +17,11 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.GET;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import org.glassfish.jersey.server.mvc.Viewable;
+import uk.ac.dundee.computing.infrabike.dao.CustomerDAO;
 
 import uk.ac.dundee.computing.infrabike.dao.DatabaseDAO;
 import uk.ac.dundee.computing.infrabike.models.CustomerModel;
@@ -25,41 +30,44 @@ import uk.ac.dundee.computing.infrabike.models.CustomerModel;
  *
  * @author dlennart
  */
-@WebServlet(urlPatterns = {
-    "/webapi/Customer/*",
-    "/webapi/Customers",
-    })
-@MultipartConfig
-public class Customers extends HttpServlet {  
+
+@Stateless
+@Path("Customer")
+
+public class Customers {  
     
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("/customers called");
-        response.setContentType("text/html;charset=UTF-8");
-        
-        try {
-        PrintWriter out = response.getWriter();
+
+    
+    @GET
+    
+    @Produces("text/html")
+    public Viewable getIt(@Context HttpServletRequest request) {
+        System.out.println("/customer called");       
+        try {        
         DatabaseDAO db = new DatabaseDAO();
-        CustomerModel c = new CustomerModel();
-        ArrayList customerData = null;
+        CustomerDAO war = new CustomerDAO();
+        ArrayList cusData = null;
         
         Connection conn = db.Get_Connection();
-        customerData = c.GetCustomers(conn, request, response);
+        cusData = war.showCustomers(conn, null, null);
         
         Gson gson = new Gson();
-        String customers = gson.toJson(customerData);
-        out.println("{\"Customers\":"+customers+"}");
+        
+        String customers = gson.toJson(cusData);
+        
+        //out.println("{\"Customers\":"+customers+"}");
         
         
         conn.close();
-        out.close();
+        //out.close();
+        
         request.setAttribute("customers", customers);
-        RequestDispatcher rd = request.getRequestDispatcher("show_customers.jsp");
-        rd.forward(request, response);
         
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
         }
         
+        return new Viewable("/customers", null);
     }
 
 }

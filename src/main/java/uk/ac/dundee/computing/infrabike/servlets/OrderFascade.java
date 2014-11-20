@@ -5,8 +5,11 @@
  */
 package uk.ac.dundee.computing.infrabike.servlets;
 
+import com.google.gson.Gson;
 import java.sql.Connection;
+import java.util.ArrayList;
 import javax.ejb.Stateless;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -14,10 +17,11 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Context;
 import org.glassfish.jersey.server.mvc.Viewable;
 import uk.ac.dundee.computing.infrabike.dao.DatabaseDAO;
-import uk.ac.dundee.computing.infrabike.dto.OrderItemV;
-import uk.ac.dundee.computing.infrabike.models.OrderModel;
+import uk.ac.dundee.computing.infrabike.dao.OrderDAO;
+
 
 /**
  *
@@ -38,7 +42,7 @@ public class OrderFascade {
    
    try{  
         DatabaseDAO db = new DatabaseDAO();
-        OrderModel c = new OrderModel();
+        OrderDAO c = new OrderDAO();
         Connection conn = db.Get_Connection();
         c.updateOrder(Id,Id_d,d,region,Id_c,conn);
         }
@@ -59,7 +63,7 @@ public class OrderFascade {
    
    try{  
         DatabaseDAO db = new DatabaseDAO();
-        OrderModel c = new OrderModel();
+        OrderDAO c = new OrderDAO();
         Connection conn = db.Get_Connection();
         c.updateItem(Id,IdI,s,conn);
             }
@@ -80,7 +84,7 @@ public class OrderFascade {
        
        try{  
         DatabaseDAO db = new DatabaseDAO();
-        OrderModel c = new OrderModel();
+        OrderDAO c = new OrderDAO();
         Connection conn = db.Get_Connection();
         c.addOrder(Id_d,d,region,Id_c,s,conn);
             }
@@ -99,9 +103,9 @@ public class OrderFascade {
        int Id=Integer.parseInt(id);
        try{  
         DatabaseDAO db = new DatabaseDAO();
-        OrderModel c = new OrderModel();
+        OrderDAO c = new OrderDAO();
         Connection conn = db.Get_Connection();
-        c.addOrderItem(Id,s,conn);
+        //c.addOrderItem(Id,s,conn);
             }
         catch(Exception e)
         {
@@ -116,7 +120,7 @@ public class OrderFascade {
    {
        try{  
         DatabaseDAO db = new DatabaseDAO();
-        OrderModel c = new OrderModel();
+        OrderDAO c = new OrderDAO();
         Connection conn = db.Get_Connection();
         //sesion role daniel will fix it:D
         int role=6;
@@ -133,19 +137,26 @@ public class OrderFascade {
    
    
    @GET
-   public Viewable showOrders()
+   
+   public Viewable showOrders(@Context HttpServletRequest request)
    {
+       ArrayList orderData = null;
        try{  
         DatabaseDAO db = new DatabaseDAO();
-        OrderModel c = new OrderModel();
+        OrderDAO c = new OrderDAO();
         Connection conn = db.Get_Connection();
-        c.showOrders(conn);
+        
+        Gson gson = new Gson();
+        orderData = c.showOrders(conn);
+        String orders = gson.toJson(orderData);
+        System.out.println("{\"Orders\":"+orders+"}");
+        request.setAttribute("orders", orders);
             }
         catch(Exception e)
         {
              
         }
-        return new Viewable("/test", null);
+        return new Viewable("/all_orders", null);
    }
    
    
@@ -157,7 +168,7 @@ public class OrderFascade {
        try{  
            
         DatabaseDAO db = new DatabaseDAO();
-        OrderModel c = new OrderModel();
+        OrderDAO c = new OrderDAO();
         Connection conn = db.Get_Connection();
         c.deleteOrder(Id, conn);
             }
@@ -176,7 +187,7 @@ public class OrderFascade {
        int Id = Integer.parseInt(id);
        try{  
         DatabaseDAO db = new DatabaseDAO();
-        OrderModel c = new OrderModel();
+        OrderDAO c = new OrderDAO();
         Connection conn = db.Get_Connection();
         c.deleteItem(Id,conn);
             }

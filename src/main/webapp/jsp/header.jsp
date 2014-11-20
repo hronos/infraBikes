@@ -23,7 +23,8 @@
                         <ul>
                             <li><a href="/infraBike/webapi/Profile/<%=user%>">Profile</a></li>
                             <li><a href="/infraBike/webapi/Motorcycle">Motorcycles</a></li>
-                            <li><a href="">Orders</a></li> </ul>
+                            <li><a href="">Orders</a></li> 
+                            <li><a href="/infraBike">Log out</a></li></ul>
                             <% } 
                         else if (role.equals("admin")){%>
                         
@@ -37,7 +38,9 @@
                                 <li><a href="">Stock</a></li>
                                 <li><a href="">Info</a></li>
                             </ul>
-                             <li><a href="/infraBike/webapi/Users">Users</a></li></ul>
+                             <li><a href="/infraBike/webapi/Users">Users</a></li>
+                             <li><a href="/infraBike">Log out</a></li></ul>
+                             
                             <% } 
                         else if (role.equals("marketing")) { %>
                         <ul>
@@ -48,7 +51,8 @@
                             <li><a href="/infraBike/webapi/Supplier">Suppliers</a></li>
                             <li><a href="/infraBike/webapi/Warehouse">Warehouse</a></li>
                             <li><a href="/infraBike/webapi/Motorcycle">Motorcycles</a></li>
-                            <li><a href="">Orders</a></li> </ul>
+                            <li><a href="">Orders</a></li>
+                            <li><a href="/infraBike">Log out</a></li></ul>
                         
                         <% }
                         else if(role.equals("manager")) { %>
@@ -58,6 +62,7 @@
                             <li><a href="/infraBike/webapi/Users/Dealer">Dealers</a></li>
                             <li><a href="/infraBike/webapi/Supplier">Suppliers</a></li>
                             <li><a href="">Orders</a></li>
+                            <li><a href="/infraBike">Log out</a></li>
                         </ul>
                         <% }
                         else if(role.equals("tech")) { %>
@@ -67,6 +72,7 @@
                             <ul>
                                 <li><a href="">Specifications</a></li>
                                 <li><a href="">Parts</a></li>
+                                <li><a href="/infraBike">Log out</a></li>
                             </ul>
                         </ul>
                         
@@ -79,13 +85,15 @@
                             <li><a href="//infraBike/webapi/Motorcycle">Motorcycles</a></li>
                             <li><a href="/infraBike/webapi/Supplier">Suppliers</a></li>
                             <li><a href="">Orders</a></li>
+                            <li><a href="/infraBike">Log out</a></li>
                         </ul>
                         <% }
                         else if(role.equals("dealer")) { %>
                             <ul>
                                 <li><a href="/infraBike/webapi/Profile/<%=user%>">Profile</a></li>
                             <li><a href="/infraBike/webapi/Motorcycle">Motorcycles</a></li>
-                            <li><a href="">Orders</a></li> </ul>
+                            <li><a href="">Orders</a></li>
+                            <li><a href="/infraBike">Log out</a></li></ul>
                         <% }} %>
          
                  

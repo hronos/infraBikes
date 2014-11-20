@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import uk.ac.dundee.computing.infrabike.dto.DemographicsLo;
 
 /**
@@ -17,32 +18,40 @@ import uk.ac.dundee.computing.infrabike.dto.DemographicsLo;
  */
 public class DemographicsDAO {
     
-    public DemographicsLo viewDemographics(Connection connection)
+    public ArrayList viewDemographics(Connection connection) throws SQLException
     {
-        DemographicsLo demographics=new DemographicsLo();
+        ArrayList demoData = new ArrayList();
+        
         try{
-         PreparedStatement ps=connection.prepareStatement("SELECT * FROM  demographics_lo");
-         ResultSet rs=ps.executeQuery();
+         PreparedStatement ps=connection.prepareStatement("SELECT * FROM demographics_lo");
+         ResultSet rs = ps.executeQuery();
+         
+         System.out.println("DAO before while");
+         
          while(rs.next())
          {
-             demographics.setAverageAge(rs.getInt("average_age"));
-             demographics.setAverageTemperature(rs.getInt("average_temprature"));
-             demographics.setCommuting(rs.getString("commuting"));
-             demographics.setCountry(rs.getString("country"));
-             demographics.setCrimeStats(rs.getInt("crime_stats"));
-             demographics.setMarried(rs.getBoolean("married"));
-             demographics.setParking(rs.getInt("parking"));
-             demographics.setPopulation(rs.getInt("population"));
-             demographics.setRainyDays(rs.getInt("rainy_days"));
-             demographics.setRegion(rs.getString("region"));
-             demographics.setSnowyDays(rs.getInt("snowy_days"));
-             demographics.setTrafficInfo(rs.getInt("traffic_info"));
-         }
-         
+             DemographicsLo d = new DemographicsLo();
+             d.setAverageAge(rs.getInt("average_age"));
+             d.setAverageTemperature(rs.getInt("average_temperature"));
+             d.setCommuting(rs.getString("commuting"));
+             d.setCountry(rs.getString("country"));
+             d.setCrimeStats(rs.getInt("crime_stats"));
+             d.setMarried(rs.getInt("married"));
+             d.setParking(rs.getInt("parking"));
+             d.setPopulation(rs.getInt("population"));
+             d.setRainyDays(rs.getInt("rainy_days"));
+             d.setRegion(rs.getString("region"));
+             d.setSnowyDays(rs.getInt("snowy_days"));
+             d.setTrafficInfo(rs.getInt("traffic_info"));
+             demoData.add(d);
+             System.out.println("DAO after add");
+         } 
+         return demoData;
         }
         catch(SQLException e)
         {
+            throw e;
         }
-     return demographics;   
+       
     }
 }

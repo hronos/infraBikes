@@ -5,38 +5,51 @@
  */
 package uk.ac.dundee.computing.infrabike.servlets;
 
+import com.google.gson.Gson;
 import java.sql.Connection;
+import java.util.ArrayList;
 import javax.ejb.Stateless;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import org.glassfish.jersey.server.mvc.Viewable;
 import uk.ac.dundee.computing.infrabike.dao.DatabaseDAO;
+import uk.ac.dundee.computing.infrabike.dao.DemographicsDAO;
 import uk.ac.dundee.computing.infrabike.dto.DemographicsLo;
-import uk.ac.dundee.computing.infrabike.models.DemographicsModel;
 
 /**
  *
  * @author Anna
  */
 @Stateless
-@Path("Demographics")
+@Path("Demo")
 public class DemographicsFascade {
  
     @GET
-    public Viewable viewDemographics()
+    @Produces("text/html")
+    public Viewable viewDemographics(@Context HttpServletRequest request)
     {
+        ArrayList demoData = null;
         try{
-        DemographicsLo demographics=new DemographicsLo();
         DatabaseDAO db = new DatabaseDAO();
-        DemographicsModel c = new DemographicsModel();
+        DemographicsDAO d = new DemographicsDAO();
         Connection conn = db.Get_Connection();
-        demographics =c.viewDemographics(conn) ;
+        
+        demoData = d.viewDemographics(conn) ;
+        Gson gson = new Gson();
+        String demoD;
+        demoD = gson.toJson(demoData);
+        System.out.println(demoD);
+        conn.close();
+        request.setAttribute("demo", demoD);
         }
         catch(Exception e)
         {
             
         }
-         return new Viewable("/works",null);
+         return new Viewable("/demo",null);
          
     }
     
