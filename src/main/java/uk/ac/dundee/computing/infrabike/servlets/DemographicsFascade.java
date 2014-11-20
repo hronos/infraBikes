@@ -24,7 +24,7 @@ import uk.ac.dundee.computing.infrabike.dto.DemographicsLo;
  * @author Anna
  */
 @Stateless
-@Path("Demo")
+@Path("Demographics")
 public class DemographicsFascade {
  
     @GET
@@ -49,7 +49,7 @@ public class DemographicsFascade {
         {
             
         }
-         return new Viewable("/demo",null);
+         return new Viewable("/demographics.jsp",null);
          
     }
     

@@ -44,7 +44,7 @@
         <%@ include file="header.jsp" %>
         <%
                     LoggedIn lg2 = (LoggedIn) session.getAttribute("LoggedIn");
-                    if (lg != null) {
+                    if (lg2 != null) {
                         String user = lg2.getUsername();
                    
                         String role = lg2.getRole();

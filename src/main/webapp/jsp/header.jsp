@@ -45,7 +45,7 @@
                         else if (role.equals("marketing")) { %>
                         <ul>
                             <li><a href="/infraBike/webapi/Profile/<%=user%>">Profile</a></li>
-                            <li><a href="">Demographics</a></li>
+                            <li><a href="/infraBike/Demo">Demographics</a></li>
                             <li><a href="/infraBike/webapi/Customer">Customers</a></li>
                             <li><a href="/infraBike/webapi/Users/Dealer">Dealers</a></li>
                             <li><a href="/infraBike/webapi/Supplier">Suppliers</a></li>

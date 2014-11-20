@@ -51,6 +51,7 @@
         </script>    
     </head>
     <body>
+        
         <%@ include file="header.jsp" %>
         <table id="my-final-table">
   <thead>
