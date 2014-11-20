@@ -14,7 +14,7 @@
                <img class="displayed" src="/infraBike/image.jpg">
             </div>
     </div>
-        <div class="clearfix"></div>
+    <div class="clearfix"></div>
     <div class="cont">
         
         

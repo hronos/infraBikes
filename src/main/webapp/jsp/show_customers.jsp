@@ -8,11 +8,13 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="/infraBike/jsp/header_css.css">
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.min.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Customers</title>
     </head>
     <body>
+        <%@ include file="header.jsp" %>
         <h1>Customers</h1>
         
         <script type='text/javascript'>
