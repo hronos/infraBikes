@@ -21,14 +21,26 @@ import uk.ac.dundee.computing.infrabike.dto.PartLo;
  */
 public class MotorcycleDAO {
     
-    public void viewMotorcycleList(int Id,String phone,int storageS,Connection connection){
-    try{
-         
-         PreparedStatement ps = connection.prepareStatement("SELECT * FROM motorcycle_lo"  );
-         ResultSet rs=ps.executeQuery();
-    }catch(Exception e)
+    public ArrayList<MotorcycleLo> viewMotorcycleList(Connection connection){
+    ArrayList<MotorcycleLo> list= new ArrayList<MotorcycleLo>();
+        try{
+    PreparedStatement ps=connection.prepareStatement("SELECT * FROM motorcycle_lo  ");
+    
+    ResultSet rs=ps.executeQuery();
+    while(rs.next())
+    {
+       MotorcycleLo motorcycle=new MotorcycleLo();
+       motorcycle.setIdModel(rs.getInt("id_model"));
+       motorcycle.setColor(rs.getString("color"));
+       motorcycle.setModelName(rs.getString("model_name"));
+       motorcycle.setPrice(rs.getFloat("price"));
+       list.add(motorcycle);
+    }
+    }
+    catch(SQLException e)
     {
     }
+   return list;
       
     }
     public PartLo viewParts(int Id,Connection connection){

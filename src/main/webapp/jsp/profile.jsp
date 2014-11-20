@@ -90,16 +90,7 @@ else if(role.equals("dealer")){
   </tbody>
 </table>
 
-<form class="form-container">
-<div class="form-title"><h2>Edit Profile</h2></div>
-<div class="form-title">Name</div>
-<input class="form-field" type="text" name="firstname" /><br />
-<div class="form-title">Email</div>
-<input class="form-field" type="text" name="email" /><br />
-<div class="submit-container">
-<input class="submit-button" type="submit" value="Submit" />
-</div>
-</form>
+
   
 <span id="usr-span"></span>  
     </body>

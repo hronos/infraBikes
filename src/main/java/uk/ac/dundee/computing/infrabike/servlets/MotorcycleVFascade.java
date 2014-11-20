@@ -46,7 +46,7 @@ public class MotorcycleVFascade  {
         DatabaseDAO db = new DatabaseDAO();
         MotorcycleDAO c = new MotorcycleDAO();
         Connection conn= db.Get_Connection();
-       
+       if(!search.equals("")){
         if(type.equals("Model"))
         {
           list= c.searchByKeyword(search, conn);
@@ -58,13 +58,18 @@ public class MotorcycleVFascade  {
         }
         else
         {
-            
+            list= c.viewMotorcycleList( conn);
         }
+       }
+       else
+       {
+       
+       }
         
        }
        catch(Exception ex)
        {
-    }       
+        }       
       request.setAttribute("list", list);  
      return new Viewable("/search", null);
     }

@@ -18,6 +18,7 @@
     </head>
 
     <body>
+        <%@ include file="header.jsp" %>
         <%ArrayList<MotorcycleLo> list = new ArrayList<MotorcycleLo>();
             list = (ArrayList<MotorcycleLo>) request.getAttribute("list");%>
 
