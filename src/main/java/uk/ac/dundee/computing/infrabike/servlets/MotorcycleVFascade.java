@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -80,7 +81,7 @@ public class MotorcycleVFascade  {
         
         Connection conn= db.Get_Connection();
         MotorcycleLo motorcycle =c.viewMotorcycle(Id, conn) ;
-        MotPartLo part= c.viewMotPart(motorcycle.getModelName(), conn);
+        ArrayList <MotPartLo> part= c.viewMotPart(motorcycle.getModelName(), conn);
         
         Gson gson = new Gson();
        
@@ -97,6 +98,9 @@ public class MotorcycleVFascade  {
         out.close();
         
         request.setAttribute("model", model);
+        request.setAttribute("id", Id);
+        request.setAttribute("mot", motorcycle);
+        request.setAttribute("part", part);
         
         
         }
@@ -115,7 +119,7 @@ public class MotorcycleVFascade  {
     
     
     
-    @POST
+    /*@POST
     @Path("Motorcycle")
     public void addMotorcycle(@FormParam ("id_model")String id,@FormParam("serial")String serial,@FormParam("id_part")String part)    {
     try{
@@ -131,13 +135,14 @@ public class MotorcycleVFascade  {
     }
     
     }
-    
+    */
     
     @POST
-    @Path("Specification")
+    @Path("Add")
+    @Produces("text/html")
     public void createMotorcycleSpec(@FormParam ("model_name")String name,@FormParam("top_speed")String top_speed,@FormParam("weight")String weight,@FormParam("seat_height")String seat_height,@FormParam("frame")String frame,
     @FormParam("tank")String tank,@FormParam("engine_size")String engineSize,@FormParam("front_brakes")String frontB,@FormParam("rear_brakes")String rearB,@FormParam("front_tyre")String frontT,
-    @FormParam("rear_tyre")String rearT,@FormParam("power")String power,@FormParam ("serial")String serial,@FormParam("colour")String colour,@FormParam("price")String price,@FormParam("Id")String Id) {
+    @FormParam("rear_tyre")String rearT,@FormParam("power")String power,@FormParam ("serial")String serial,@FormParam("colour")String colour,@FormParam("price")String price,@FormParam("Id")String Id,@FormParam("prod_weight")String prod_w) {
         
      int speed=Integer.parseInt(top_speed);
      int w=Integer.parseInt(weight);
@@ -150,14 +155,15 @@ public class MotorcycleVFascade  {
      int rt=Integer.parseInt(rearT);
      int pw=Integer.parseInt(power);
      int s=Integer.parseInt(serial);
-     int pr=Integer.parseInt(price);
+     float pr=Float.parseFloat(price);
      int id=Integer.parseInt(Id);
+      int prw=Integer.parseInt(prod_w);
         try{
         DatabaseDAO db = new DatabaseDAO();
          Connection conn = db.Get_Connection();
-        MotorcycleModel c = new MotorcycleModel();
+        MotorcycleDAO c = new MotorcycleDAO();
          System.out.println("TEST3"+name);
-        c.addSpec(name,speed,w,sh,frame,t,es,fb,rb,ft,rt,pw,s,colour, pr,id,conn) ; 
+        c.addSpec(name,speed,w,sh,frame,t,es,fb,rb,ft,rt,pw,s,colour, pr,prw,id,conn) ; 
         }catch(Exception e)
         {
           
@@ -167,7 +173,8 @@ public class MotorcycleVFascade  {
     
     @POST
     @Path("Update")
-     public void updateMotorcycleSpec(@FormParam ("idModel")String idModel,@FormParam ("model_name")String name,@FormParam("top_speed")String top_speed,@FormParam("weight")String weight,@FormParam("seat_height")String seat_height,@FormParam("frame")String frame,
+    @Produces("text/html")
+    public void updateMotorcycleSpec(@FormParam ("idModel")String idModel,@FormParam ("model_name")String name,@FormParam("top_speed")String top_speed,@FormParam("weight")String weight,@FormParam("seat_height")String seat_height,@FormParam("frame")String frame,
     @FormParam("tank")String tank,@FormParam("engine_size")String engineSize,@FormParam("front_brakes")String frontB,@FormParam("rear_brakes")String rearB,@FormParam("front_tyre")String frontT,
     @FormParam("rear_tyre")String rearT,@FormParam("power")String power,@FormParam ("serial")String serial,@FormParam("colour")String colour,@FormParam("price")String price,@FormParam("Id")String Id) {
    
@@ -198,9 +205,39 @@ public class MotorcycleVFascade  {
         }
         
     }
+    @GET
+    @Path("Delete/{id}")
     
+    public Viewable remove(@PathParam("id") String id,@Context HttpServletRequest request) {
+         int Id=Integer.parseInt(id);
+           
+        try{
+        DatabaseDAO db = new DatabaseDAO();
+         Connection conn = db.Get_Connection();
+        MotorcycleDAO c = new MotorcycleDAO();
+         
+        c.deleteMotorcycle(Id, conn);
+        
+        }
+        catch(Exception e)
+        {
+            
+        }
+         ArrayList <MotorcycleLo> list=new ArrayList <MotorcycleLo>();
+        request.setAttribute("list", list);
+         return new Viewable("/search", null);
+  
+    }
     
+    @GET
+    @Path("Add")
     
+    public Viewable add() {
+        
+         return new Viewable("/addMotorcycle", null);
+  
+    }
+   
     /* 
     @PUT
     @Path("{id}")
@@ -209,14 +246,7 @@ public class MotorcycleVFascade  {
         super.edit(entity);
     }
 
-    @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") Integer id) {
-        em = getEntityManager();
-        UserV em2= em.merge(super.find(id));
-        em.remove(em2);
-        //super.remove(super.find(id));
-    }
+    
 
     @GET
     @Path("{id}")

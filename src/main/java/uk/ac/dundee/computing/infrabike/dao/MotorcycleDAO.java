@@ -59,8 +59,8 @@ public class MotorcycleDAO {
     }
     
     // view parts that exist in certain bike
-    public MotPartLo viewMotPart(String name, Connection connection){
-        MotPartLo motPart=new MotPartLo();
+    public ArrayList<MotPartLo> viewMotPart(String name, Connection connection){
+       ArrayList<MotPartLo> mot=new ArrayList<MotPartLo>();
         try{
       
          PreparedStatement ps = connection.prepareStatement("SELECT * FROM mot_part_lo WHERE model_name=?"  );
@@ -68,15 +68,17 @@ public class MotorcycleDAO {
          ResultSet rs=ps.executeQuery();
          while(rs.next())
          {
+              MotPartLo motPart=new MotPartLo();
          motPart.setModelName(rs.getString("model_name"));
          motPart.setPartName(rs.getString("part_name"));
-         motPart.setPartType(rs.getString("part_type"));        
+         motPart.setPartType(rs.getString("part_type"));
+         mot.add(motPart);
          }
          
         }catch(Exception e){
         
         }
-     return motPart; 
+     return mot; 
     }
     
       public MotorcycleLo viewMotorcycle(int Id,Connection connection){
