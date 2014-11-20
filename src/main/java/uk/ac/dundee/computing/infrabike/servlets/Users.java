@@ -60,7 +60,7 @@ public class Users {
             System.out.println("Error: " + ex.getMessage());
         }
         
-        return new Viewable("/test", null);
+        return new Viewable("/showUser", null);
     }
     
     @GET
