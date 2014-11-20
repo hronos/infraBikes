@@ -70,7 +70,7 @@ public class MotorcycleVFascade  {
    
     @GET
     @Path("{id}")
-    @Produces({"application/xml", "application/json"})
+     @Produces("text/html")
     public Viewable find(@PathParam("id") String id,@Context HttpServletRequest request) {
        
         
