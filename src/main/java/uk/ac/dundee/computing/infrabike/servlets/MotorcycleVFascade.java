@@ -73,11 +73,11 @@ public class MotorcycleVFascade  {
      @Produces("text/html")
     public Viewable find(@PathParam("id") String id,@Context HttpServletRequest request) {
        
-        
+        int Id=Integer.parseInt(id);
         try{
         DatabaseDAO db = new DatabaseDAO();
         MotorcycleDAO c = new MotorcycleDAO();
-        int Id=Integer.parseInt(id);
+        
         Connection conn= db.Get_Connection();
         MotorcycleLo motorcycle =c.viewMotorcycle(Id, conn) ;
         MotPartLo part= c.viewMotPart(motorcycle.getModelName(), conn);
@@ -105,7 +105,7 @@ public class MotorcycleVFascade  {
             System.out.println("Error: " + e.getMessage());
         }
         
-        
+        request.setAttribute("id", Id); 
         return new Viewable("/model", null);
   
     }

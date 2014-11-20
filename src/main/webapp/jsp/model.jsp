@@ -17,6 +17,10 @@
     </head>
     
     <body onload="init()">
+        
+        <%int id;
+           id= (Integer) request.getAttribute("id");    %>
+          
          <%@ include file="header.jsp" %>
         <h1>Hello World!</h1>
               
@@ -33,18 +37,16 @@
     
 
 <div class="tabContent" id="advantages">
-  <h2>Parts</h2>
+    
+    </br > </br>
+  <h2>Model</h2>
   <div>
     
   </div>
 </div>
             
- <div class="tabContent" id="advantages">
-  <h2>About JavaScript tabs</h2>
-  <div>
+ 
     
-  </div>
-</div>       
         
         
     </body>
