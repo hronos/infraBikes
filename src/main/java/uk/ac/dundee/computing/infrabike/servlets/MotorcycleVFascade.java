@@ -63,7 +63,7 @@ public class MotorcycleVFascade  {
        }
        else
        {
-       
+           list=c.viewMotorcycleList(conn);
        }
         
        }
