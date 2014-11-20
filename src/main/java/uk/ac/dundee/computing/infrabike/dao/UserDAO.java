@@ -164,12 +164,12 @@ public class UserDAO {
         return true;
     }
     
-    public boolean changRole(int role,int Id,Connection connection)
+    public boolean changeRole(int role,String username,Connection connection)
     {
         try{     
-        PreparedStatement ps = connection.prepareStatement("UPDATE user_v SET id_role=? where id_user=?");
+        PreparedStatement ps = connection.prepareStatement("UPDATE user_v SET id_role=? where username=?");
         ps.setInt(1, role);
-        ps.setInt(2, Id);
+        ps.setString(2, username);
          ps.executeUpdate();
       }catch(SQLException e)
       { 

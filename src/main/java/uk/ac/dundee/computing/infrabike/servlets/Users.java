@@ -1,6 +1,7 @@
 package uk.ac.dundee.computing.infrabike.servlets;
 
 import com.google.gson.Gson;
+import java.io.IOException;
 import static java.lang.System.out;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -9,6 +10,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.POST;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 
@@ -16,6 +20,7 @@ import javax.ws.rs.core.Context;
 import org.glassfish.jersey.server.mvc.Viewable;
 import uk.ac.dundee.computing.infrabike.dao.DatabaseDAO;
 import uk.ac.dundee.computing.infrabike.dao.UserDAO;
+import uk.ac.dundee.computing.infrabike.dto.UserV;
 
 /**
  * Root resource (exposed at "myresource" path)
@@ -49,20 +54,72 @@ public class Users {
         String users = gson.toJson(userData);
         
         System.out.println("{\"Users\":"+users+"}");
-        
-        
         conn.close();
-        
-        
         request.setAttribute("users", users);
-        
+
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
         }
         
         return new Viewable("/showUser", null);
     }
-    
+    @POST
+    @Path("{username}")
+    public void saveUserRole(@Context HttpServletRequest request, HttpServletResponse response, @PathParam("username") String username,
+            @FormParam("sel_Role") String role_name)throws IOException {
+        int role;
+        switch(role_name){
+        default:
+             throw new IllegalArgumentException("Invalid role");
+        case "admin":
+            role = 1;
+            break;
+        case "marketing":
+            role = 2;
+            break;
+        case "manager":
+            role = 3;
+            break;
+        case "tech":
+            role = 4;
+            break;
+        case "warehouse_keeper":
+            role = 5;
+            break;
+        case "customer":
+            role = 6;
+            break;
+        case "dealer":
+            role = 7;
+            break;
+        }
+        UserDAO u = new UserDAO();
+        UserV user = new UserV();
+        
+        DatabaseDAO db = new DatabaseDAO();
+        try {
+        Connection conn = db.Get_Connection();
+        u.changeRole(role, username, conn);
+        
+        } catch (Exception e){}
+        
+    }
+    @GET
+    @Path("{username}")
+    public Viewable editUser(@Context HttpServletRequest request, @PathParam("username") String username){
+        UserDAO u = new UserDAO();
+        UserV user = new UserV();
+        DatabaseDAO db = new DatabaseDAO();
+        try {
+        Connection conn = db.Get_Connection();
+        user = u.getUser(username, conn);
+        
+        } catch (Exception e){}
+        
+        request.setAttribute("username", user.getUsername());
+        request.setAttribute("role", user.getIdRole());
+        return new Viewable("/edit_user", null);
+    }
     @GET
     @Path("Dealer")
     @Produces("text/html")
