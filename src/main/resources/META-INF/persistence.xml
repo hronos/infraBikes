@@ -8,6 +8,7 @@
     <class>uk.ac.dundee.computing.infrabike.dto.UserV</class>
     <class>uk.ac.dundee.computing.infrabike.dao.MotorcycleV</class>
     <class>uk.ac.dundee.computing.infrabike.dto.UserLo</class>
+    <class>uk.ac.dundee.computing.infrabike.dto.ProductLo</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://silva.computing.dundee.ac.uk:3306/14ac3d30?zeroDateTimeBehavior=convertToNull"/>

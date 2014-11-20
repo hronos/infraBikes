@@ -63,7 +63,6 @@
                         else if(role.equals("tech")) { %>
                         <ul>
                             <li><a href="/infraBike/webapi/Profile/<%=user%>">Profile</a></li>
-                            <li><a href="">Products</a></li>
                             <li><a href="/infraBike/webapi/Motorcycle">Motorcycle</a></li>
                             <ul>
                                 <li><a href="">Specifications</a></li>
@@ -79,7 +78,6 @@
                             <li><a href="">Parts</a></li>
                             <li><a href="//infraBike/webapi/Motorcycle">Motorcycles</a></li>
                             <li><a href="/infraBike/webapi/Supplier">Suppliers</a></li>
-                            <li><a href="">Products</a></li>
                             <li><a href="">Orders</a></li>
                         </ul>
                         <% }
