@@ -3,18 +3,19 @@
     Created on : 10-Nov-2014, 20:11:57
     Author     : Anna
 --%>
-
+<!--form style needed-->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="/infraBike/jsp/header_css.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Stock</title>
     </head>
     <body>
         <%@ include file="header.jsp" %>
      <p>Add part</p>
-      <form method="POST"  action="/infraBike/webapi/Part"
+     <form method="POST"  action="/infraBike/webapi/Part">
                 <ul>
                     <li>Name <input type="text" name="name" value=""></li>
                     <li>Part type <input type="text" name="part_type" value=""></li>

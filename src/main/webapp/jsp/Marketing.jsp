@@ -9,9 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="/infraBike/jsp/header_css.css">
         <title>Marketing</title>
     </head>
     <body>
+        <%@ include file="header.jsp" %>
         <h1>Marketing</h1>
         <table border="0" width="20%">
             <tbody>
