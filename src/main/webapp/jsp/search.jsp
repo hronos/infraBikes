@@ -14,6 +14,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+         <link href="/infraBike/jsp/header_css.css" rel="stylesheet" type="text/css"/>
         <title>Search</title>
     </head>
 
