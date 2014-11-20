@@ -8,6 +8,7 @@
     <head>
         <link href="../dynatable/jquery.dynatable.css" rel="stylesheet" type="text/css"/>
         <script src="http://code.jquery.com/jquery-1.7.2.min.js" type="text/javascript"></script>
+        <script src="http://code.highcharts.com/highcharts.js" type="text/javascript"></script>
         <script src="../dynatable/jquery.dynatable.js" type="text/javascript"></script>
         <style type="text/css">
             #usr-span {
@@ -51,7 +52,7 @@
         
 <table id="population">
   <thead>
-    <th>country</th>
+    
     <th>region</th>
     <th>population</th>
     
@@ -59,8 +60,94 @@
   <tbody>
   </tbody>
 </table>
+<div id="chart-example-chart" style="width: 310px;  margin: 0 auto"></div>
+<a class="btn primary" id="toggle-chart-table">Show Table to Sort the Chart Series</a>
+<span id="usr-span"></span>
 
-<span id="usr-span"></span>  
-        
+<table id="test" class="table table-bordered">
+  <thead><tr><th>City</th><th>Population</th></tr></thead>
+  <tbody>
+    <tr><td>Central</td><td>21</td></tr>
+    <tr><td>Yorkshire</td><td>32121</td></tr>
+    <tr><td>Highlands</td><td>21021</td></tr>
+    <tr><td>London</td><td>420000</td></tr>
+    <tr><td>Midlands</td><td>3232</td></tr>
+    <tr><td>MidWa</td><td>77</td></tr>
+    <tr><td>NorthEast</td><td>231231</td></tr>
+    <tr><td>NorthEastSc</td><td>45</td></tr>
+    <tr><td>NorthernIreland</td><td>1800231</td></tr>
+    <tr><td>East</td><td>55</td></tr>
+  </tbody>
+</table>
+<script>
+    (function() {
+  var $table = $('#test'), $chart = $('#chart-example-chart'), chart;
+
+  // Create a button to toggle our table's visibility.
+  // We could just hide it completely if we don't need it.
+  $('#toggle-chart-table').click(function(e) {
+    e.preventDefault();
+    $table.toggle();
+  });
+
+  // Set up our Highcharts chart
+  chart = new Highcharts.Chart({
+    chart: {
+      type: 'column',
+      renderTo: 'chart-example-chart'
+    },
+    title: {
+      text: 'Population per region'
+    },
+    yAxis: {
+      min: 0,
+      title: {
+        text: 'Population'
+      }
+    },
+    series: [{
+      name: 'population',
+      color: '#006A72'
+    }]
+  });
+
+  // Create a function to update the chart with the current working set
+  // of records from dynatable, after all operations have been run.
+  function updateChart() {
+    var dynatable = $table.data('dynatable'), categories = [], values = [];
+    $.each(dynatable.settings.dataset.records, function() {
+      categories.push(this.city);
+      values.push(parseFloat(this.population));
+    });
+
+    chart.xAxis[0].setCategories(categories);
+    chart.series[0].setData(values);
+  };
+
+  // Attach dynatable to our table, hide the table,
+  // and trigger our update function whenever we interact with it.
+  $table
+    .dynatable({
+      inputs: {
+        queryEvent: 'blur change keyup',
+        recordCountTarget: $chart,
+        paginationLinkTarget: $chart,
+        searchTarget: $chart,
+        perPageTarget: $chart
+      },
+      dataset: {
+        perPageOptions: [5, 10, 20],
+        sortTypes: {
+          'population': 'number'
+        }
+      }
+    })
+    .hide()
+    .bind('dynatable:afterProcess', updateChart);
+
+  // Run our updateChart function for the first time.
+  updateChart();
+})();
+</script>       
 </body>
 </html>
