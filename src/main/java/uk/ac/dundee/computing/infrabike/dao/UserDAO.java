@@ -305,7 +305,7 @@ public class UserDAO {
         ResultSet rs= ps.executeQuery();
         while(rs.next()){
                 
-                customer.setIdCustomer(rs.getInt(rs.getInt("id_customer")));; 
+                customer.setIdCustomer(rs.getInt("id_customer"));; 
                customer.setUsername(rs.getString("username"));
                customer.setRoleName(rs.getString("role_name"));
                 customer.setLocation(rs.getString("location"));
