@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -44,6 +45,7 @@ public class DemographicsLo implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "country")
     private String country;
+    @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -60,7 +62,7 @@ public class DemographicsLo implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "married")
-    private boolean married;
+    private int married;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -126,11 +128,11 @@ public class DemographicsLo implements Serializable {
         this.averageAge = averageAge;
     }
 
-    public boolean getMarried() {
+    public int getMarried() {
         return married;
     }
 
-    public void setMarried(boolean married) {
+    public void setMarried(int married) {
         this.married = married;
     }
 
