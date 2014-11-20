@@ -65,8 +65,8 @@ public class Users {
     }
     @POST
     @Path("{username}")
-    public void saveUserRole(@Context HttpServletRequest request, HttpServletResponse response, @PathParam("username") String username,
-            @FormParam("sel_Role") String role_name)throws IOException {
+    public void saveUserRole(@Context HttpServletRequest request, @PathParam("username") String username,
+            @FormParam("sel_Role") String role_name) {
         int role;
         switch(role_name){
         default:
