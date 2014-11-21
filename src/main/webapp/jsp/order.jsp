@@ -40,11 +40,7 @@
                 },
                 table: {
                   copyHeaderClass: true
-                },
-                writers: {
-                    link: function(v) {
-                    return '<a href="Order/'+v.idOrder+'">Edit</a>';
-                    }   
+                
                 }
               }); 
             });
