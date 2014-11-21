@@ -9,7 +9,7 @@
 
         <div id="container">
             <div id="logo">
-               <img class="displayed" src="/infraBike/image.jpg">
+               <img class="displayed" src="/infraBike/logo.jpg">
             </div>
             <div id="menu_bar">
                 <%

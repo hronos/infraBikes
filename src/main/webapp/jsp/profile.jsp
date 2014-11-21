@@ -41,6 +41,7 @@
         </script>    
     </head>
     <body>
+        <div class="center">
         <%@ include file="header.jsp" %>
         <%
                     LoggedIn lg2 = (LoggedIn) session.getAttribute("LoggedIn");
@@ -99,5 +100,10 @@ else if(role.equals("dealer")){
  <%}%>
   
 <span id="usr-span"></span>  
+     
+ <footer> @infraBikes </footer>
+   
+        </div>
     </body>
+    
 </html>

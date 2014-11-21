@@ -26,7 +26,7 @@
     </head>
     
     <body onload="init()">
-        
+        <div class="center">
         <%int id;
            id= (Integer) request.getAttribute("id");    %>
           <%MotorcycleLo mot;
@@ -34,10 +34,10 @@
           <%ArrayList <MotPartLo> part;
            part= (ArrayList<MotPartLo>) request.getAttribute("part");    %>
          <%@ include file="header.jsp" %>
-        <h1>Model <%=mot.getModelName() %></h1> 
-        <h1>Colour <%=mot.getColor() %></h1> 
-        <h1>Price <%=mot.getPrice() %></h1> 
-        <h1>Product Weight <%=mot.getProdWeight() %></h1>     
+        <h3>Model <%=mot.getModelName() %></h3> 
+        <h3>Colour <%=mot.getColor() %></h3> 
+        <h3>Price <%=mot.getPrice() %></h3> 
+        <h3>Product Weight <%=mot.getProdWeight() %></h3>     
        
 <ul id="tabs">
         <li  onclick="showTab()"><a href="#about">Model specification</a></li>
@@ -47,14 +47,14 @@
 <div class="tabContent" id="about">
    </br > </br>
    
-    <h2>Name: <%= mot.getModelName()%> </h2>
-    <h2>Top speed: <%=mot.getTopSpeed() %> </h2>
-    <h2>Weight: <%= mot.getWeight()%> </h2>
-    <h2>Seat Height: <%= mot.getSeatHeight()%> </h2>
-    <h2>Engine: <%= mot.getEngineSizeCc()%> </h2>
-    <h2>Power: <%= mot.getPowerKw()%> </h2>
-    <h2>Front Tyre Size: <%= mot.getFrontTyreSize()%> </h2>
-    <h2>Rare Tyre Size: <%= mot.getRearTyreSize()%> </h2>
+    <h4>Name: <%= mot.getModelName()%> </h4>
+    <h4>Top speed: <%=mot.getTopSpeed() %> </h4>
+    <h4>Weight: <%= mot.getWeight()%> </h4>
+    <h4>Seat Height: <%= mot.getSeatHeight()%> </h4>
+    <h4>Engine: <%= mot.getEngineSizeCc()%> </h4>
+    <h4>Power: <%= mot.getPowerKw()%> </h4>
+    <h4>Front Tyre Size: <%= mot.getFrontTyreSize()%> </h4>
+    <h4>Rare Tyre Size: <%= mot.getRearTyreSize()%> </h4>
   <div>
      </div>
   
@@ -72,8 +72,8 @@
                     MotPartLo motPart = litr.next();
                 %>
                
-                <h2>Type: <%= motPart.getPartType() %> </h2>
-                <h2>Name: <%= motPart.getPartName() %> </h2>            
+                <h4>Type: <%= motPart.getPartType() %> </h4>
+                <h4>Name: <%= motPart.getPartName() %> </h4>            
             <br><br>
             <%}%>
   
@@ -94,7 +94,7 @@
  
     
         
-        
+        </div>
     </body>
     
   

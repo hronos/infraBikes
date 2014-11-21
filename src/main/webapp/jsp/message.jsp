@@ -11,13 +11,18 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
-        <title>Message</title>
+        <link rel="stylesheet" type="text/css" href="/infraBike/jsp/header_css.css">
+        <title>Error</title>
     </head>
     <body>
+        
+        <%@ include file="header.jsp" %>
+        <div class="center">
         <p>Message: <c:out value="${msg}"/></p>
         <p> Please click <a href="http://localhost:8080/infraBike/">here</a> 
             to go back to index page now</p>
         
+        </div>
+    
     </body>
 </html>

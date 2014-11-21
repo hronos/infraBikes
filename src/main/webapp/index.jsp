@@ -8,11 +8,11 @@
         <title>Login</title>
     </head>
     <body>
-        
+        <div class="center">
     <div id ="container">
             <div id="logo">
-               <img class="displayed" src="/infraBike/image.jpg">
-            </div>
+               <img class="displayed" src="/infraBike/logo.jpg">
+                </div>
     </div>
     <div class="clearfix"></div>
     <div class="cont">
@@ -35,8 +35,12 @@
 		</form><!-- form -->
 		<div class="button">
 		</div><!-- button -->
+                
 	</section><!-- content -->
+        <footer>@Project done by Group 4 for AC32006/AC52001 module</footer>
     </div><!-- cont -->
-            
+    
+        </div>
+        
     </body>
 </html>

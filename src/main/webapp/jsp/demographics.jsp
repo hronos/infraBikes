@@ -52,7 +52,7 @@
         </script>    
     </head>
     <body>
-        
+        <div class="center">
         <%@ include file="header.jsp" %>
         <table id="my-final-table">
   <thead>
@@ -62,7 +62,7 @@
     <th>married</th>
     <th>commuting</th>
     <th>crimeStats</th>
-    <th>traffic_info</th>
+   
     <th>parking</th>
     <th>snowyDays</th>
     <th>rainyDays</th>
@@ -73,9 +73,12 @@
   </tbody>
 </table>
 <h1>Graphs for marketing</h1>
+<div class="acor">
         <h4>  <a href="/infraBike/jsp/demo.jsp">Population graph</a> </h4>
         <h4> <a href="/infraBike/jsp/charts.jsp">Commuting graph</a> </h4>
-<span id="usr-span"></span>  
+</div>
+<span id="usr-span"></span> 
+        </div>
     </body>
     </head>
    

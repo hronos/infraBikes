@@ -8,6 +8,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link href="/infraBike/jsp/header_css.css" rel="stylesheet" type="text/css"/>
+        <link href="/infraBike/jsp/edit_form.css" rel="stylesheet" type="text/css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="http://code.highcharts.com/highcharts.js"></script>
@@ -61,7 +63,9 @@
         <title>Commuting</title>
     </head>
     <body>
+        <div class="center">
         <h1>Commuting graph</h1>
         <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+        </div>
     </body>
 </html>
