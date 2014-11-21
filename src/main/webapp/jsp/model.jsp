@@ -21,7 +21,7 @@
         <link href="/infraBike/jsp/header_css.css" rel="stylesheet" type="text/css"/>
         <link href="/infraBike/dynatable/jquery.dynatable.css" rel="stylesheet" type="text/css"/>
         <script src="/infraBike/jsp/tabsheet.js"></script>
-        <title>JSP Page</title>
+        <title>Models</title>
         
     </head>
     
@@ -34,15 +34,14 @@
           <%ArrayList <MotPartLo> part;
            part= (ArrayList<MotPartLo>) request.getAttribute("part");    %>
          <%@ include file="header.jsp" %>
-        <h1>Model <%=mot.getModelName() %></h1> 
-        <h1>Colour <%=mot.getColor() %></h1> 
-        <h1>Price <%=mot.getPrice() %></h1> 
-        <h1>Product Weight <%=mot.getProdWeight() %></h1>     
+        <h2>Model <%=mot.getModelName() %></h2> 
+        <h2>Colour <%=mot.getColor() %></h2> 
+        <h2>Price <%=mot.getPrice() %></h2> 
+        <h2>Product Weight <%=mot.getProdWeight() %></h2>     
        
 <ul id="tabs">
-        <li  onclick="showTab()"><a href="#about">Model specification</a></li>
-        <li onclick="showTab()"><a href="#advantages">Model Parts</a></li>
-       
+    <li onclick="showTab()"><a href="#about" style="width: 150px">Model specification</a></li>
+        <li onclick="showTab()"><a href="#advantages">Model Parts</a></li> 
 </ul>  
 <div class="tabContent" id="about">
    </br > </br>
