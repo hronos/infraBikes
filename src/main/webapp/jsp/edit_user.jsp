@@ -53,6 +53,7 @@
     }%>
     
     <body>
+        <div class="center">
         <%@ include file="header.jsp" %>
         <h1>Edit user</h1>
         User: <%= username %>
@@ -82,6 +83,6 @@
 
         
  
-
+        </div>
     </body>
 </html>

@@ -27,6 +27,7 @@
     int current_role = (Integer) request.getAttribute("role");
     username = (String) request.getAttribute("username"); %>
     <body>
+        <div class="center">
         <%@ include file="header.jsp" %>
         
         <form action="/infraBike/webapi/Model/Add" method="POST">
@@ -89,5 +90,6 @@
             <input type="submit" value="Add" />
             
         </form>
+        </div>
     </body>
 </html>
