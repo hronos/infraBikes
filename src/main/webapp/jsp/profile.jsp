@@ -71,7 +71,7 @@ else if(role.equals("dealer")){
     <th>phone</th>
     <th>personalEmail</th>
     <th>dealerEmail</th>
-    <%}else{%>
+    <%}else{%> 
     
     <th>idUser</th>
     <th>username</th>

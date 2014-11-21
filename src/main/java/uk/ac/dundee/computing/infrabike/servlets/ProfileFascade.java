@@ -84,6 +84,30 @@ public class ProfileFascade {
     }
     
     
+    
+    @GET
+    @Path("Update/{username}")
+    public Viewable edit(@PathParam("username")String username,@Context HttpServletRequest request)
+    {
+        //int Id=Integer.parseInt(id);
+        Profile profile=null;
+         try{
+        DatabaseDAO db = new DatabaseDAO();
+        Connection conn = db.Get_Connection();
+        UserModel c = new UserModel();
+         
+        profile=c.findUser(username, conn); ; 
+        }catch(Exception e)
+        {
+          
+        }
+        
+        request.setAttribute("profile", profile);
+       
+    return new Viewable("/profile", null);
+    }
+     
+    
     @GET
     @Produces("text/html")
     public Viewable allProfiles(@PathParam ("username")String username, @Context HttpServletRequest request) {
