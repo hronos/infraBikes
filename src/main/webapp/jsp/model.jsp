@@ -26,7 +26,7 @@
     </head>
     
     <body onload="init()">
-        <div class="center">
+        
         <%int id;
            id= (Integer) request.getAttribute("id");    %>
           <%MotorcycleLo mot;
@@ -94,7 +94,7 @@
  
     
         
-        </div>
+        
     </body>
     
   

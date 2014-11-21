@@ -52,7 +52,7 @@
         </script>    
     </head>
     <body>
-        <div class="center">
+        
         <%@ include file="header.jsp" %>
         <table id="my-final-table">
   <thead>
@@ -76,7 +76,6 @@
         <h4>  <a href="/infraBike/jsp/demo.jsp">Population graph</a> </h4>
         <h4> <a href="/infraBike/jsp/charts.jsp">Commuting graph</a> </h4>
 <span id="usr-span"></span>  
-        </div>
     </body>
     </head>
    

@@ -13,7 +13,6 @@
         <title>Stock</title>
     </head>
     <body>
-        <div class="center">
         <%@ include file="header.jsp" %>
      <p>Add part</p>
      <form method="POST"  action="/infraBike/webapi/Part">
@@ -29,6 +28,6 @@
                 <br/>
                 <input type="submit" value="Add"> 
             </form>
-        </div>
+        
     </body>
 </html>

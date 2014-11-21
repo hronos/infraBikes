@@ -19,7 +19,6 @@
     </head>
 
     <body>
-        <div class="center">
         <%@ include file="header.jsp" %>
         <%ArrayList<MotorcycleLo> list = new ArrayList<MotorcycleLo>();
             list = (ArrayList<MotorcycleLo>) request.getAttribute("list");%>
@@ -69,7 +68,6 @@
             <%}} if(role.equals("admin")){%><a href="/infraBike/webapi/Model/Add/" id="add" >Add</a><%}}%>
 
 
-        </div>
         </div>
     </body>
 </html>
