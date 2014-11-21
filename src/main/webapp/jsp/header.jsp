@@ -23,7 +23,7 @@
                         <ul>
                             <li><a href="/infraBike/webapi/Profile/<%=user%>">Profile</a></li>
                             <li><a href="/infraBike/webapi/Motorcycle">Motorcycles</a></li>
-                            <li><a href="/infraBike/webapi/Order/<%=user%>">Orders</a></li> 
+                            <li><a href="/infraBike/webapi/Order/<%=user%>/<%=role%>">Orders</a></li> 
                             <li><a href="/infraBike">Log out</a></li></ul>
                             <% } 
                         else if (role.equals("admin")){%>
@@ -85,7 +85,7 @@
                             <ul>
                                 <li><a href="/infraBike/webapi/Profile/<%=user%>">Profile</a></li>
                             <li><a href="/infraBike/webapi/Motorcycle">Motorcycles</a></li>
-                            <li><a href="/infraBike/webapi/Order/<%=user%>">Orders</a></li>
+                            <li><a href="/infraBike/webapi/Order/<%=user%>/<%=role%>">Orders</a></li>
                             <li><a href="/infraBike">Log out</a></li></ul>
                         <% }} %>
          
