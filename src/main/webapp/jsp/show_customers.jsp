@@ -14,7 +14,6 @@
         <title>Customers</title>
     </head>
     <body>
-        <div class="center">
         <%@ include file="header.jsp" %>
         <h1>Customers</h1>
         
@@ -54,6 +53,5 @@
 <textarea id='Message'></textarea><br/>
 <input type='button' value=' Update ' id='UpdateButton'/>
 <div id='content'></div>
-        </div>
     </body>
 </html>

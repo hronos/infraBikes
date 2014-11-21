@@ -57,7 +57,6 @@
         </script>    
     </head>
     <body>
-        <div class="center">
         <%@ include file="header.jsp" %>
         <%
                     LoggedIn lg2 = (LoggedIn) session.getAttribute("LoggedIn");
@@ -85,6 +84,5 @@
 </table>
   
 <span id="usr-span"></span>  
-        </div>
     </body>
 </html>

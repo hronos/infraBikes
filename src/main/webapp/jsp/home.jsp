@@ -13,9 +13,7 @@
         <title>Home</title>
     </head>
     <body>
-        <div class="center">
         <%@ include file="header.jsp" %>
         <h1>Welcome to infraBike information system. Please use menu on the top to navigate</h1>
-        </div>
-        </body>
+    </body>
 </html>
