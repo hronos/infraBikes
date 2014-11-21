@@ -17,7 +17,7 @@
         <%@ include file="header.jsp" %>
         <p></p>
         <h1>Welcome to infraBike information system. Please use menu on the top to navigate</h1>
-        </div>
-        <footer>@</footer>
+       <footer>@Project done by Group 4 for AC32006/AC52001 module</footer> </div>
+       
         </body>
 </html>

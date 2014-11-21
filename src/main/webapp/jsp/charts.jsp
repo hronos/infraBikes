@@ -66,6 +66,6 @@
         <div class="center">
         <h1>Commuting graph</h1>
         <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-        </div>
+        <footer>@Project done by Group 4 for AC32006/AC52001 module</footer> </div>
     </body>
 </html>

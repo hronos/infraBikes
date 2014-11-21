@@ -22,7 +22,7 @@
         <p> Please click <a href="http://localhost:8080/infraBike/">here</a> 
             to go back to index page now</p>
         
-        </div>
+     <footer>@Project done by Group 4 for AC32006/AC52001 module</footer>   </div>
     
     </body>
 </html>
