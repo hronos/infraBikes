@@ -83,27 +83,28 @@ public class OrderDAO {
         ArrayList orderList=new ArrayList();
         try{
             if(role==6){
-                ps=connection.prepareStatement("SELECT * FROM order_lo WHERE dealer_name=?");
+                ps=connection.prepareStatement("SELECT * FROM order_lo WHERE dealer=?");
             }   
             else
             {
-                ps=connection.prepareStatement("SELECT * FROM order_lo WHERE customer_name=?");
+                ps=connection.prepareStatement("SELECT * FROM order_lo WHERE id_customer=?");
             }
         ps.setString(1, name);
         ResultSet rs= ps.executeQuery();
         while(rs.next()){
             OrderLo order=new OrderLo();
-            order.setColor(rs.getString("color"));
-            order.setDate(rs.getTimestamp("date"));
-            order.setDeliveryPrice(rs.getInt("delivery_price"));
-            order.setCustomerName(rs.getString("customer name"));
-            order.setDealerName(rs.getString("dealer_name"));
-            order.setSerial(rs.getInt("serial"));
             order.setIdOrder(rs.getInt("id_order"));
-            order.setPrice(rs.getInt("price"));
+            order.setDealer(rs.getInt("dealer"));
+            order.setName(rs.getString("name"));
+            order.setIdCustomer(rs.getInt("id_customer"));
+            order.setDate(rs.getDate("date"));
+            order.setDeliveryPrice(rs.getInt("delivery_price"));
             order.setRegion(rs.getString("region"));
-            order.setModel(rs.getString("model"));
-            order.setWeigh(rs.getInt("weight"));
+            order.setSerial(rs.getInt("serial"));
+            
+            order.setColor(rs.getString("color"));
+            order.setPrice(rs.getInt("price"));
+            
             orderList.add(order);
         }
         
@@ -115,6 +116,8 @@ public class OrderDAO {
         }
         return orderList;
     }
+    
+    
     public ArrayList showOrders(Connection connection)
     {
         ArrayList orderList=new ArrayList();
@@ -125,14 +128,18 @@ public class OrderDAO {
         while(rs.next()){
             //CHECK THAT, PROBABLY NOT WORKING CORRECTLY
             OrderLo order=new OrderLo();
-            order.setColor(rs.getString("color"));
+            order.setIdOrder(rs.getInt("id_order"));
+            order.setDealer(rs.getInt("dealer"));
+            order.setName(rs.getString("name"));
+            order.setIdCustomer(rs.getInt("id_customer"));
             order.setDate(rs.getDate("date"));
             order.setDeliveryPrice(rs.getInt("delivery_price"));
-            order.setName(rs.getString("name"));
-            order.setSerial(rs.getInt("serial"));
-            order.setIdOrder(rs.getInt("id_order"));
-            order.setPrice(rs.getInt("price"));
             order.setRegion(rs.getString("region"));
+            order.setSerial(rs.getInt("serial"));
+            
+            order.setColor(rs.getString("color"));
+            order.setPrice(rs.getInt("price"));
+            
             
             orderList.add(order);
         }

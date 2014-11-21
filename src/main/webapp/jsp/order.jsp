@@ -1,7 +1,7 @@
 <%-- 
-    Document   : demographics
-    Created on : 20-Nov-2014, 19:28:15
-    Author     : Fury
+    Document   : order
+    Created on : 10-Nov-2014, 18:10:05
+    Author     : Anna
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,21 +14,20 @@
         <link href="../dynatable/jquery.dynatable.css" rel="stylesheet" type="text/css"/>
         <script src="http://code.jquery.com/jquery-1.7.2.min.js" type="text/javascript"></script>
         <script src="../dynatable/jquery.dynatable.js" type="text/javascript"></script>
-     
         <style type="text/css">
             #usr-span {
                 display: none;
             }
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Demographics</title>
+        <title>Order</title>
         
         <script>
               // getting JSON from the document works, but of what use is that?
             $(document).ready( function() {
-            var json = (${demographics});
-            var $users = [${demographics}];
-            var obj = ${demographics};
+            var json = (${order});
+            var $users = [${order}];
+            var obj = ${order};
             
             input = JSON.stringify(obj);
             
@@ -44,7 +43,7 @@
                 },
                 writers: {
                     link: function(v) {
-                    return '<a href="Demographics/'+v.region+'">Edit</a>';
+                    return '<a href="Order/'+v.idOrder+'">Edit</a>';
                     }   
                 }
               }); 
@@ -56,27 +55,21 @@
         <%@ include file="header.jsp" %>
         <table id="my-final-table">
   <thead>
+    <th>idOrder</th>
+    <th>dealer</th>
+    <th>name</th>
+    <th>idCustomer</th>
+    <th>date</th>
+    <th>deliveryPrice</th>
     <th>region</th>
-    <th>population</th>
-    <th>averageAge</th>
-    <th>married</th>
-    <th>commuting</th>
-    <th>crimeStats</th>
-    <th>traffic_info</th>
-    <th>parking</th>
-    <th>snowyDays</th>
-    <th>rainyDays</th>
-    <th>averageTemperature</th>
-    
-  </thead>
+    <th>serial</th>
+    <th>color</th>
+    <th>price</th>
+        </thead>
   <tbody>
   </tbody>
 </table>
-<h1>Graphs for marketing</h1>
-        <h4>  <a href="/infraBike/jsp/demo.jsp">Population graph</a> </h4>
-        <h4> <a href="/infraBike/jsp/charts.jsp">Commuting graph</a> </h4>
+
 <span id="usr-span"></span>  
     </body>
-    </head>
-   
 </html>

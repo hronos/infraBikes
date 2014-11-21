@@ -6,6 +6,8 @@
 package uk.ac.dundee.computing.infrabike.servlets;
 
 import com.google.gson.Gson;
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
+import static java.lang.System.out;
 import java.sql.Connection;
 import java.util.ArrayList;
 import javax.ejb.Stateless;
@@ -19,6 +21,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import org.glassfish.jersey.server.mvc.Viewable;
+import stores.LoggedIn;
 import uk.ac.dundee.computing.infrabike.dao.DatabaseDAO;
 import uk.ac.dundee.computing.infrabike.dao.OrderDAO;
 
@@ -116,21 +119,44 @@ public class OrderFascade {
    
    @GET 
    @Path("{user}")
-   public Viewable showOrder(@PathParam("user")String user)
+   public Viewable showOrder(@PathParam("user")String user, @PathParam("role")String role, @Context HttpServletRequest request)
    {
+       ArrayList orderData = null;
+       int r = 6;
+       if (role.equals("customer")) { r = 6;
+                          } 
+                        else if (role.equals("admin")){ r = 1; } 
+                        else if (role.equals("marketing")) { r = 2; }
+                        else if(role.equals("manager")) { r = 3; }
+                        else if(role.equals("tech")) { r= 4;  }
+                        else if(role.equals("warehouse_keeper")) {  r=5;}
+                        else if(role.equals("dealer")) { r=7;}
        try{  
         DatabaseDAO db = new DatabaseDAO();
         OrderDAO c = new OrderDAO();
         Connection conn = db.Get_Connection();
-        //sesion role daniel will fix it:D
-        int role=6;
-        c.showOrder(role, user, conn);
+        
+        
+        Gson gson = new Gson();
+        
+
+        orderData = c.showOrder(r, user, conn);
+      
+        String order = gson.toJson(orderData);
+        System.out.println("{\"Order\":"+order+"}");
+        
+         conn.close();
+        out.close();
+        request.setAttribute("order", order);
+        
+         
+        c.showOrder(r, user, conn);
             }
         catch(Exception e)
         {
              
         }
-        return new Viewable("/test", null);
+        return new Viewable("/order", null);
    
    }
    
@@ -148,15 +174,15 @@ public class OrderFascade {
         
         Gson gson = new Gson();
         orderData = c.showOrders(conn);
-        String orders = gson.toJson(orderData);
-        System.out.println("{\"Orders\":"+orders+"}");
-        request.setAttribute("orders", orders);
+        String order = gson.toJson(orderData);
+        System.out.println("{\"Order\":"+order+"}");
+        request.setAttribute("order", order);
             }
         catch(Exception e)
         {
              
         }
-        return new Viewable("/all_orders", null);
+        return new Viewable("/order", null);
    }
    
    

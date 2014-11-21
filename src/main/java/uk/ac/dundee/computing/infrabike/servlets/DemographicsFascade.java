@@ -43,13 +43,13 @@ public class DemographicsFascade {
         demoD = gson.toJson(demoData);
         System.out.println(demoD);
         conn.close();
-        request.setAttribute("demo", demoD);
+        request.setAttribute("demographics", demoD);
         }
         catch(Exception e)
         {
             
         }
-         return new Viewable("/demographics.jsp",null);
+         return new Viewable("/demographics",null);
          
     }
     

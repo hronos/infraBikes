@@ -58,10 +58,10 @@
         </script>
 
 
-        <title>JSP Page</title>
+        <title>Commuting</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Commuting graph</h1>
         <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
     </body>
 </html>
