@@ -118,7 +118,7 @@ public class OrderFascade {
    }
    
    @GET 
-   @Path("{user}")
+   @Path("{user}/{role}")
    public Viewable showOrder(@PathParam("user")String user, @PathParam("role")String role, @Context HttpServletRequest request)
    {
        ArrayList orderData = null;
@@ -139,8 +139,8 @@ public class OrderFascade {
         
         Gson gson = new Gson();
         
-
-        orderData = c.showOrder(r, user, conn);
+        int id= c.getId(r,user,conn);
+        orderData = c.showOrder(r, id, conn);
       
         String order = gson.toJson(orderData);
         System.out.println("{\"Order\":"+order+"}");
@@ -150,7 +150,7 @@ public class OrderFascade {
         request.setAttribute("order", order);
         
          
-        c.showOrder(r, user, conn);
+  
             }
         catch(Exception e)
         {

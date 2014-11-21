@@ -51,18 +51,19 @@ public class WarehouseDAO {
     
     
     
-    public boolean updateWarehouse(int Id,String phone,int storageS,Connection connection){
+    public boolean updateWarehouse(String location,String phone,int storageS,Connection connection){
     try{
          
-         PreparedStatement ps = connection.prepareStatement("UPDATE warehouse_v SET storage_size=?, phone=? WHERE id_warehouse=?"  );
+         PreparedStatement ps = connection.prepareStatement("UPDATE warehouse_v SET storage_size=?, phone=? WHERE location=?"  );
          ps.setInt(1, storageS);
          ps.setString(2, phone);
-         ps.setInt(3, Id);
+         ps.setString(3, location);
          ps.executeUpdate();
          return true;
          
-    }catch(Exception e)
+    }catch(SQLException e)
     {
+          e.printStackTrace(); 
         return false;
     }
       
@@ -190,24 +191,51 @@ public class WarehouseDAO {
     
     }
     
-    public WarehouseLo showWarehouse(String location,Connection connection)
+    public WarehouseLo showWarehouse(int Id,Connection connection)
     {
      WarehouseLo wh=new WarehouseLo();
      try{
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM warehouse_lo WHERE location=? ");
-            ps.setString(1, location);
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM warehouse_v WHERE id_warehouse=? ");
+            ps.setInt(1, Id);
             ResultSet rs= ps.executeQuery();
             while(rs.next()){
                 wh.setLocation(rs.getString("location"));
                 wh.setPhone(rs.getString("phone"));
                 wh.setStorageSize(rs.getInt("storage_size"));
+                
+            }
+     }
+     
+     catch(SQLException e)
+     {
+           e.printStackTrace(); 
+     }
+     System.out.println("TUT"+wh.getLocation());
+     return wh;
+    }
+    
+    
+    
+     public int showWarehouse2(String location,Connection connection)
+    {
+     WarehouseV wh=new WarehouseV();
+     try{
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM warehouse_v WHERE location=? ");
+            ps.setString(1, location);
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                return rs.getInt("id_warehouse");
+              
+                
             }
      }
      catch(SQLException e)
      {
+         e.printStackTrace();
      }
-     return wh;
-    }
+         return 9879;
+     }
+    
     
     
     

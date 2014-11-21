@@ -84,7 +84,7 @@ public class WarehouseModel {
         boolean success = true;
         try {
             WarehouseDAO c = new WarehouseDAO();
-             success=c.updateWarehouse(Id,phone,storage,connection);
+//             success=c.updateWarehouse(Id,phone,storage,connection);
         } 
         catch (Exception e) {
             throw e;
@@ -98,7 +98,7 @@ public class WarehouseModel {
          WarehouseLo wh=new WarehouseLo();
          try {
             WarehouseDAO c = new WarehouseDAO();
-            wh=c.showWarehouse(location,connection);
+  //          wh=c.showWarehouse(location,connection);
          }
          catch(Exception e)
          {

@@ -14,7 +14,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-         <link href="/infraBike/jsp/header_css.css" rel="stylesheet" type="text/css"/>
+        <link href="/infraBike/jsp/header_css.css" rel="stylesheet" type="text/css"/>
         <title>Search</title>
     </head>
 
@@ -46,27 +46,34 @@
         </div>
         <div>
             <%-- &nbsp;&nbsp;&nbsp;&nbsp;<a href="#">Advanced Search</a> --%>
-            <br><br><br><br>
         </div>
         <div>
             <hr>
         </div>
-        <br><br>
         <h3>Search results</h3>
 
         <div>
-            <% 
+            <%
                 ListIterator<MotorcycleLo> litr = list.listIterator();
                 while (litr.hasNext()) {
                     MotorcycleLo mot = litr.next();
             %>
-            <a href="/infraBike/webapi/Model/<%=mot.getIdModel()%>"> Model: <%=mot.getModelName()%>  Colour: <%=mot.getColor()%> Price: <%=mot.getPrice()%> </a>      <p>                    </p> <%if(role.equals("admin")){%> 
-            <a href="/infraBike/webapi/Model/Delete/<%=mot.getIdModel()%>" id="delete" >Delete</a> <input type="hidden" id="id" value="<%=mot.getIdModel()%>">
-            
+            <a href="/infraBike/webapi/Model/<%=mot.getIdModel()%>" style="width: 120px; height: 60px"> 
+                Model: <%=mot.getModelName()%>  
+                Colour: <%=mot.getColor()%> 
+                Price: <%=mot.getPrice()%> 
+            </a>      
 
+            <%if (role.equals("admin")) {%> 
+            <a href="/infraBike/webapi/Model/Delete/<%=mot.getIdModel()%>" id="delete" >Delete</a> 
+            <input type="hidden" id="id" value="<%=mot.getIdModel()%>">
             <br><br>
-            <%}} if(role.equals("admin")){%><a href="/infraBike/webapi/Model/Add/" id="add" >Add</a><%}}%>
-
+            <%}
+                }
+                if (role.equals("admin")) {%>
+            <a href="/infraBike/webapi/Model/Add/" id="add" >Add</a>
+            <%}
+                }%>
 
         </div>
     </body>
