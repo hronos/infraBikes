@@ -31,6 +31,7 @@
     username = (String) request.getAttribute("username"); 
     MotorcycleLo mot = (MotorcycleLo)request.getAttribute("mot"); %>
     <body>
+        <div class="center">
         <%@ include file="header.jsp" %>
         
         <form action="/infraBike/webapi/Model/Update" method="POST">
@@ -91,5 +92,6 @@
             <input type="submit" value="Edit" />
             
         </form>
+        </div>
     </body>
 </html>

@@ -51,6 +51,7 @@
         </script>    
     </head>
     <body>
+         <div class="center">
         <%@ include file="header.jsp" %>
         <table id="my-final-table">
   <thead>
@@ -68,5 +69,6 @@
 </table>
 
 <span id="usr-span"></span>  
+         </div>
     </body>
 </html>

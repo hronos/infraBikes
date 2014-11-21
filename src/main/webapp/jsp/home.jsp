@@ -18,5 +18,6 @@
         <p></p>
         <h1>Welcome to infraBike information system. Please use menu on the top to navigate</h1>
         </div>
+        <footer>@</footer>
         </body>
 </html>

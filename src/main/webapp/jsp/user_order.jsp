@@ -13,7 +13,9 @@
         <title>Orders</title>
     </head>
     <body>
+        <div class="center">
         <%@ include file="header.jsp" %>
         <h1>Your orders</h1>
+        </div>
     </body>
 </html>

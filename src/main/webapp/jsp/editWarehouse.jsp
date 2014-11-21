@@ -15,7 +15,7 @@
         <link href="/infraBike/jsp/header_css.css" rel="stylesheet" type="text/css"/>
         <link href="/infraBike/jsp/header_css.css" rel="stylesheet" type="text/css"/>
         <style>
-            div.formrow {background:#ffc;border:2px solid #ffc;margin:0 0 5px 0;float:left;width:100%;padding:6px 0;}
+            div.formrow {background:rgba(204, 204, 204, 0.54);border:2px solid #8B8B7E;margin:0 0 5px 0;float:left;width:100%;padding:6px 0;}
             div.formrow label {float:left;display:block;width:15em;font-weight:bold;padding:0 6px;}
             div.formrow label:hover {background:#FFFF66;cursor:pointer;}
             div.formrow fieldset {border:1px solid gray;margin:0 6px;}
@@ -32,7 +32,7 @@
     WarehouseLo war = (WarehouseLo)request.getAttribute("warehouse"); %>
     
     <body>
-        
+        <div class="center">
           <%@ include file="header.jsp" %>
         <form action="/infraBike/webapi/Warehouse/Update/<%=war.getLocation()%>" method="POST">
             <div class="formrow">
@@ -48,5 +48,6 @@
           <input type="submit" value="Edit" />
                 
         </form>
+        </div>
     </body>
 </html>

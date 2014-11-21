@@ -29,6 +29,7 @@
         </script>
     </head>
     <body>
+        <div class="center">
         <%@ include file="header.jsp" %>
         <h1>Users</h1>
         Value: [<c:out value="${users}"/>]
@@ -54,5 +55,6 @@
 
             $("#jsontotable-obj")
         </script>
+        </div>
     </body>
 </html>
