@@ -17,10 +17,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import org.glassfish.jersey.server.mvc.Viewable;
 import uk.ac.dundee.computing.infrabike.dao.DatabaseDAO;
-import static uk.ac.dundee.computing.infrabike.dto.DealerV_.name;
-import static uk.ac.dundee.computing.infrabike.dto.MotorcycleLo_.price;
+
 import uk.ac.dundee.computing.infrabike.dto.PartLo;
-import static uk.ac.dundee.computing.infrabike.dto.PartV_.quantity;
+
 import uk.ac.dundee.computing.infrabike.models.WarehouseModel;
 
 /**

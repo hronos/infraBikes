@@ -22,7 +22,7 @@ import org.glassfish.jersey.server.mvc.Viewable;
 import uk.ac.dundee.computing.infrabike.dao.DatabaseDAO;
 import uk.ac.dundee.computing.infrabike.dao.UserDAO;
 import uk.ac.dundee.computing.infrabike.dto.Profile;
-import static uk.ac.dundee.computing.infrabike.dto.UserV_.password;
+
 import uk.ac.dundee.computing.infrabike.models.UserModel;
 
 /**
