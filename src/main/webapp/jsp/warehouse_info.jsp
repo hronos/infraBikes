@@ -25,8 +25,7 @@
         <script>
               // getting JSON from the document works, but of what use is that?
             $(document).ready( function() {
-            var json = (${warehouses});
-            var $users = [${warehouses}];
+            
             var obj = ${warehouses};
             
             input = JSON.stringify(obj);
@@ -43,7 +42,7 @@
                 },
                 writers: {
                     link: function(v) {
-                    return '<a href="Warehouse/'+v.idWarehouse+'">Edit</a>';
+                    return '<a href="/infraBike/webapi/Warehouse/Update/'+v.idWarehouse+'">Edit</a>';
                     }   
                 }
               }); 

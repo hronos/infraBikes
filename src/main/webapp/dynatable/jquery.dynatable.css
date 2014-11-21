@@ -10,7 +10,7 @@
  */
 
 th {
-  background: #71AF5A;
+  background: #000000;
   border-radius: 5px;
   
 }
@@ -18,13 +18,14 @@ th a {
   color: #fff;
 }
 th a:hover {
-  color: #fff;
+  color: rgb(242, 221, 221);
   text-decoration: underline;
 }
 
 .dynatable-search {
   float: right;
   margin-bottom: 10px;
+  margin-top:10px
 }
 
 .dynatable-pagination-links {
@@ -33,10 +34,13 @@ th a:hover {
 
 .dynatable-record-count {
   display: block;
-  padding: 5px 0;
+  padding: 40px 0;
 }
 
-.dynatable-pagination-links span,
+.dynatable-pagination-links span{
+    display: inline-block;
+    margin: 5px
+}
 .dynatable-pagination-links li {
   display: inline-block;
 }
@@ -61,7 +65,7 @@ th a:hover {
 }
 
 .dynatable-active-page {
-  background: #71AF5A;
+  background: #000000;
   border-radius: 5px;
   color: #fff;
 }
@@ -72,4 +76,8 @@ th a:hover {
 .dynatable-disabled-page:hover {
   background: none;
   color: #999;
+}
+
+.dynatable-per-page-my-final-table {
+    margin-top: 10px;
 }

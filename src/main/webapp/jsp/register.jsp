@@ -49,10 +49,10 @@
         </script>
     </head>
     <body>
-
+<div class="center">
         <div id ="container">
             <div id="logo">
-                <img class="displayed" src="/infraBike/image.jpg">
+                <img class="displayed" src="/infraBike/logo.jpg">
             </div>
         </div>
         <div class="clearfix"></div>
@@ -88,6 +88,6 @@
                 </div>
             </section>
         </div>        
-
+</div>
     </body>
 </html>

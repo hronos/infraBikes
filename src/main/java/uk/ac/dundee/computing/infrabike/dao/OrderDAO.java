@@ -76,19 +76,51 @@ public class OrderDAO {
         return true;
     }
     
-    public ArrayList showOrder(int role, String name,Connection connection)
+    public int getId(int role, String username,Connection connection)
+    {
+        int id=0;
+        PreparedStatement ps;
+        ResultSet rs;
+        try{
+        if(role==6){
+        ps=connection.prepareStatement("SELECT * FROM customer_lo WHERE username=?");
+        ps.setString(1,username);
+        
+        }
+        else{
+        ps=connection.prepareStatement("SELECT * FROM dealer_lo WHERE username=?");
+        ps.setString(1,username);
+        
+        }
+        rs=ps.executeQuery();
+         while(rs.next())
+        {
+           if(role==6){ id=rs.getInt("id_customer");}
+           else{id=rs.getInt("id_dealer");}
+        }
+        }catch(SQLException e)
+                {
+                 e.printStackTrace();
+                }
+       return id;
+        
+    }
+    
+    
+    
+    public ArrayList showOrder(int role, int id,Connection connection)
     {
         PreparedStatement ps;
         ArrayList orderList=new ArrayList();
         try{
             if(role==6){
-                ps=connection.prepareStatement("SELECT * FROM order_lo WHERE dealer=?");
+                ps=connection.prepareStatement("SELECT * FROM order_lo WHERE id_customer=?");
             }   
             else
             {
-                ps=connection.prepareStatement("SELECT * FROM order_lo WHERE id_customer=?");
+                ps=connection.prepareStatement("SELECT * FROM order_lo WHERE dealer=?");
             }
-        ps.setString(1, name);
+        ps.setInt(1, id);
         ResultSet rs= ps.executeQuery();
         while(rs.next()){
             OrderLo order=new OrderLo();

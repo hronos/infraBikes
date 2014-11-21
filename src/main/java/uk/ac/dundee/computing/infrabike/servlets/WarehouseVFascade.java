@@ -23,7 +23,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import org.glassfish.jersey.server.mvc.Viewable;
 import uk.ac.dundee.computing.infrabike.dao.DatabaseDAO;
-import uk.ac.dundee.computing.infrabike.dao.UserDAO;
 import uk.ac.dundee.computing.infrabike.dao.WarehouseDAO;
 import uk.ac.dundee.computing.infrabike.dto.WarehouseLo;
 import uk.ac.dundee.computing.infrabike.models.WarehouseModel;
@@ -34,27 +33,11 @@ import uk.ac.dundee.computing.infrabike.models.WarehouseModel;
  */
 @Stateless
 @Path("Warehouse")
-@WebServlet(name = "Warehouse", urlPatterns = {"/Warehouse"})
+//@WebServlet(name = "Warehouse", urlPatterns = {"/Warehouse"})
 public class WarehouseVFascade {
     
     
-    @PUT
-    public Viewable addWarehouse(@FormParam("location")String location,@FormParam("storage_size")String storage_size,@FormParam("phone")String phone)
-    {
-        boolean success=false;
-         try{  
-        DatabaseDAO db = new DatabaseDAO();
-        WarehouseModel c = new WarehouseModel();
-        Connection conn = db.Get_Connection();
-        int s=Integer.parseInt(storage_size);
-        success= c.addWarehouse(conn, location, s, phone);
-            }
-        catch(Exception e)
-        {
-             
-        }        
-         return new Viewable("/test", null);
-    }
+    
       
     @GET
     @Produces("text/html")
@@ -87,23 +70,7 @@ public class WarehouseVFascade {
         return new Viewable("/warehouse_info", null);
     }
     
-    @GET
-    @Path("{location}")
-    public Viewable showWarehouse(@PathParam("location")String location)
-    {
-      
-         try{  
-        DatabaseDAO db = new DatabaseDAO();
-        WarehouseModel c = new WarehouseModel();
-        Connection conn = db.Get_Connection();
-        WarehouseLo wh= c.showWarehouse(location, conn);
-            }
-        catch(Exception e)
-        {
-             
-        }        
-          return new Viewable("/warehouse_info", null);
-    }
+   
             
     @DELETE
     @Path("{id}")
@@ -123,25 +90,70 @@ public class WarehouseVFascade {
         }        
           return new Viewable("/test", null);
     }
-             
-    @POST
+       
     
-    public Viewable updateWarehouse(@FormParam("id")String id,@FormParam("storage_size")String storage_size,@FormParam("phone")String phone)
+    @GET
+    @Path("Update/{id}")
+    public Viewable edit(@PathParam("id")int id,@Context HttpServletRequest request)
     {
-     boolean success=false;
+       // int Id=Integer.parseInt(id);
+     WarehouseLo war=null;
+         try{
+        DatabaseDAO db = new DatabaseDAO();
+        Connection conn = db.Get_Connection();
+        WarehouseDAO c = new WarehouseDAO();
+        
+        war=c.showWarehouse(id, conn);
+        
+        
+        }catch(Exception e)
+        {
+          
+        }
+        
+        request.setAttribute("warehouse", war); 
+        
+    return new Viewable("/editWarehouse", null);
+    }
+    
+    @POST
+    @Path("Update/{location}")
+    public Viewable updateWarehouse(@PathParam("location")String location,@FormParam("storage_size")String storage_size,@FormParam("phone")String phone,@Context HttpServletRequest request)
+    {
+    ArrayList warehouseData = null;
+        
          try{  
         DatabaseDAO db = new DatabaseDAO();
-        WarehouseModel c = new WarehouseModel();
+        WarehouseDAO c = new WarehouseDAO();
         Connection conn = db.Get_Connection();
-        int Id=Integer.parseInt(id);
+      
         int s=Integer.parseInt(storage_size);
-        success= c.updateWarehouse(conn, Id, s, phone);
-            }
+        
+         c.updateWarehouse(location,  phone, s,conn);
+         
+            
+           
+        
+        warehouseData =c.getWarehouses(conn, null, null);
+        
+        Gson gson = new Gson();
+        
+        String warehouses = gson.toJson(warehouseData);
+        
+        out.println("{\"Warehouses\":"+warehouses+"}");
+        
+        
+        conn.close();
+        out.close();
+        request.setAttribute("warehouses", warehouses); 
+         }
         catch(Exception e)
         {
              
         }
-          return new Viewable("/test", null);
+         
+         
+          return new Viewable("/warehouse_info", null);
     }
     
   
