@@ -13,6 +13,7 @@
         <title>Update</title>
     </head>
     <body>
+        <div class="center">
         <%@ include file="header.jsp" %>
         <form action="/infraBike/webapi/Motorcycle/Update" method="POST">
             Id Model: <input type="text" name="idModel"> <br />
@@ -34,5 +35,6 @@
             Id: <input type="text" name="Id" /><br />
             <input type="submit" value="Add" />
         </form>
+        </div>
     </body>
 </html>

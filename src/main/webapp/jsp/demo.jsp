@@ -50,7 +50,7 @@
     </head>
     <body>
         
-
+<div class="center">
 <div id="chart-example-chart" style="margin: 0 auto"></div>
 <a class="btn primary" id="toggle-chart-table">Show Table to Sort the Chart Series</a>
 <span id="usr-span"></span>
@@ -148,5 +148,6 @@
   updateChart();
 })();
 </script>       
+</div>
 </body>
 </html>

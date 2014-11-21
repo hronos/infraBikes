@@ -15,9 +15,10 @@
         <title>Message</title>
     </head>
     <body>
+        <div class="center">
         <p>Message: <c:out value="${msg}"/></p>
         <p> Please click <a href="http://localhost:8080/infraBike/">here</a> 
             to go back to index page now</p>
-        
+        </div>
     </body>
 </html>

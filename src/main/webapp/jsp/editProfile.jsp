@@ -29,6 +29,7 @@
     username = (String) request.getAttribute("username"); 
     Profile profile = (Profile)request.getAttribute("profile"); %>
     <body>
+        <div class="center">
          <%@ include file="header.jsp" %>
         <h1>Update your profile</h1>
          <%
@@ -127,5 +128,6 @@
             
         </form>
      <%}}%>           
+     <div class="center">
     </body>
 </html>

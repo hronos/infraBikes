@@ -48,7 +48,7 @@
         </script>    
     </head>
     <body>
-        
+    <div class="center">    
 <table id="my-final-table">
   <thead>
     <th>name</th>
@@ -66,6 +66,6 @@
 </table>
 
 <span id="usr-span"></span>  
-        
+    </div>
 </body>
 </html>
