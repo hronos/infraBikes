@@ -11,7 +11,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -20,6 +22,7 @@ import org.glassfish.jersey.server.mvc.Viewable;
 import uk.ac.dundee.computing.infrabike.dao.DatabaseDAO;
 import uk.ac.dundee.computing.infrabike.dao.UserDAO;
 import uk.ac.dundee.computing.infrabike.dto.Profile;
+import static uk.ac.dundee.computing.infrabike.dto.UserV_.password;
 import uk.ac.dundee.computing.infrabike.models.UserModel;
 
 /**
@@ -83,8 +86,7 @@ public class ProfileFascade {
         return new Viewable("/profile", null);
     }
     
-    
-    
+   
     @GET
     @Path("Update/{username}")
     public Viewable edit(@PathParam("username")String username,@Context HttpServletRequest request)
@@ -104,7 +106,7 @@ public class ProfileFascade {
         
         request.setAttribute("profile", profile);
        
-    return new Viewable("/profile", null);
+    return new Viewable("/editProfile", null);
     }
      
     
@@ -140,64 +142,154 @@ public class ProfileFascade {
         
         return new Viewable("/profile", null);
     }
-}
+
     
-    /*@POST
-    @Path("Customer/{id}")
-     public Viewable editCustomer(@PathParam("id") String id,@FormParam("first_name") String first_name,@FormParam("last_name")String last_name,@FormParam("location")String location,@FormParam("phone_number")String phone_number,@FormParam("emailUser")String emailUser,@FormParam("password") String password) {
+    @POST
+    @Path("Update/Customer/{id}")
+     public Viewable editCustomer(@PathParam("id") String id,@FormParam("first_name") String first_name,@FormParam("username") String username,@FormParam("last_name")String last_name,@FormParam("location")String location,@FormParam("phone_number")String phone_number,@FormParam("emailUser")String emailUser,@Context HttpServletRequest request) {
      boolean success;
          try{  
        DatabaseDAO db = new DatabaseDAO();
-        UserModel c = new UserModel();
+        UserDAO c = new UserDAO();
         Connection conn = db.Get_Connection();
         int Id=Integer.parseInt(id);
-        success=c.editCustomer(Id,first_name,last_name,location,phone_number,emailUser,password,conn);  
-     }
+        success=c.editCustomer(Id,username,first_name,last_name,location,phone_number,emailUser,conn);  
+        
+        UserModel m=new UserModel();
+        Profile profiles=new Profile();
+        profiles = m.findUser(username, conn);
+        
+        Gson gson = new Gson();
+        ArrayList userData = null;
+     
+        String profile="";
+                if(profiles.getCustomer()!=null)
+                {
+                 
+                    profile=gson.toJson(profiles.getCustomer());
+                }
+                else if(profiles.getDealer()!=null)
+                {   
+                    profile=gson.toJson(profiles.getDealer());
+                }
+                else 
+                {
+                    profile=gson.toJson(profiles.getUser());
+                }
+        
+        out.println("{\"Profile\":"+profile+"}");
+        
+        
+        conn.close();
+        //out.close();
+        
+        request.setAttribute("profile", "["+profile+"]");
+         }
      catch(Exception e)
      {
      }
          
-         return new Viewable("/test", null);
+         return new Viewable("/profile", null);
      }
      
      @POST
-    @Path("Dealer/{id}")
-     public Viewable editDealer(@PathParam("id") String id,@FormParam("name") String name,@FormParam("location")String location,@FormParam("phone")String phone,@FormParam("emailUser")String emailUser,@FormParam("password") String password,@FormParam("email")String email) {
+    @Path("Update/Dealer/{id}")
+     public Viewable editDealer(@PathParam("id") String id,@FormParam("name") String name,@FormParam("location")String location,@FormParam("phone")String phone,@FormParam("emailUser")String emailUser,@FormParam("email")String email,@FormParam("username")String username,@Context HttpServletRequest request) {
      boolean success=false;
          try{  
        DatabaseDAO db = new DatabaseDAO();
-        UserModel c = new UserModel();
+        UserDAO c = new UserDAO();
         Connection conn = db.Get_Connection();
         int Id=Integer.parseInt(id);
-        success=c.editDealer(Id,name,location,phone,emailUser,password,email,conn);  
+        success=c.editDealer(Id,username,name,location,phone,emailUser,email,conn);  
+        
+        UserModel m=new UserModel();
+         Profile profiles=new Profile();
+        profiles = m.findUser(username, conn);
+        
+        Gson gson = new Gson();
+        ArrayList userData = null;
+     
+        String profile="";
+                if(profiles.getCustomer()!=null)
+                {
+                 
+                    profile=gson.toJson(profiles.getCustomer());
+                }
+                else if(profiles.getDealer()!=null)
+                {   
+                    profile=gson.toJson(profiles.getDealer());
+                }
+                else 
+                {
+                    profile=gson.toJson(profiles.getUser());
+                }
+        
+        out.println("{\"Profile\":"+profile+"}");
+        
+        
+        conn.close();
+        //out.close();
+        
+        request.setAttribute("profile", "["+profile+"]");
      }
      catch(Exception e)
      {
      }
+              
+     
          
-          return new Viewable("/test", null);
+          return new Viewable("/profile", null);
      }
      
     @POST
-    @Path("User/{id}")
-     public Viewable editUser(@PathParam("id")String id,@FormParam("password") String password,@FormParam("emailUser")String emailUser) {
+    @Path("Update/User/{id}")
+     public Viewable editUser(@PathParam("id")String id,@FormParam("emailUser")String emailUser,@FormParam("username")String username,@Context HttpServletRequest request) {
       boolean success;
          try{  
        DatabaseDAO db = new DatabaseDAO();
-        UserModel c = new UserModel();
+        UserDAO c = new UserDAO();
         Connection conn = db.Get_Connection();
         int Id=Integer.parseInt(id);
-        success=c.editUser(Id,password,emailUser,conn);  
-         
+        success=c.editUser2(Id,emailUser,conn); 
+        UserModel m=new UserModel();
+         Profile profiles=new Profile();
+        profiles = m.findUser(username, conn);
+        
+        Gson gson = new Gson();
+        ArrayList userData = null;
+     
+        String profile="";
+                if(profiles.getCustomer()!=null)
+                {
+                 
+                    profile=gson.toJson(profiles.getCustomer());
+                }
+                else if(profiles.getDealer()!=null)
+                {   
+                    profile=gson.toJson(profiles.getDealer());
+                }
+                else 
+                {
+                    profile=gson.toJson(profiles.getUser());
+                }
+        
+        out.println("{\"Profile\":"+profile+"}");
+        
+        
+        conn.close();
+        //out.close();
+        
+        request.setAttribute("profile", "["+profile+"]");
      }
      catch(Exception e)
      {
      }
          
-          return new Viewable("/test", null);
+          return new Viewable("/profile", null);
      }
-    
-    
+}
+    /*
    
     
 }

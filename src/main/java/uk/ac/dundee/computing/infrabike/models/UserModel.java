@@ -118,7 +118,7 @@ public class UserModel {
            boolean success = true;
         try {
             UserDAO c = new UserDAO();
-            success=c.editUser(Id,emailUser,password,connection);
+           // success=c.editUser(Id,emailUser,password,connection);
         } 
         catch (Exception e) {
             throw e;

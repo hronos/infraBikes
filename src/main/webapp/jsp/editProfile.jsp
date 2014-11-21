@@ -27,40 +27,105 @@
      <%  String username; String role_name = "";
     int current_role = (Integer) request.getAttribute("role");
     username = (String) request.getAttribute("username"); 
-    Profile profile = (Profile)request.getAttribute("prifile"); %>
+    Profile profile = (Profile)request.getAttribute("profile"); %>
     <body>
          <%@ include file="header.jsp" %>
         <h1>Update your profile</h1>
-        
+         <%
+                    LoggedIn lg2 = (LoggedIn) session.getAttribute("LoggedIn");
+                    if (lg2 != null) {
+                        String user = lg2.getUsername();
+                   
+                        String role = lg2.getRole();
+         %>
        
-        
-        <form action="/infraBike/webapi/Model/Update" method="POST">
+        <%if(role.equals("customer")){%>
+        <form action="/infraBike/webapi/Profile/Update/Customer/<%=profile.getCustomer().getIdCustomer()%>" method="POST">
+            
             <div class="formrow">
-                <label for="model_name" id="Username-ariaLabel" >Model Name:</label>
+                <label for="username" id="Username-ariaLabel" >Username:</label>
+                <input type="text" name="username" value="<%=profile.getCustomer().getUsername() %>"  readonly/><br />
                 
+            </div>
+            <div class="formrow">
+                <label for="firstname" id="Username-ariaLabel" >First Name:</label>
+                    <input type="text" name="sirstname" value="<%=profile.getCustomer().getFirstName()%>"/><br />
+            </div>
+            <div class="formrow">
+                <label for="lastname" id="Username-ariaLabel" >Last Name:</label>
+                    <input type="text" name="lastname" value="<%=profile.getCustomer().getLastName()%>"/><br />
+            </div>
+            <div class="formrow">
+                <label for="location" id="Username-ariaLabel" >Location:</label>
+                    <input type="text" name="location" value="<%=profile.getCustomer().getLocation()%>"/><br />
+            </div>
+            <div class="formrow">
+               <label for="phone" id="Username-ariaLabel" >Phone Number: </label> 
+                    <input type="text" name="phone" value="<%=profile.getCustomer().getPhoneNumber()%>"/><br />
+            </div>
+            <div class="formrow">
+                <label for="email" id="Username-ariaLabel" >Email: </label> 
+                    <input type="text" name="email" value="<%=profile.getCustomer().getEmail()%>"/><br />
+            </div>
+        
+          
+            <input type="submit" value="Edit" />
+            
+        </form>
+      <%}else if(role.equals("dealer")){%>
+      <form action="/infraBike/webapi/Profile/Update/Dealer/<%=profile.getDealer().getIdDealer()%>" method="POST">
+            
+            <div class="formrow">
+                <label for="username" id="Username-ariaLabel" >Username:</label>
+                    <input type="text" name="username" value="<%=profile.getDealer().getUsername()%>" readonly/><br />
                 <br />
             </div>
             <div class="formrow">
-                <label for="top_speed" id="Username-ariaLabel" >Top Speed:</label> <br />
+                <label for="name" id="Username-ariaLabel" >Name:</label> 
+                    <input type="text" name="name" value="<%=profile.getDealer().getName()%>"/><br />
             </div>
             <div class="formrow">
-                <label for="Weight" id="Username-ariaLabel" >Weight:</label> <br />
+                <label for="location" id="Username-ariaLabel" >Location:</label> 
+                    <input type="text" name="location" value="<%=profile.getDealer().getLocation()%>"/><br />
             </div>
             <div class="formrow">
-                <label for="seat_height" id="Username-ariaLabel" >Seat Height:</label><br />
+                <label for="phone" id="Username-ariaLabel" >Phone Number:</label>
+                    <input type="text" name="phone" value="<%=profile.getDealer().getPhone()%>"/><br />
             </div>
             <div class="formrow">
-               <label for="frame" id="Username-ariaLabel" >Frame: </label> <br />
+               <label for="emailUser" id="Username-ariaLabel" >Personal Email: </label> 
+                    <input type="text" name="emailUser" value="<%=profile.getDealer().getPersonalEmail()%>"/><br />
             </div>
             <div class="formrow">
-                <label for="tank" id="Username-ariaLabel" >Tank: </label> <br />
+                <label for="email" id="Username-ariaLabel" >Dealer Email: </label> 
+                    <input type="email" name="colour" value="<%=profile.getDealer().getDealerEmail()%>"/><br />
             </div>
+           
         
-            <input type="text" name="idModel" value=""/>
+            
             
             
             <input type="submit" value="Edit" />
             
         </form>
+      <%}else{ %>
+      <form action="/infraBike/webapi/Profile/Update/User/<%=profile.getUser().getIdUser()%>" method="POST">
+            
+            <div class="formrow">
+                <label for="username" id="Username-ariaLabel" >User Name:</label>
+                    <input type="text" name="username" value="<%=profile.getUser().getUsername()%> readonly"/><br />
+                <br />
+            </div>
+            <div class="formrow">
+                <label for="emailUser" id="Username-ariaLabel" >Email:</label> 
+                    <input type="text" name="emailUser" value="<%=profile.getCustomer().getEmail()%>"/><br />
+            </div>
+           
+            
+            
+            <input type="submit" value="Edit" />
+            
+        </form>
+     <%}}%>           
     </body>
 </html>

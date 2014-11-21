@@ -196,10 +196,9 @@ public class UserDAO {
         return role;
     }
     
-    //not checked
-    //can dealer change the email?
+    
    
-    public boolean editDealer(int Id,String name,String  location,String phone,String emailUser,String password,String email,Connection connection)
+    public boolean editDealer(int Id,String username,String name,String  location,String phone,String emailUser,String email,Connection connection)
     {   try{     
         PreparedStatement ps = connection.prepareStatement("UPDATE dealer_v SET name=?,location=?,phone=?,email=? WHERE id_dealer=?");
         
@@ -209,7 +208,7 @@ public class UserDAO {
         ps.setString(4, emailUser);
         ps.setInt(5, Id);
          ps.executeUpdate();
-         editUser(Id,password,email,connection);
+         editUser(username,email,connection);
       }catch(SQLException e)
       { 
           e.printStackTrace();  
@@ -217,7 +216,7 @@ public class UserDAO {
         return true;
     }
     
-    public boolean editCustomer(int Id,String first_name,String last_name,String location,String phone_number,String emailUser,String password,Connection connection)
+    public boolean editCustomer(int Id,String username,String first_name,String last_name,String location,String phone_number,String emailUser,Connection connection)
     {
         try{     
         PreparedStatement ps = connection.prepareStatement("UPDATE customer_v SET first_name=?,last_name=?,location=?,phone_number=? where id_customer=?");
@@ -228,20 +227,20 @@ public class UserDAO {
         ps.setString(4, phone_number);
         ps.setInt(5, Id);
          ps.executeUpdate();
-         editUser(Id,password,emailUser,connection);
+         editUser(username,emailUser,connection);
       }catch(SQLException e)
       { 
           e.printStackTrace();  
       }
         return true;
     }
-    /* public boolean editUser(int Id,String username,String password,String email,Connection connection)
+    public boolean editUser2(int Id,String email,Connection connection)
     {   try{     
-        PreparedStatement ps = connection.prepareStatement("UPDATE user_v SET username=?,password=?,email=? where id_user=?");
-        ps.setString(1, username);
-        ps.setString(2, password);
-        ps.setString(3, email);
-        ps.setInt(4, Id);
+        PreparedStatement ps = connection.prepareStatement("UPDATE user_v SET email=? where id_user=?");
+       
+        
+        ps.setString(1, email);
+        ps.setInt(2, Id);
          ps.executeUpdate();
       }catch(SQLException e)
       { 
@@ -249,15 +248,15 @@ public class UserDAO {
       }
         return true;
     }
-     */
+     
     
-     public boolean editUser(int Id,String password,String email,Connection connection)
+     public boolean editUser(String username,String email,Connection connection)
      {
          try{
-        PreparedStatement ps= connection.prepareStatement("UPDATE user_v SET password=?,email=? WHERE id_user=?");
-        ps.setString(1,password);
-        ps.setString(2, email);
-        ps.setInt(3, Id);
+        PreparedStatement ps= connection.prepareStatement("UPDATE user_v SET email=? WHERE username=?");
+        
+        ps.setString(1, email);
+        ps.setString(2,username);
         ps.executeUpdate();
          }catch(SQLException e)
          { 

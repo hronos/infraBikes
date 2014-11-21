@@ -61,7 +61,10 @@
     <th>location</th>
     <th>phoneNumber</th>
     <th>email</th>
-    <th>roleName</th><%}
+    <th>roleName</th>
+    
+    <%}
+
 else if(role.equals("dealer")){
  %>
     <th>idDealer</th>
@@ -71,18 +74,20 @@ else if(role.equals("dealer")){
     <th>phone</th>
     <th>personalEmail</th>
     <th>dealerEmail</th>
+    
     <%}else{%> 
     
     <th>idUser</th>
     <th>username</th>
     <th>email</th>
+   
    <%--<th><a href="/infraBike/webapi/Profile/" id="delete" onclick="deleteUser()">Delete user</a></th> --%>
   
     
    
     
     
-<%}}%>
+<%}%>
 
 
   </thead>
@@ -90,7 +95,8 @@ else if(role.equals("dealer")){
   </tbody>
 </table>
 
-
+ <a href="/infraBike/webapi/Profile/Update/<%=user%>">EDIT</a>
+ <%}%>
   
 <span id="usr-span"></span>  
     </body>
