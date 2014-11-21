@@ -74,8 +74,8 @@
                         <ul>
                             <li><a href="/infraBike/webapi/Profile/<%=user%>">Profile</a></li>
                             <li><a href="/infraBike/webapi/Warehouse">Warehouse</a></li>
-                            <li><a href="">Parts</a></li>
-                            <li><a href="//infraBike/webapi/Motorcycle">Motorcycles</a></li>
+                            <li><a href="#">Parts</a></li>
+                            <li><a href="/infraBike/webapi/Motorcycle">Motorcycles</a></li>
                             <li><a href="/infraBike/webapi/Supplier">Suppliers</a></li>
                             <li><a href="/infraBike/webapi/Order">Orders</a></li>
                             <li><a href="/infraBike">Log out</a></li>
